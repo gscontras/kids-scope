@@ -1,2 +1,3 @@
 # kids-scope
-children's scope ambiguity resolution
+
+This repo contains work relevant to children's scope ambiguity resolution.
