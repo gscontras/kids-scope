@@ -49,6 +49,12 @@
 
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
+    <p>You will here a short story, and then hear a fictitious pupppet make a comment about the story.  Your goal is to say whether the puppet is right or wrong in his account of the story.  You will be asked why you think the puppet is right or wrong.  The puppet gets a reward for being right or wrong (not sure if adults need/got this instruction; papers aren't clear)</p>
+    <button onclick="_s.button()">Continue</button>
+  </div>
+  
+  <div class="slide" id="story">
+    <h3>Story</h3>
     <p>You will here a short story, and then hear a fictitious pupppet make a comment about the story.  Your goal is to say whether the puppet is right or wrong in his account of the story, and why.</p>
     <button onclick="_s.button()">Continue</button>
   </div>
@@ -62,12 +68,21 @@
   </div>
 
   <div class="slide" id="one_slider">
-    <p>Here is one slider. For every trial in this block, you get an input to the 'present_handle' function. You can use that variable to display different prompts:</p>
+    <p>Three horses decide to have some fun jumping over things. One horse suggests jumping
+over a cow, but the other horses say the cow is too big to jump over, and the plan is
+abandoned. Then the first horse jumps over the pig, which is much smaller, and
+challenges the other horses to do the same. The second horse jumps over the pig. The
+third horse considers jumping over the pig but decides that the pig looks scared and
+approaches him. The pig is, in fact, scared, so the third horse just talks with him instead
+of jumping over him.</p>
+	<p>(Animation Here)<p> <!--two slides or one?-->
     <p class="prompt"></p>
     <table id="slider_table" class="slider_table">
-      <tr><td class="left">completely disagree</td><td class="right">completely agree</td></tr>
+      <tr><td class="left">no</td><td class="right">yes</td></tr>
       <tr><td colspan="2"><div id="single_slider" class="slider"></div></td></tr>
     </table>
+	  <p>Please justify your answer:</p>
+	  <textarea id="justification" rows="3" cols="50"></textarea>
     <button onclick="_s.button()">Continue</button>
     <div class="err">Please adjust the slider before continuing.</div>
   </div>
