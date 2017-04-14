@@ -33,7 +33,7 @@ opt = 2.5;
 %worlds for 'every-not' (amb)
 %worlds = [0 1 2 3];
 %worlds for 'nottwo'
-worlds = [1 2 3 4];
+worlds = [1 2 3 4 5];
 
 tot = worlds(end);
 w = numel(worlds);
@@ -71,14 +71,14 @@ w_prior = [fv unfw unfw unfw
 
 
 %%%%scopes prior
-% s_pri = [.9 .1
-%     .7 .3
-%     .5 .5
-%     .3 .7
-%     .1 .9];
 s_pri = [.9 .1
+    .7 .3
     .5 .5
+    .3 .7
     .1 .9];
+% s_pri = [.9 .1
+%     .5 .5
+%     .1 .9];
 
 
 %%%%QUD prior
@@ -87,11 +87,15 @@ q_prior = [fv unfq unfq
     unfq unfq fv
     (1/3) (1/3) (1/3)];
 
+% q_prior = [fv unfq
+%     unfq fv
+%     .5 .5];
+
 
 %Prior set, set 1 if manipulating, 0 otherwise
 world_prior_sett = 0;
 scope_prior_sett = 0;
-qud_prior_sett = 1;
+qud_prior_sett = 0;
 
 %Interaction Variables to save
 w_priors = [];
@@ -106,9 +110,9 @@ count = 1;
 %x is scope
 %z is world
 for z = 1:5
-    for y = 1:4
-        for x = 1:3
-            %type of prior on worlds
+    for y = 1:3
+        for x = 1:5
+            %%Type of priors used
             %unifrom prior
             if world_prior_sett == 0
                 for i = 1:w
@@ -120,7 +124,7 @@ for z = 1:5
             end
             
             if scope_prior_sett == 0
-                scopes_p = [.7 .3];
+                scopes_p = [.5 .5];
                 %set to .7 .3 for sent in results
             else
                 scopes_p = s_pri(x,:);
@@ -182,6 +186,7 @@ for z = 1:5
             temp_Lit(isnan(temp_Lit))=0;
             %Partition probability for QUD component, this is the delta function
             p_Lit = QUDFun(temp_Lit, QUDs);
+            
             %% Speaker
             %speaker time
             %currently no utterance prior here
@@ -276,7 +281,7 @@ for z = 1:5
             %x is scope
             %z is world
             manip_concern = y;
-            m_u_ps(manip_concern,:) = utterance_PS(2,2);
+            m_u_ps(manip_concern,:) = utterance_PS(3,2);
             
             count = count + 1;   
         end

@@ -18,8 +18,8 @@ utterances = {'ambi',
     'nottwo',
     'notsome'};
 
-%select utterances for this run
-utt = [2,3];
+%select utterances for this run. Number is place of utterance in list
+utt = [2,6];
 u = numel(utt);
 utt = uttselect(utt,utterances);
 %speaker optimality parameter
@@ -35,10 +35,10 @@ opt = 2.5;
 %specify descrete occurances
 
 %worlds for 'every-not' (amb)
-worlds = [0 1 2 3];
+%worlds = [0 1 2 3];
 
 %worlds for 'nottwo'
-%worlds = [1 2 3 4];
+worlds = [0 1 2];
 
 tot = worlds(end);
 w = numel(worlds);
@@ -67,7 +67,7 @@ qu = 1/q;
 %prior settings:
 world_prior_sett = 0;
 scope_prior_sett = 0;
-qud_prior_sett = 0;
+qud_prior_sett = 1;
 
 %type of prior on worlds
 %unifrom prior 0
@@ -77,13 +77,13 @@ if world_prior_sett == 0
     end
 else
     %manually adjust priors 1
-    prior_w = [unfw unfw unfw fv];
+    prior_w = [unfw unfw fv];
 end
 
 
 %scopes priors
 if scope_prior_sett == 0
-    scopes_p = [.7 .3];
+    scopes_p = [.5 .5];
 else
     scopes_p = [.1 .9];
 end
