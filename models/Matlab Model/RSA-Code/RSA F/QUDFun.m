@@ -1,5 +1,10 @@
 function [qstate] = QUDFun(LL, QUDs)
-%QUDFun(QUD, state). This function inputs an normalized LL, and moves through each QUD to compute the partition space. I'm not exactly sure how to handle this yet.
+%QUDFun(QUD, state). This function inputs an normalized LL, and moves
+%through each QUD to compute the probability of a given answer to the
+%question.  Since certain QUDs have yes/no answers, the probability
+%distributions for these QUDs being passed to the pragmatic speaker will
+%add up to greater than one.  This is because we can't have unsymetrical
+%matrices in matlab
 
 q = length(QUDs);
 u = size(LL,2);
@@ -24,9 +29,19 @@ qstate = [];
                     for a = 2:w
                         qstate(a,b,c,d) = sum(LL(2:w,b,c,d));
                     end
-%                 elseif strcmpi(QUDs(d), 'any?') == 1
-%                     qstate(w,b,c,d) = LL(w,b,c,d);
-%                     for a = 
+                elseif strcmpi(QUDs(d), '<two?') == 1
+                    for a = 1:2
+                        qstate(a,b,c,d) = sum(LL(1:2,b,c,d));
+                    end
+                    for a = 3:w
+                        qstate(a,b,c,d) = sum(LL(3:w,b,c,d));
+                    end
+                elseif strcmpi(QUDs(d), 'two?') == 1
+                    qstate(1,b,c,d) = LL(1,b,c,d) + sum(LL(3:w,b,c,d));
+                    qstate(2,b,c,d) = LL(2,b,c,d);
+                    for a = 3:w
+                        qstate(a,b,c,d) = LL(1,b,c,d) + sum(LL(3:w,b,c,d));
+                    end 
                 end
             end
         end

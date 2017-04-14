@@ -272,10 +272,8 @@ for z = 1:5
             %make sure utterance_PS includes the state and utterance of
             %concern. %utterance_PS(state,utterance)  Also change how the variable is saving with the
             %appropriate variable
-            %y is QUD
-            %x is scope
-            %z is world
-            manip_concern = y;
+            
+            manip_concern = z;
             m_u_ps(manip_concern,:) = utterance_PS(2,2);
             
             count = count + 1;   

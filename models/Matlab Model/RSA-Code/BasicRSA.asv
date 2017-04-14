@@ -2,9 +2,6 @@
 clc;
 clear;
 addpath('RSA F');
-%This is the basic RSA that runs the model once for one sett of parameter
-%settings.  Running the model multiple times while adjusting the parameters
-%per run occurs in RSA_MultiManip
 
 
 
@@ -15,11 +12,10 @@ utterances = {'ambi',
     'none',
     'every',
     'notall',
-    'nottwo',
-    'notsome'};
+    'nottwo'};
 
 %select utterances for this run
-utt = [2,3];
+utt = [1,2];
 u = numel(utt);
 utt = uttselect(utt,utterances);
 %speaker optimality parameter
@@ -47,9 +43,7 @@ prior_w = [];
 %available QUDs
 tot_QUDs = {'many?',
     'all?',
-    'none?',
-    '<two?',
-    'two?'};
+    'none?'};
 QUDs = [1,2,3];
 QUDs = uttselect(QUDs, tot_QUDs);
 q = numel(QUDs);
@@ -67,11 +61,11 @@ qu = 1/q;
 %prior settings:
 world_prior_sett = 0;
 scope_prior_sett = 0;
-qud_prior_sett = 0;
+qud_prior_sett = 1;
 
 %type of prior on worlds
 %unifrom prior 0
-if world_prior_sett == 0
+if world_prior_sett_sett == 0
     for i = 1:w
         prior_w(i) = 1/w;
     end
@@ -94,7 +88,7 @@ if qud_prior_sett == 0
         QUD_prior(i) = 1/q;
     end
 else
-    %manually adjust prior. You will need to
+    %manually adjust prior, if you won't want it uniform.  You will need to
     %alter this matrix if you change how many QUDs are in the model.  Order
     %in this Matrix indicates order in QUDs matrix
     QUD_prior = [unfq unfq fv];
@@ -108,13 +102,12 @@ end
 %so in a matrix LL(a,b,c,d), a is always worlds, b is always utterances, c
 %is always scopes, and d is always QUDs
 
-%meaning function
 Lit = [];
 for a = 1:w
     for b = 1:u
         for c = 1:s
             for d = 1:q
-                Lit(a,b,c,d) = meaning(utt(b), worlds(a), tot, scopes(c)).*prior_w(a);
+                Lit(a,b,c,d) = LL(utt(b), QUDs(d), worlds(a), tot, scopes(c)).*prior_w(a);
             end
         end
     end
@@ -139,13 +132,13 @@ for a = 1:w
     for b = 1:u
         for c = 1:s
             for d = 1:q
-                temp_Lit(a,b,c,d) = (meaning(utt(b), worlds(a), tot, scopes(c)).*prior_w(a))/sums_Lit(a,b,c,d);
+                temp_Lit(a,b,c,d) = (LL(utt(b), QUDs(d), worlds(a), tot, scopes(c)).*prior_w(a))/sums_Lit(a,b,c,d);
             end
         end
     end
 end
 temp_Lit(isnan(temp_Lit))=0;
-%Partition probability for QUD component, this is the delta function
+%Partition probability for QUD component
 p_Lit = QUDFun(temp_Lit, QUDs);
 %% Speaker
 %speaker time

@@ -1,7 +1,7 @@
 function [success] = meaning(utt, state, tot, scope)
 %meaning(utt, state, tot, scope) I input in an utternace, state, total possible in world and scope, and
 %return either a 1 if its true in this world state or a 0 if the utterance
-%is false in this world state.
+%is false in this world state.  
 
 if nargin < 4
     scope = 'surface';
@@ -11,7 +11,7 @@ if strcmpi(utt,'ambi') == 1
     if strcmpi(scope, 'surface') == 1
         if state == 0
             success = 1;
-        else
+        else 
             success = 0;
         end
     else
@@ -51,23 +51,7 @@ elseif strcmp(utt, 'nottwo') == 1
         end
     else
         %"Two X were not caught
-        if (tot - state) == 2;
-            success = 1;
-        else
-            success = 0;
-        end
-    end
-elseif strcmp(utt, 'notsome') == 1
-    if strcmpi(scope, 'surface') == 1
-        %"no guys were caught"
-        if state == 0
-            success = 1;
-        else
-            success = 0;
-        end
-    else
-        %"some guys weren't caught
-        if state ~= tot;
+        if state == 2
             success = 1;
         else
             success = 0;
