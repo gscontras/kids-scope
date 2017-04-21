@@ -41,6 +41,22 @@ elseif strcmpi(utt, 'notall') == 1
     else
         success = 0;
     end
+elseif strcmp(utt, 'nottwoB') == 1
+    if strcmpi(scope, 'surface') == 1
+        %"It is not the case that X did two"
+        if state < 2
+            success = 1;
+        else
+            success = 0;
+        end
+    else
+        %"Two X were not caught
+        if (tot - state) > 1;
+            success = 1;
+        else
+            success = 0;
+        end
+    end
 elseif strcmp(utt, 'nottwo') == 1
     if strcmpi(scope, 'surface') == 1
         %"It is not the case that X did two"

@@ -16,10 +16,11 @@ utterances = {'ambi',
     'every',
     'notall',
     'nottwo',
+    'nottwoB',
     'notsome'};
 
 %select utterances for this run. Number is place of utterance in list
-utt = [2,6];
+utt = [2,7];
 u = numel(utt);
 utt = uttselect(utt,utterances);
 %speaker optimality parameter
@@ -38,7 +39,7 @@ opt = 2.5;
 %worlds = [0 1 2 3];
 
 %worlds for 'nottwo'
-worlds = [0 1 2];
+worlds = [0 1 2 3 4];
 
 tot = worlds(end);
 w = numel(worlds);
@@ -50,7 +51,7 @@ tot_QUDs = {'many?',
     'none?',
     '<two?',
     'two?'};
-QUDs = [1,2,3];
+QUDs = [1,4];
 QUDs = uttselect(QUDs, tot_QUDs);
 q = numel(QUDs);
 
@@ -67,9 +68,11 @@ qu = 1/q;
 %prior settings:
 world_prior_sett = 0;
 scope_prior_sett = 0;
-qud_prior_sett = 1;
+qud_prior_sett = 0;
 
 %type of prior on worlds
+
+
 %unifrom prior 0
 if world_prior_sett == 0
     for i = 1:w
@@ -97,7 +100,7 @@ else
     %manually adjust prior. You will need to
     %alter this matrix if you change how many QUDs are in the model.  Order
     %in this Matrix indicates order in QUDs matrix
-    QUD_prior = [unfq unfq fv];
+    QUD_prior = [fv unfq];
 end
 
 %% Literal Listener
@@ -230,3 +233,5 @@ for b = 1:u
         utterance_PS(a,b) = sum(sum(sum(jp_PL(a,b,:,:))))/sum(sum(sum(sum(jp_PL(a,:,:,:)))));
     end
 end
+
+utterance_PS(3,2)

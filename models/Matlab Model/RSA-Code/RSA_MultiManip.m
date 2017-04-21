@@ -16,9 +16,10 @@ utterances = {'ambi',
     'every',
     'notall',
     'nottwo',
+    'nottwoB',
     'notsome'};
 %select utterances for this run
-utt = [2,6];
+utt = [2,7];
 u = numel(utt);
 utt = uttselect(utt,utterances);
 %speaker optimality parameter
@@ -33,7 +34,7 @@ opt = 2.5;
 %worlds for 'every-not' (amb)
 %worlds = [0 1 2 3];
 %worlds for 'nottwo'
-worlds = [1 2 3 4 5];
+worlds = [0 1 2 3 4];
 
 tot = worlds(end);
 w = numel(worlds);
@@ -44,7 +45,7 @@ tot_QUDs = {'many?',
     'none?',
     '<two?',
     'two?'};
-QUDs = [1,4,5];
+QUDs = [1,2];
 QUDs = uttselect(QUDs, tot_QUDs);
 q = numel(QUDs);
 
@@ -63,11 +64,32 @@ qu = 1/q;
 
 %%%%worlds prior
 %4 state prior
-w_prior = [fv unfw unfw unfw
-    unfw fv unfw unfw
-    unfw unfw fv unfw
-    unfw unfw unfw fv
-    .25 .25 .25 .25];
+% w_prior = [fv unfw unfw unfw
+%     unfw fv unfw unfw
+%     unfw unfw fv unfw
+%     unfw unfw unfw fv
+%     .25 .25 .25 .25];
+
+% w_prior = [fv unfw unfw
+%     unfw fv unfw
+%     unfw unfw fv
+%     (1/3) (1/3) (1/3)];
+% 
+w_prior = [fv unfw unfw unfw unfw
+    unfw fv unfw unfw unfw
+    unfw unfw fv unfw unfw
+    unfw unfw unfw fv unfw
+    unfw unfw unfw unfw fv
+    .2 .2 .2 .2 .2];
+
+% w_prior = [fv unfw unfw unfw unfw unfw
+%     unfw fv unfw unfw unfw unfw
+%     unfw unfw fv unfw unfw unfw
+%     unfw unfw unfw fv unfw unfw
+%     unfw unfw unfw unfw fv unfw
+%     unfw unfw unfw unfw unfw fv
+%     (1/6) (1/6) (1/6) (1/6) (1/6) (1/6)];
+
 
 
 %%%%scopes prior
@@ -81,21 +103,21 @@ s_pri = [.9 .1
 %     .1 .9];
 
 
-%%%%QUD prior
-q_prior = [fv unfq unfq
-    unfq fv unfq
-    unfq unfq fv
-    (1/3) (1/3) (1/3)];
+% %%%%QUD prior
+% q_prior = [fv unfq unfq
+%     unfq fv unfq
+%     unfq unfq fv
+%     (1/3) (1/3) (1/3)];
 
-% q_prior = [fv unfq
-%     unfq fv
-%     .5 .5];
+q_prior = [fv unfq
+    unfq fv
+    .5 .5];
 
 
-%Prior set, set 1 if manipulating, 0 otherwise
-world_prior_sett = 0;
+%Prior set, set 1 if manipulating, 0 otherwise. 2 if wrapping worlds
+world_prior_sett = 1;
 scope_prior_sett = 0;
-qud_prior_sett = 0;
+qud_prior_sett = 1;
 
 %Interaction Variables to save
 w_priors = [];
@@ -105,23 +127,40 @@ m_u_ps = [];
 count = 1;
 
 %% Model
+
+%adding worlds to multiple runs here
+%nw is the total number of different world amounts we want.  
+% nw = 4;
+% worlds = [0 1 2];
+% tot = worlds(end);
+% w = numel(worlds);
+% world_count = 0;
+% for h = 1:nw
+%     if world_count > 0
+%         worlds(w + 1) = (tot + 1);
+%         tot = worlds(end);
+%         w = numel(worlds);
+%     end
+    
 %change z,y,x here depending on number of priors used
 %y is QUD
 %x is scope
-%z is world
-for z = 1:5
+%z is world; z is number of worlds + 1
+for z = 1:6
     for y = 1:3
-        for x = 1:5
+        for x = 1:1
             %%Type of priors used
             %unifrom prior
             if world_prior_sett == 0
                 for i = 1:w
                     prior_w(i) = 1/w;
                 end
-            else
+            elseif world_prior_sett == 1
                 %manually adjust priors
                 prior_w = w_prior(z,:);
             end
+                
+                    
             
             if scope_prior_sett == 0
                 scopes_p = [.5 .5];
@@ -271,22 +310,28 @@ for z = 1:5
                 end
             end
                    
-            w_priors(y,:) = [prior_w];
-            s_priors(y,:) = [scopes_p];
-            q_priors(y,:) = [QUD_prior];
+            w_priors(count,:) = [prior_w];
+            s_priors(count,:) = [scopes_p];
+            q_priors(count,:) = [QUD_prior];
             %make sure utterance_PS includes the state and utterance of
             %concern. %utterance_PS(state,utterance)  Also change how the variable is saving with the
             %appropriate variable
             %y is QUD
             %x is scope
             %z is world
-            manip_concern = y;
-            m_u_ps(manip_concern,:) = utterance_PS(3,2);
+            manip_concern = z;
+            %m_u_ps(manip_concern,:) = utterance_PS(4,2);
+            m_u_ps(count,1) = w_priors(count);
+            m_u_ps(count,2) = q_priors(count);
+            m_u_ps(count,3) = utterance_PS(3,2);
+%             world_PS(nw,:)
             
             count = count + 1;   
         end
     end
 end
+%     world_count = world_count + 1;
+% end
 
 
 %%%Need to change what the save is called
