@@ -101,7 +101,7 @@ Thus, children's developing processing and pragmatic abilities may both be a sou
 % but it's muddy right now...better way to say this?
 though current experimental studies have struggled to clearly isolate the influence of each type of factor.
 %% so that's where we come in
-To this end, we formally articulate the mechanism of scope ambiguity resolution using the Bayesian Rational Speech Act (RSA) computational modeling framework \shortcite{goodman2013knowledge,GoodmanLassiter2015} %LSP: We should cite Noah's stuff.
+To this end, we formally articulate the mechanism of scope ambiguity resolution using the Bayesian Rational Speech Act (RSA) computational modeling framework \shortcite{frankgoodman2012,goodmanfrank2016} %LSP: We should cite Noah's stuff.
 %  It also offers us a computational framework from which to understand exactly how the variables considered here would impact a scopally ambiguous utterance's endorsement.
 in order to identify the separate contributions of processing and pragmatic factors.
 
@@ -123,7 +123,7 @@ More generally, our model yields a more precise, explanatory, and predictive des
 %LSP:  Going directly to the heart of it.
 Children's ability to access the inverse scope interpretation has been shown to be sensitive to manipulations of experimental context.
 % about the task that's used 
-The methodology typically used to assess children's scope disambiguation is the Truth Value Judgment Task (TVJT; \citeNP{crain1985acquisition}).  In the basic TVJT, children are presented with a background story about the actors---e.g., horses engaging in some activities.  After this background story, children watch as the horses attempt to complete an action, such as jump over a fence. 
+The methodology typically used to assess children's scope disambiguation is the Truth Value Judgment Task (TVJT; \citeNP{crain1985acquisition}).  In the basic TVJT, children are presented with a background story about the actors---for example, horses engaging in some activities.  After this background story, children watch as the horses attempt to complete an action, such as jump over a fence. 
 %TVJTs typically have a many of horses succeed and a few horses (typically one) fail.  
 The critical \textbf{not-all} result state meant to prompt the inverse scope interpretation is illustrated in Figure \ref{fig:horse}, where the white horse fails to jump over the fence. 
 
@@ -240,8 +240,8 @@ These experimental studies have also supported different theoretical proposals f
 
 %give more information about what all the priors are, like exact values. More ecologically valid prior.  .7 and .3.  Put all the details in.
 
-We model  ambiguity resolution within the Bayesian Rational Speech Act (RSA) framework \cite{goodman2013knowledge}. This framework views language understanding as a social reasoning process. A \textit{pragmatic listener} $L_1$ interprets an utterance by reasoning about a cooperative \textit{speaker} $S_1$ who is trying to inform a \textit{literal listener} $L_0$ about the world.
-Our model is a ``lifted-variable'' extension wherein the ambiguous utterance's literal semantics is parameterized by interpretation-fixing variables (e.g., the relative scope of the quantificational elements; \citeNP{Lassiter2013}). Hearing an ambiguous utterance, a pragmatic listener reasons jointly about the true state of the world (e.g., how many horses jumped over the fence), the scope interpretation that the speaker had in mind (e.g., inverse), as well as the likely QUD that the utterance addresses (e.g., \texttt{all?}).  %LSP: Just to keep familiar nomenclature
+We model  ambiguity resolution within the Bayesian Rational Speech Act (RSA) framework \cite{goodmanfrank2016}. This framework views language understanding as a social reasoning process. A \textit{pragmatic listener} $L_1$ interprets an utterance by reasoning about a cooperative \textit{speaker} $S_1$ who is trying to inform a \textit{literal listener} $L_0$ about the world.
+Our model is a ``lifted-variable'' extension wherein the ambiguous utterance's literal semantics is parameterized by interpretation-fixing variables (e.g., the relative scope of the quantificational elements; \citeNP{Lassiter2013}). Hearing an ambiguous utterance, a pragmatic listener reasons jointly about the true state of the world (e.g., how many horses jumped over the fence), the scope interpretation that the speaker had in mind (i.e., surface vs.~inverse), as well as the likely QUD that the utterance addresses (e.g., \texttt{all?}).  %LSP: Just to keep familiar nomenclature
 %\emph{did all horses fail?}, \emph{did all horses succeed?}, \emph{how many horses succeeded?}
 %This models the resolution of scope ambiguity as pragmatic inference over the parameters of an underspecified literal semantics, delivering quantitative predictions about behavior.
 %as well as about the QUD and the scope interpretation that the speaker had in mind. 
@@ -252,7 +252,7 @@ To connect our model's predictions with the available TVJT data, we follow \cite
 The pragmatic speaker $S_2$ makes this decision by reasoning about the probability that a pragmatic listener $L_1$ (who is reasoning about a speaker $S_1$ reasoning about a literal listener $L_0$) would arrive at the correct world state after hearing the utterance. 
 
 We take world states $w\in W$ 
-to correspond to the number of successful outcomes, e.g., the horses that successfully jumped over the fence ($W=\{0,1,2,3\}$). We assume a simple truth-functional semantics where an utterance $u$ denotes a mapping from world states to truth values ($Bool = \{\texttt{true},\texttt{false}\}$). We parameterize this truth function so that it depends on the scope interpretation $i \in I = \{\texttt{inverse}, \texttt{surface}\}$,
+to correspond to the number of successful outcomes, for example, the horses that successfully jumped over the fence ($W=\{0,1,2,3\}$). We assume a simple truth-functional semantics where an utterance $u$ denotes a mapping from world states to truth values ($Bool = \{\texttt{true},\texttt{false}\}$). We parameterize this truth function so that it depends on the scope interpretation $i \in I = \{\texttt{inverse}, \texttt{surface}\}$,
 \sem{\textit{u}}$^{i}$: $W\rightarrow$ Bool. 
 We consider two alternative utterances $u \in U$: the \texttt{null} utterance (i.e., saying nothing at all, and so choosing \emph{not} to endorse the utterance) and the scopally ambiguous utterance \texttt{amb} (e.g., \textit{``Every horse didn't jump over the fence''}). So, $U$ = \{\texttt{null}, \texttt{amb}\}.  
 The utterance semantics appears in \ref{ex:utt-sem},
@@ -265,8 +265,9 @@ If  \texttt{surface} is active, this corresponds to the \textbf{none} reading, a
 
 \ex. \label{ex:utt-sem} \emph{Utterance semantics} \sem{\textit{u}}$^{i}$:
 \a. \sem{\texttt{null}}$^{i}$ = \texttt{true}
-\b. \sem{\texttt{amb}}$^{i}$ = if $i$ \sem{\texttt{inverse}}, else \sem{\texttt{surface}}\\
-where:\\
+\b. \sem{\texttt{amb}}$^{i}$ = \ \ \ \ if $i$ = \texttt{inverse}  \sem{\texttt{inverse}}, \\
+\phantom{sem{\texttt{amb}}$^{i}$ = } else \sem{\texttt{surface}}\\
+ where:\\
 \sem{\texttt{inverse}} = $\lambda$w. w $\neq$ 3 \\
 \sem{\texttt{surface}} = $\lambda$w. w = 0
 
@@ -355,6 +356,7 @@ To test  how pragmatic and processing factors contribute to non-adult-like utter
 \vspace{-15pt}
 \caption{Model predictions for ambiguous utterance endorsement (e.g., \emph{Every horse didn't jump over the fence}) in a not-all scenario (e.g., two-out-of-three horses jump over the fence). Lower endorsement probability corresponds to less adult-like (i.e., more child-like) behavior. For the pragmatic variables (world state, QUD), the favored parameter value receives most of the prior probability weight ($P(favored) = 0.9$). For the processing variable (scope), the prior corresponds to how strongly the inverse scope is favored.}
 \label{fig:graphs}
+%\vspace{-10pt}
 \end{figure*}
 
 For the world state prior (Figure \ref{fig:graphs}, \emph{left}), we systematically favor specific world states by setting their prior probability to $0.9$; if a world state is not favored, it receives a prior probability of $0.1/3=0.033$. Holding the QUD and scope priors at their default values, we see a marked increase in endorsement of the ambiguous utterance in the not-all scenario as beliefs about horse success increase. Utterance endorsement is at its lowest ($0.25$) when prior knowledge suggests that horses are particularly unlikely to succeed at jumping; utterance endorsement is at its highest (i.e., most adult-like: $0.90$) when we believe horses are very likely to succeed.
