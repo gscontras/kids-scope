@@ -43,7 +43,8 @@ elseif strcmpi(utt, 'notall') == 1
     end
 elseif strcmp(utt, 'nottwoB') == 1
     if strcmpi(scope, 'surface') == 1
-        %"It is not the case that X did two"
+        %"This is confusing, since the semantics for 'twonot' and 'nottow'
+        %are the same. For 'twonot' the surface is 'nottwo'
         if state < 2
             success = 1;
         else

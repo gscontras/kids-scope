@@ -39,7 +39,7 @@ opt = 2.5;
 %worlds = [0 1 2 3];
 
 %worlds for 'nottwo'
-worlds = [0 1 2 3 4];
+worlds = [0 1 2];
 
 tot = worlds(end);
 w = numel(worlds);
@@ -51,7 +51,7 @@ tot_QUDs = {'many?',
     'none?',
     '<two?',
     'two?'};
-QUDs = [1,4];
+QUDs = [1,2,3];
 QUDs = uttselect(QUDs, tot_QUDs);
 q = numel(QUDs);
 
@@ -60,7 +60,7 @@ scopes = {'surface', 'inverse'};
 s = numel(scopes);
 
 %favored probability number
-fv = .8;
+fv = .9;
 unfw = (1 - fv)/(w - 1);
 unfq = (1 - fv)/(q - 1);
 wu = 1/w;
@@ -68,7 +68,7 @@ qu = 1/q;
 %prior settings:
 world_prior_sett = 0;
 scope_prior_sett = 0;
-qud_prior_sett = 0;
+qud_prior_sett = 1;
 
 %type of prior on worlds
 
@@ -80,7 +80,7 @@ if world_prior_sett == 0
     end
 else
     %manually adjust priors 1
-    prior_w = [unfw unfw fv];
+    prior_w = [fv unfw unfw];
 end
 
 
@@ -100,7 +100,7 @@ else
     %manually adjust prior. You will need to
     %alter this matrix if you change how many QUDs are in the model.  Order
     %in this Matrix indicates order in QUDs matrix
-    QUD_prior = [fv unfq];
+    QUD_prior = [unfq unfq fv];
 end
 
 %% Literal Listener
@@ -234,4 +234,6 @@ for b = 1:u
     end
 end
 
-utterance_PS(3,2)
+utterance_PS
+worlds_PL;
+scopes_PL;

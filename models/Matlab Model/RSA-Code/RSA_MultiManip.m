@@ -34,7 +34,7 @@ opt = 2.5;
 %worlds for 'every-not' (amb)
 %worlds = [0 1 2 3];
 %worlds for 'nottwo'
-worlds = [0 1 2 3 4];
+worlds = [0 1 2];
 
 tot = worlds(end);
 w = numel(worlds);
@@ -45,7 +45,7 @@ tot_QUDs = {'many?',
     'none?',
     '<two?',
     'two?'};
-QUDs = [1,2];
+QUDs = [1,2,3];
 QUDs = uttselect(QUDs, tot_QUDs);
 q = numel(QUDs);
 
@@ -54,7 +54,7 @@ scopes = {'surface', 'inverse'};
 s = numel(scopes);
 
 %favored probability number
-fv = .8;
+fv = .9;
 unfw = (1 - fv)/(w - 1);
 unfq = (1 - fv)/(q - 1);
 wu = 1/w;
@@ -70,17 +70,17 @@ qu = 1/q;
 %     unfw unfw unfw fv
 %     .25 .25 .25 .25];
 
-% w_prior = [fv unfw unfw
-%     unfw fv unfw
-%     unfw unfw fv
-%     (1/3) (1/3) (1/3)];
-% 
-w_prior = [fv unfw unfw unfw unfw
-    unfw fv unfw unfw unfw
-    unfw unfw fv unfw unfw
-    unfw unfw unfw fv unfw
-    unfw unfw unfw unfw fv
-    .2 .2 .2 .2 .2];
+w_prior = [fv unfw unfw
+    unfw fv unfw
+    unfw unfw fv
+    (1/3) (1/3) (1/3)];
+
+% w_prior = [fv unfw unfw unfw unfw
+%     unfw fv unfw unfw unfw
+%     unfw unfw fv unfw unfw
+%     unfw unfw unfw fv unfw
+%     unfw unfw unfw unfw fv
+%     .2 .2 .2 .2 .2];
 
 % w_prior = [fv unfw unfw unfw unfw unfw
 %     unfw fv unfw unfw unfw unfw
@@ -104,18 +104,18 @@ s_pri = [.9 .1
 
 
 % %%%%QUD prior
-% q_prior = [fv unfq unfq
-%     unfq fv unfq
-%     unfq unfq fv
-%     (1/3) (1/3) (1/3)];
+q_prior = [fv unfq unfq
+    unfq fv unfq
+    unfq unfq fv
+    (1/3) (1/3) (1/3)];
 
-q_prior = [fv unfq
-    unfq fv
-    .5 .5];
+% q_prior = [fv unfq
+%     unfq fv
+%     .5 .5];
 
 
 %Prior set, set 1 if manipulating, 0 otherwise. 2 if wrapping worlds
-world_prior_sett = 1;
+world_prior_sett = 0;
 scope_prior_sett = 0;
 qud_prior_sett = 1;
 
@@ -146,9 +146,9 @@ count = 1;
 %y is QUD
 %x is scope
 %z is world; z is number of worlds + 1
-for z = 1:6
-    for y = 1:3
-        for x = 1:1
+for z = 1:4
+    for y = 1:4
+        for x = 1:5
             %%Type of priors used
             %unifrom prior
             if world_prior_sett == 0
@@ -319,11 +319,11 @@ for z = 1:6
             %y is QUD
             %x is scope
             %z is world
-            manip_concern = z;
-            %m_u_ps(manip_concern,:) = utterance_PS(4,2);
-            m_u_ps(count,1) = w_priors(count);
-            m_u_ps(count,2) = q_priors(count);
-            m_u_ps(count,3) = utterance_PS(3,2);
+            manip_concern = y;
+            m_u_ps(manip_concern,:) = utterance_PS(2,2);
+%             m_u_ps(count,1) = w_priors(count);
+%             m_u_ps(count,2) = q_priors(count);
+%             m_u_ps(count,3) = utterance_PS(3,2);
 %             world_PS(nw,:)
             
             count = count + 1;   
@@ -332,11 +332,13 @@ for z = 1:6
 end
 %     world_count = world_count + 1;
 % end
+m_u_ps
 
 
 %%%Need to change what the save is called
-savename = 'mu_Run';
-%save(savename,'w_priors','s_priors','q_priors','m_u_ps');
+savename = 'twonot_qud';
+save(savename,'w_priors','s_priors','q_priors','m_u_ps');
+
 
 
 

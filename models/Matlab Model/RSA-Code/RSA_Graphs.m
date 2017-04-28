@@ -2,33 +2,24 @@
 clc;
 clear;
 addpath('RSA F');
+addpath('Data');
 %save(filename,variables) 
 %load(filename)
 
-load('scope_manip.mat');
+qud = load('twonot_qud.mat');
+scope = load('twonot_scope.mat');
+world = load('twonot_world.mat');
 
-uniform = [4, .3, 3, .4496];
+quds = qud.m_u_ps;
+scopes = scope.m_u_ps;
+worlds = world.m_u_ps;
 
-worlds = [uniform
-    0 .3 3 .2500
-    1 .3 3 .4900
-    2 .3 3 .4900
-    3 .3 3 .8967];
+
+
+
 %csvwrite('world_manip',worlds);
-
-quds = [uniform
-    4.0000    0.3000         0    0.2811
-    4.0000    0.3000    1.0000    0.3663
-    4.0000    0.3000    2.0000    0.6350];
 %csvwrite('qud_manip9',quds);
-
-
-scopes = [4.0000    0.1000    3.0000    0.3994
-    4.0000    0.3000    3.0000    0.4496
-    4.0000    0.5000    3.0000    0.4928
-    4.0000    0.7000    3.0000    0.5326
-    4.0000    0.9000    3.0000    0.5716];
-csvwrite('scope_manip',scopes);
+%csvwrite('scope_manip',scopes);
 
 % super_endorse = [3 .1 2 .9494
 %     3 .5 2 .9600

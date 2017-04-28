@@ -41,10 +41,12 @@ for b = 1:u
                     qstate(a,b,c,d) = sum(LL(3:w,b,c,d));
                 end
             elseif strcmpi(QUDs(d), 'two?') == 1
-                qstate(1,b,c,d) = LL(1,b,c,d) + sum(LL(3:w,b,c,d));
-                qstate(2,b,c,d) = LL(2,b,c,d);
-                for a = 3:w
-                    qstate(a,b,c,d) = LL(1,b,c,d) + sum(LL(3:w,b,c,d));
+                for a = 1:2
+                    qstate(a,b,c,d) = sum(LL(1:2,b,c,d)) + sum(LL(4:w,b,c,d));
+                end
+                qstate(3,b,c,d) = LL(3,b,c,d);
+                for a = 4:w
+                    qstate(a,b,c,d) = sum(LL(1:2,b,c,d)) + sum(LL(4:w,b,c,d));
                 end
             end
         end
