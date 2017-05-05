@@ -163,7 +163,7 @@ for z = 1:4
                     
             
             if scope_prior_sett == 0
-                scopes_p = [.5 .5];
+                scopes_p = [.3 .7];
                 %set to .7 .3 for sent in results
             else
                 scopes_p = s_pri(x,:);

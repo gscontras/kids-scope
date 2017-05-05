@@ -51,7 +51,6 @@ elseif strcmp(utt, 'nottwoB') == 1
             success = 0;
         end
     else
-        %"Two X were not caught
         if (tot - state) > 1;
             success = 1;
         else
