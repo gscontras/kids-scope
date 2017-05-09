@@ -1,4 +1,4 @@
-setwd("~/Documents/git/meaningLab/kids-scope/models/plots")
+##setwd("~/Documents/git/meaningLab/kids-scope/models/plots")
 ##setwd("~/Documents/MATLAB/RSA Functions/R Code for Graphs/kids-scope/kids-scope")
 library(ggplot2)
 library(scales)

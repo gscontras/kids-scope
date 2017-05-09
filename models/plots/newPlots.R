@@ -32,7 +32,7 @@ library(scales)
 # little plot
 
 q = read.csv("twonot_qud",header=F)
-q = read.csv("qud_manip9",header=F)
+#q = read.csv("qud_manip9.csv",header=F)
 names(q) <- c("state","scope","QUD","p")
 q$condition = "qud"
 q$QUD = factor(q$QUD,levels=c("3","0","1","2"))
@@ -41,18 +41,21 @@ q$QUD = factor(q$QUD,labels=c("uniform\nQUD prior","did no\nfrogs succeed?","how
 q$QUD = factor(q$QUD,labels=c("uniform\nQUD prior","did no\nhorses succeed?","how many\nhorses succeeded?","did all\nhorses succeed?"))
 
 s = read.csv("twonot_scope",header=F)
-s = read.csv("scope_manip9",header=F)
+#s = read.csv("scope_manip9.csv",header=F)
 names(s) <- c("state","scope","QUD","p")
 s$condition = "scope"
 
 w = read.csv("twonot_world",header=F)
-w = read.csv("worldd_manip9",header=F)
+#w = read.csv("world_manip9.csv",header=F)
+#w = w[-c(3),]
 names(w) <- c("state","scope","QUD","p")
 w$condition = "world"
+##Frogs
 w$state = factor(w$state,levels=c("3","0","1","2"))
 w$state = factor(w$state,labels=c("uniform\nstate prior","0 frogs","1 frog","2 frogs"))
-#w$state = factor(w$state,levels=c("4","0","1","2","3"))
-#w$state = factor(w$state,labels=c("uniform\nstate prior","0 horses","1 horse","2 horse","3 horses"))
+##Horses
+#w$state = factor(w$state,levels=c("4","0","2","3"))
+#w$state = factor(w$state,labels=c("uniform\nstate prior","0 horses","2 horse","3 horses"))
 
 d = rbind(s,w,q)
 
@@ -61,15 +64,16 @@ d[d$condition=="qud",]$x = as.character(d[d$condition=="qud",]$QUD)
 d[d$condition=="scope",]$x = d[d$condition=="scope",]$scope
 d[d$condition=="world",]$x = d[d$condition=="world",]$world
 
-#d$x = factor(d$x,levels=c("uniform\nQUD prior","did no\nhorses succeed?","how many\nhorses succeeded?","did all\nhorses succeed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 horses","1 horse","2 horses","3 horses"))
-#d$x = factor(d$x,labels=c("uniform\nQUD prior","did no\nhorses\nsucceed?","how many\nhorses\nsucceeded?","did all\nhorses\nsucceed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 horses","1 horse","2 horses","3 horses"))
+#Horses
+#d$x = factor(d$x,levels=c("uniform\nQUD prior","did no\nhorses succeed?","how many\nhorses succeeded?","did all\nhorses succeed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 horses", "2 horses","3 horses"))
+#d$x = factor(d$x,labels=c("uniform","none?","how\nmany?","all?","0.1","0.3", "0.5","0.7","0.9","uniform","0","2","3"))
 
-#change from horses to frogs 
+#Frogs
 d$x = factor(d$x,levels=c("uniform\nQUD prior","did no\nfrogs succeed?","how many\nfrogs succeeded?","did all\nfrogs succeed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 frogs","1 frog","2 frogs"))
 d$x = factor(d$x,labels=c("uniform","none?","how\nmany?","all?","0.1","0.3", "0.5","0.7","0.9","uniform","0","1","2"))
 
-d$x = factor(d$x,levels=c("uniform\nQUD prior","did no\nfrogs succeed?","how many\nfrogs succeeded?","did all\nfrogs succeed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 frogs","1 frog","2 frogs"))
-d$x = factor(d$x,labels=c("uniform","none?","how\nmany?","all?","0.1","0.3", "0.5","0.7","0.9","uniform","0","1","2"))
+#d$x = factor(d$x,levels=c("uniform\nQUD prior","did no\nfrogs succeed?","how many\nfrogs succeeded?","did all\nfrogs succeed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 frogs","1 frog","2 frogs"))
+#d$x = factor(d$x,labels=c("uniform","none?","how\nmany?","all?","0.1","0.3", "0.5","0.7","0.9","uniform","0","1","2"))
 
 d$condition = factor(d$condition,levels=c("world","qud","scope"))
 d$condition = factor(d$condition,labels=c("world state prior\nmanipulation","qud prior\nmanipulation","scope prior\nmanipulation"))
@@ -87,8 +91,8 @@ lp <- ggplot(d,aes(x=as.factor(x),y=p,fill=as.factor(x))) +
   theme(text = element_text(size=26))+
   facet_grid(.~condition,scales = "free_x")
 lp
-ggsave("twonot_results.jpeg",width=15.75,height=4.5)
-#ggsave("post_three.jpeg",width=15.75,height=4.5)
+#ggsave("twonot_results.jpeg",width=15.75,height=4.5)
+ggsave("post_three.jpeg",width=15.75,height=4.5)
 
 ##Super Endorsement Graph
 
