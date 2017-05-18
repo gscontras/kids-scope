@@ -2,7 +2,6 @@
 ##setwd("~/Documents/MATLAB/kids-scope/kids-scope/models/Matlab Model/RSA-Code/Data")
 library(ggplot2)
 library(scales)
-
 # ## BIG PLOt
 # 
 # all_d = read.csv("big_matrix.csv",header=T)
@@ -32,7 +31,7 @@ library(scales)
 # little plot
 
 #q = read.csv("twonot_qud",header=F)
-q = read.csv("qud_manip9",header=F)
+q = read.csv("qud_manip9.csv",header=F)
 names(q) <- c("state","scope","QUD","p")
 q$condition = "qud"
 q$QUD = factor(q$QUD,levels=c("3","0","1","2"))
@@ -41,12 +40,12 @@ q$QUD = factor(q$QUD,levels=c("3","0","1","2"))
 q$QUD = factor(q$QUD,labels=c("uniform\nQUD prior","did no\nhorses succeed?","how many\nhorses succeeded?","did all\nhorses succeed?"))
 
 #s = read.csv("twonot_scope",header=F)
-s = read.csv("scope_manip",header=F)
+s = read.csv("scope_manip.csv",header=F)
 names(s) <- c("state","scope","QUD","p")
 s$condition = "scope"
 
 #w = read.csv("twonot_world",header=F)
-w = read.csv("world_manip9",header=F)
+w = read.csv("world_manip9.csv",header=F)
 w = w[-c(3),]
 names(w) <- c("state","scope","QUD","p")
 w$condition = "world"
