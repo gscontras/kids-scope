@@ -6,4 +6,16 @@ function [success] = worldPrior(frogs,probs)
 %given these odds. iterate in the literal listener
 
 tot = numel(frogs);
+success = [];
+check = 1;
 for i = 1:tot
+    if webpplFlip(probs(i)) == 1
+        success{check} = frogs{i};
+        check = check + 1;
+    end
+end
+
+
+% if isempty(success) == 1
+%     success = success(~cellfun('isempty',success)); 
+% end

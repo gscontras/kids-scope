@@ -31,7 +31,7 @@ which_frogs = [1,4];
 frogs = uttselect(which_frogs, tot_frogs);
 tot = numel(frogs);
 %prior of each frogs jump (this currently sucks)
-frogProbs = [.9 .9 .5 .9];
+frogProbs = [.5 .9 .5 .5];
 for i = 1:tot
     indivPrior(i) = frogProbs(which_frogs(i));
 end
@@ -54,13 +54,14 @@ for i = 1:(tot + 1)
     total_prior(i) = total_prior(i)/iter;
 end
 
-sets = {[1 2], [1 2], [4 5]};
-
-%cartProd = [x(:) y(:) z(:)];
-
-
-ndgrid(frogs{:})
-
+for i = 1:1000
+    world = worldPrior(frogs, indivPrior);
+    x = numel(world);
+    tot(i) = x;
+end
+y(1) = sum(tot(:) == 0)/1000;
+y(2) = sum(tot(:) == 1)/1000;
+y(3) = sum(tot(:) == 2)/1000
 
 %available QUDs
 tot_QUDs = {'many?',
