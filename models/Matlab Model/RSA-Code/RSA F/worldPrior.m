@@ -15,7 +15,3 @@ for i = 1:tot
     end
 end
 
-
-% if isempty(success) == 1
-%     success = success(~cellfun('isempty',success)); 
-% end

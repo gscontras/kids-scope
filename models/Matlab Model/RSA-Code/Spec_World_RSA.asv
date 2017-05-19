@@ -32,15 +32,15 @@ frogs = uttselect(which_frogs, tot_frogs);
 tot = numel(frogs);
 %prior of each frogs jump (this currently sucks)
 frogProbs = [.5 .9 .5 .5];
-
-%indivPrior for each frog 
 for i = 1:tot
-    indivPrior(i) = frogProbs(which_frogs(i));
+    indivPrior{i} = frogProbs(which_frogs(i));
+end
+iter = 1000;
+for i = 1:iter
+    frogdraws(i) = worldPrior(frogs, frogProbs);
 end
 
-%statePrior, given the frog probabilities
-iter = 1000;
-statePrior = statePrior(frogs, indivPrior, iter);
+statePrior = statePrior(f);
 
 
 %worldPrior - webppl style
