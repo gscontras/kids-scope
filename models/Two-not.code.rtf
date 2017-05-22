@@ -7,14 +7,14 @@
 
 \f0\fs24 \cf0 // Here is the code for the quantifier scope model\
 // TO DO: unit presupposition failure = need to find unit somewhere \
-//    (either successes or failures)\
-// TO DO: adjust makeUnits_baseRate based on whether numParticipants = unitSize\
+//    (either successes or failures) -- involves updating meaning function\
+//    so that unit not succeeding means all members not in success state\
 \
 ///// variables that can be set globally\
 ////////////// possible utterances\
 // // two-not = "two frogs didn't jump"\
 var utterances = ["null","two-not"];\
-var numParticipants = 4; // e.g., total frogs\
+var numParticipants = 2; // e.g., total frogs\
 var baseRate = 0.5; // success rate\
 var unitSize = 2; // e.g., for 2-frog units\
 var scopes = ["surface", "inverse"];\
@@ -24,7 +24,12 @@ var QUDPrior_makeUnits = [0.033, 0.033, 0.033, 0.45, 0.45];\
 // if not making units, favor the QUDs not concerned with making units\
 var QUDPrior_noMakeUnits = [0.3, 0.3, 0.3, 0.05, 0.05];\
 //var makeUnits = true;\
-var makeUnits_baseRate = 0.5; // prior probability of making units\
+// prior probability of making units in default cases\
+var makeUnits_baseRate = 0.5; \
+// prior probability of making units if numParticipants == unitSize\
+// e.g., two-frog world when utterance is "two frogs..." (two-not)\
+var makeUnits_baseRate_sameSize = 0.9;\
+\
 \
 ///////////////////////\
 \
@@ -339,6 +344,22 @@ var speaker = cache(function(scope,state,QUD,makeUnits,unit) \{\
 // sanity check for speaker S1\
 //viz.auto(speaker("surface", [1,3,4], "not this unit?", true, [1,2]))\
 \
+// helper function to return correct makeUnits value\
+var getMakeUnits = function()\{\
+  //check to see if numParticipants == unitSize  \
+  if(numParticipants == unitSize)\{\
+    // if so, use special prior for makeUnits: makeUnits_baseRate_sameSize\
+    return flip(makeUnits_baseRate_sameSize);\
+  \}else\{\
+    // else makeUnits inferred based on makeUnits_baseRate\
+    return flip(makeUnits_baseRate);\
+  \}\
+\}\
+\
+// sanity check on getMakeUnits\
+// print("numParticipants: " + numParticipants + ", unitSize = " + unitSize);\
+// print(getMakeUnits());\
+  \
 // Pragmatic listener (L1)\
 // get utterance, and infer everything else:\
 //   scope, state, QUD, makeUnits, unit\
@@ -347,8 +368,8 @@ var pragmaticListener = cache(function(utterance) \{\
     var scope = scopePrior();\
     // numParticipants and baseRate of success globally set\
     var state = statePrior(numParticipants, baseRate); \
-    // makeUnits inferred based on makeUnits_baseRate\
-    var makeUnits = flip(makeUnits_baseRate);\
+    // get makeUnits\
+    var makeUnits = getMakeUnits();\
     var QUD = QUDPrior(makeUnits); // QUDs depend on whether makeUnits\
     // if makeUnits, unit sampled; \
     if(makeUnits)\{ // makeUnits reading\
@@ -367,7 +388,7 @@ var pragmaticListener = cache(function(utterance) \{\
 \});\
 \
 // sanity check for pragmaticListener\
-//pragmaticListener("two-not")\
+//viz(pragmaticListener("two-not"))\
 \
 var alpha_S2 = 1 // optimality of pragmatic speaker\
 \
@@ -390,6 +411,6 @@ var pragmaticSpeaker = cache(function(state) \{\
 // pragmaticSpeaker([1,2])\
 \
 // if we set numParticipants = 2, let's look at a 1-frog success state\
-// print("num of participants: " + numParticipants)\
-// print("in world with success state = [2]")\
-// pragmaticSpeaker([2])}
+print("num of participants: " + numParticipants)\
+print("in world with success state = [1]")\
+pragmaticSpeaker([1])}
