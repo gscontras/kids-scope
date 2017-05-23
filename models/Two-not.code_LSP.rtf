@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf820
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -25,7 +25,7 @@ var utterancePrior = function() \{\
 /////// world state functions /////////////\
 // recursive function that flips based on base rate to determine which\
 //    individuals were successful\
-var makeStates = function(numParticipants, baseRate)\{\
+var makeSuccesses = function(numParticipants, baseRate)\{\
   // if numParticipants == 1, return the empty set or [numParticipants]\
   // based on flip\
   if(numParticipants == 1)\{\
@@ -38,22 +38,69 @@ var makeStates = function(numParticipants, baseRate)\{\
   else\{\
     if(flip(baseRate))\{\
       // success for this participant\
-      return sort([numParticipants].concat(makeStates(numParticipants-1, baseRate)))\
+      return sort([numParticipants].concat(makeSuccesses(numParticipants-1, baseRate)))\
     \}else\{\
-      return makeStates(numParticipants-1, baseRate)\
+      return makeSuccesses(numParticipants-1, baseRate)\
     \}\
   \}\
 \}\
                       \
 // sanity check for making states\
-//print(makeStates(4,0.5))\
+//print(makeSuccesses(4,0.5))\
+\
+// getInverseHelper\
+// input: non-empty list (ex: successes = [1,2])\
+//        and non-empty list of individuals in world (ex: [1,2,3,4])\
+// removes each success individual from individuals list until no more successes\
+var getInverseHelper = function(toFind, individuals)\{\
+  // if toFind.length == 1, remove that element from individuals and then return\
+  if(toFind.length == 1)\{\
+    return remove(toFind[0], individuals);\
+  \}\
+  // else remove first element of toFind from individuals and from toFind\
+  //   and then recurse on new smaller toFind and new smaller individuals\
+  else\{\
+    return getInverseHelper(remove(toFind[0], toFind),  // toFind w/o first elem\
+                            remove(toFind[0], individuals)) // individuals w/o toFind[0]\
+  \}\
+\}\
+\
+// main function for getting inverse of list, based on numParticipants in world\
+// used for getting failures from list of successes\
+var getInverse = function(successes, numParticipants)\{\
+    // explicitly list out each participant with a number (e.g., [1,2,3,4])\
+  var participants = mapN(function(x) \{ return x + 1; \}, numParticipants);\
+  // check first to see if successes.length == 0; if so, inverse = whole list\
+  if(successes.length == 0)\{\
+    return participants;\
+  \}\
+  // else check to see if successes.length == numParticipants; if so, inverse = empty\
+  else if(successes.length == numParticipants)\{\
+    return [];\
+  \}else\{\
+  // else call helper function to get inverse individuals\
+    return getInverseHelper(successes, participants);\
+  \}\
+\}\
+\
+//// sanity check for getInverse\
+// print("getInverse on successes [1] for numParticipants = " + numParticipants);\
+// print(getInverse([1], numParticipants))\
+  \
 \
 // state builder: needs to know \
 //                (1) how many particants (numParticipants), \
 //                (2) base rate of success (baseRate)\
+// returns: states = \{successes: [list of success individuals], \
+//                    failures: [list of failure individuals]\}\
 var statePrior = function(numParticipants, baseRate) \{\
 // always return the collection -- can get length alone later on if needed\
-  return makeStates(numParticipants, baseRate);\
+  //return makeSuccesses(numParticipants, baseRate);\
+  var successes = makeSuccesses(numParticipants, baseRate);\
+  return \{\
+    successes: successes,\
+    failures: getInverse(successes, numParticipants)\
+  \}\
 \}\
 \
 // sanity check on state prior\
@@ -192,21 +239,20 @@ var meaning = function(utterance, state, scope, \
   if(utterance == "two-not")\{\
     if(makeUnits)\{ // assess by unit\
       // scope doesn't matter -- all that matters is whether \
-      // the unit was unsuccessful (= not in the success state)\
-      // e.g., unit = [1,2] for state = [1,2,3] = true\
-      return !findFirstInSecondList(unit, state);\
+      // the unit was unsuccessful (= in state.failures)\
+      // e.g., unit [1,2] for state failures = [1, 2, 3] = true\
+      // TO DO: Update this so unit [1,2] for success state [1,3] = false\
+      //        because unit not in failure state\
+      return findFirstInSecondList(unit, state["failures"]);\
     \}else\{ // no units -- just total count, where scope matters\
       // working with state.length to get total count\
       if(scope == "surface")\{ //there are two who didn't\
-        // e.g., 4-frog world, so only true when 2, 3, or 4 didn't = 0, 1, or 2 who did\
-        // e.g., state <= 2 (= total_frogs-2) \
-        // in 2-frog world, only true when 2 didn't, so 0 did\
-        return (state.length <= numParticipants - 2); \
+        // Update so doing verification on failure state\
+        //   Specifically, looking for failures >= 2 individuals\
+        return (state["failures"].length >= 2); \
       \}else\{ // it's not true that two did\
-        // e.g., 4-frog world, so only true when 0 or 1 (<2) did\
-        // e.g., state < 2\
-        // in 2-frog world, only true when 0 or 1 (<2) did\
-        return (state.length < 2)      \
+        // verification on successes, < 2 individuals\
+        return (state["successes"].length < 2)      \
       \}\
     \}\
   \}else\{\
@@ -217,16 +263,20 @@ var meaning = function(utterance, state, scope, \
 \
 // testing the meaning function\
 // var test_utt = "two-not";\
-// var test_state = [1,2];\
+// var test_state = \{\
+//   successes: [1,2], \
+//   failures: [3,4]\
+// \};\
 // var test_scope = "inverse";\
 // var test_numParticipants = 4;\
 // var test_makeUnits = true;\
-// var test_unit = [1,2];\
+// var test_unit = [3,4];\
 // var meaning_check = meaning(test_utt, test_state, test_scope, \
 //                             test_numParticipants, test_makeUnits, test_unit);\
 // print("meaning check with participant num " + test_numParticipants) \
 // print( "with utterance " + test_utt)\
-// print(" in success state " + test_state)\
+// print(" in state with successes " + test_state["successes"])\
+// print(" and failures "+ test_state["failures"])\
 // print(" with scope reading " + test_scope)\
 // print(" when make_units is " + test_makeUnits)\
 // print(" and test_unit is " + test_unit)\
@@ -260,20 +310,20 @@ var QUDPrior = function(makeUnits) \{\
 // "how many?", "all?", "none?", "this unit?", "not this unit?"\
 var QUDFun = function(QUD,state,numParticipants, unit) \{\
   if(QUD == "all?")\{ // boolean\
-    return state.length == numParticipants;\
+    return state["successes"].length == numParticipants;\
   \}else if(QUD == "none?")\{ // boolean\
-    return state.length == 0;\
+    return state["successes"].length == 0;\
   \}else if(QUD == "how many?")\{ // number successes\
-    return state.length;\
+    return state["successes"].length;\
   \}else if(QUD == "this unit?")\{ //  boolean (Did this unit succeed?)\
-    return findFirstInSecondList(unit, state);\
-  \}else if(QUD == "not this unit?")\{ // boolean (Did this unit not succeed?)\
-    return !findFirstInSecondList(unit, state);\
+    return findFirstInSecondList(unit, state["successes"]);\
+  \}else if(QUD == "not this unit?")\{ // boolean (Did this unit fail?)\
+    return findFirstInSecondList(unit, state["failures"]);\
   \}\
 \};\
 \
 // QUD sanity check\
-//print(QUDFun("not this unit?", [1,2,3,4], 4, [1,2]))\
+//print(QUDFun("this unit?", \{"successes": [1,2,4], "failures": [3]\}, 4, [1,2]))\
 ///////// end QUD stuff /////////////\
 \
 // Literal listener (L0)\
@@ -389,16 +439,16 @@ var pragmaticSpeaker = cache(function(state) \{\
 \})\
 \
 // now run pragmatic speaker\
-// if we set numParticipants = 2, let's look at a 1-frog success state\
 print("num of participants: " + numParticipants)\
-print("in world with success state = " + pragSpeakerState)\
+print("in world with successes = " + pragSpeakerState["successes"])\
+print(" and failures = " + pragSpeakerState["failures"])\
 pragmaticSpeaker(pragSpeakerState)\
 \
 \} // end runModel wrapper function\
 \
 // global variables for runModel\
 var utterances = ["null","two-not"];\
-var numParticipants = 4; // e.g., total frogs\
+var numParticipants = 2; // e.g., total frogs\
 var baseRate = 0.5; // success rate\
 var unitSize = 2; // e.g., for 2-frog units\
 var scopes = ["surface", "inverse"];\
@@ -416,7 +466,10 @@ var makeUnits_baseRate_sameSize = 0.9;  \
   \
 \
 // now run the model with whatever state we want, given the variables above\
-var pragSpeakerState = [1]\
+var pragSpeakerState = \{\
+  successes: [1],\
+  failures: [2]\
+\}\
 runModel(utterances, numParticipants, baseRate, unitSize,\
         scopes, QUDs, QUDPrior_makeUnits, QUDPrior_noMakeUnits,\
         makeUnits_baseRate, makeUnits_baseRate_sameSize,\
