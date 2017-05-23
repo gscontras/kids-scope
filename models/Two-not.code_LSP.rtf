@@ -6,34 +6,17 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 // Here is the code for the quantifier scope model\
-// TO DO: make wrapper function that sets the values of the global variables \
-//   down below where you actually call the code to run\
 // TO DO: unit presupposition failure = need to find unit somewhere \
 //    (either successes or failures) -- involves updating meaning function\
 //    so that unit not succeeding means all members not in success state\
 \
-///// variables that can be set globally\
-////////////// possible utterances\
-// // two-not = "two frogs didn't jump"\
-var utterances = ["null","two-not"];\
-var numParticipants = 2; // e.g., total frogs\
-var baseRate = 0.5; // success rate\
-var unitSize = 2; // e.g., for 2-frog units\
-var scopes = ["surface", "inverse"];\
-var QUDs = ["how many?","all?","none?", "this unit?", "not this unit?"];\
-// if making units, favor the QUDs concerned with units\
-var QUDPrior_makeUnits = [0.033, 0.033, 0.033, 0.45, 0.45];\
-// if not making units, favor the QUDs not concerned with making units\
-var QUDPrior_noMakeUnits = [0.3, 0.3, 0.3, 0.05, 0.05];\
-//var makeUnits = true;\
-// prior probability of making units in default cases\
-var makeUnits_baseRate = 0.5; \
-// prior probability of making units if numParticipants == unitSize\
-// e.g., two-frog world when utterance is "two frogs..." (two-not)\
-var makeUnits_baseRate_sameSize = 0.9;\
-\
-\
-///////////////////////\
+// wrapper function so the global variables can be set up before each run\
+var runModel = function(utterances, numParticipants, baseRate,\
+                        unitSize, scopes, QUDs,\
+                        QUDPrior_makeUnits, QUDPrior_noMakeUnits,\
+                        makeUnits_baseRate, \
+                        makeUnits_baseRate_sameSize,\
+                        pragSpeakerState)\{\
 \
 var utterancePrior = function() \{\
   uniformDraw(utterances)\
@@ -405,14 +388,36 @@ var pragmaticSpeaker = cache(function(state) \{\
   \}\})\
 \})\
 \
-// // A speaker decides whether to endorse the ambiguous utterance as a \
-// // description of a certain success world state\
-// if we set numParticipants = 4, let's look at a 2-frog success state\
-// print("num of participants: " + numParticipants)\
-// print("in world with success state = [1,2]")\
-// pragmaticSpeaker([1,2])\
-\
+// now run pragmatic speaker\
 // if we set numParticipants = 2, let's look at a 1-frog success state\
 print("num of participants: " + numParticipants)\
-print("in world with success state = [1]")\
-pragmaticSpeaker([1])}
+print("in world with success state = " + pragSpeakerState)\
+pragmaticSpeaker(pragSpeakerState)\
+\
+\} // end runModel wrapper function\
+\
+// global variables for runModel\
+var utterances = ["null","two-not"];\
+var numParticipants = 4; // e.g., total frogs\
+var baseRate = 0.5; // success rate\
+var unitSize = 2; // e.g., for 2-frog units\
+var scopes = ["surface", "inverse"];\
+var QUDs = ["how many?","all?","none?", "this unit?", "not this unit?"];\
+// if making units, favor the QUDs concerned with units\
+var QUDPrior_makeUnits = [0.033, 0.033, 0.033, 0.45, 0.45];\
+// if not making units, favor the QUDs not concerned with making units\
+var QUDPrior_noMakeUnits = [0.3, 0.3, 0.3, 0.05, 0.05];\
+//var makeUnits = true;\
+// prior probability of making units in default cases\
+var makeUnits_baseRate = 0.5; \
+// prior probability of making units if numParticipants == unitSize\
+// e.g., two-frog world when utterance is "two frogs..." (two-not)\
+var makeUnits_baseRate_sameSize = 0.9;  \
+  \
+\
+// now run the model with whatever state we want, given the variables above\
+var pragSpeakerState = [1]\
+runModel(utterances, numParticipants, baseRate, unitSize,\
+        scopes, QUDs, QUDPrior_makeUnits, QUDPrior_noMakeUnits,\
+        makeUnits_baseRate, makeUnits_baseRate_sameSize,\
+        pragSpeakerState);}
