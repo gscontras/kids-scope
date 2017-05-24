@@ -244,8 +244,6 @@ var meaning = function(utterance, state, scope, \
       // scope doesn't matter -- all that matters is whether \
       // the unit was unsuccessful (= in state.failures)\
       // e.g., unit [1,2] for state failures = [1, 2, 3] = true\
-      // TO DO: Update this so unit [1,2] for success state [1,3] = false\
-      //        because unit not in failure state\
       return findFirstInSecondList(unit, state["failures"]);\
     \}else\{ // no units -- just total count, where scope matters\
       // working with state.length to get total count\
@@ -445,6 +443,7 @@ var pragmaticSpeaker = cache(function(state) \{\
 print("num of participants: " + numParticipants)\
 print("in world with successes = " + pragSpeakerState["successes"])\
 print(" and failures = " + pragSpeakerState["failures"])\
+viz.table(pragmaticSpeaker(pragSpeakerState))\
 pragmaticSpeaker(pragSpeakerState)\
 \
 \} // end runModel wrapper function\
@@ -452,7 +451,7 @@ pragmaticSpeaker(pragSpeakerState)\
 // global variables for runModel\
 var utterances = ["null","two-not"];\
 var numParticipants = 4; // e.g., total frogs\
-var baseRate = 0.9; // success rate\
+var baseRate = 0.3; // success rate\
 var unitSize = 2; // e.g., for 2-frog units\
 var scopes = ["surface", "inverse"];\
 var scopePriorDist = [0.7, 0.3];\
@@ -481,6 +480,8 @@ var pragSpeakerState4frogs = \{\
 \}\
 \
 print("baseRate of success: " + baseRate);\
+print("makeUnits_baseRate_sameSize: " + makeUnits_baseRate_sameSize);\
+print("scope prior distribution [surface, inverse]: " + scopePriorDist)\
 runModel(utterances, numParticipants, baseRate, unitSize,\
         scopes, scopePriorDist,\
         QUDs, QUDPrior_makeUnits, QUDPrior_noMakeUnits,\
