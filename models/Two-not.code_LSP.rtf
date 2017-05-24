@@ -6,13 +6,12 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 // Here is the code for the quantifier scope model\
-// TO DO: unit presupposition failure = need to find unit somewhere \
-//    (either successes or failures) -- involves updating meaning function\
-//    so that unit not succeeding means all members not in success state\
 \
 // wrapper function so the global variables can be set up before each run\
 var runModel = function(utterances, numParticipants, baseRate,\
-                        unitSize, scopes, QUDs,\
+                        unitSize, \
+                         scopes, scopePriorDist,\
+                         QUDs,\
                         QUDPrior_makeUnits, QUDPrior_noMakeUnits,\
                         makeUnits_baseRate, \
                         makeUnits_baseRate_sameSize,\
@@ -192,10 +191,14 @@ var unitPrior = function(unitSize, numParticipants)\{\
 \
 /////////// scopePrior: possible scopes /////////\
 var scopePrior = function()\{ \
-  // uniform over possible scopes\
-  return uniformDraw(scopes)\
+  // based on scopePriorDist\
+   return categorical(\{vs: scopes, \
+                       ps: scopePriorDist\}); \
 \}\
 ////////////////////////\
+\
+// sanity check on scope prior\
+//print(scopePrior());\
 \
 \
 ///// helper function for unit-based meaning function calculation\
@@ -448,10 +451,11 @@ pragmaticSpeaker(pragSpeakerState)\
 \
 // global variables for runModel\
 var utterances = ["null","two-not"];\
-var numParticipants = 2; // e.g., total frogs\
-var baseRate = 0.5; // success rate\
+var numParticipants = 4; // e.g., total frogs\
+var baseRate = 0.9; // success rate\
 var unitSize = 2; // e.g., for 2-frog units\
 var scopes = ["surface", "inverse"];\
+var scopePriorDist = [0.7, 0.3];\
 var QUDs = ["how many?","all?","none?", "this unit?", "not this unit?"];\
 // if making units, favor the QUDs concerned with units\
 var QUDPrior_makeUnits = [0.033, 0.033, 0.033, 0.45, 0.45];\
@@ -466,11 +470,19 @@ var makeUnits_baseRate_sameSize = 0.9;  \
   \
 \
 // now run the model with whatever state we want, given the variables above\
-var pragSpeakerState = \{\
+var pragSpeakerState2frogs = \{\
   successes: [1],\
   failures: [2]\
 \}\
+\
+var pragSpeakerState4frogs = \{\
+  successes: [1,2],\
+  failures: [3,4]\
+\}\
+\
+print("baseRate of success: " + baseRate);\
 runModel(utterances, numParticipants, baseRate, unitSize,\
-        scopes, QUDs, QUDPrior_makeUnits, QUDPrior_noMakeUnits,\
+        scopes, scopePriorDist,\
+        QUDs, QUDPrior_makeUnits, QUDPrior_noMakeUnits,\
         makeUnits_baseRate, makeUnits_baseRate_sameSize,\
-        pragSpeakerState);}
+        pragSpeakerState4frogs);}
