@@ -31,7 +31,7 @@ which_frogs = [1,4];
 frogs = uttselect(which_frogs, tot_frogs);
 tot = numel(frogs);
 %prior of each frogs jump (this currently sucks)
-frogProbs = [.5 .9 .5 .5];
+frogProbs = [.5 .9 .9 .5];
 
 %indivPrior for each frog 
 for i = 1:tot
