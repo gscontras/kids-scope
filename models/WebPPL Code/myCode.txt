@@ -1,0 +1,105 @@
+////Goal: Copy down Lisa's code exactly so I understand it and can work with it.
+//Lisa's comments in quotes
+
+var utterancePrior = function() {
+  uniformDraw(utterances)
+}
+
+///// World State Fucntions /////
+// "recursive function that flips based on base rate to determine which
+// individuals were successful"
+// So my version had a different flip for each frog.  The issue here is that you are
+// going to get a guassian looking world prior; which maybe we want
+// (differnt from previous model)
+var makeSuccesses = function(numParticipants, baseRate){
+  // "if numParticipants == 1, return the empty set or [numParticipants]
+  // based on flip"
+  if(numParticipants == 1){
+    if(flip(baseRate)){
+      return [numParticipants]
+      }else{
+          return []
+        }
+      }
+    //"Flip this one and concatenate it to results of doing so for one participant 
+    // less"
+    else{
+      if(flip(baseRate)){
+        // "success for this participant"
+        return sort([numParticipants].concat(makeSuccesses(numParticipants - 1, baseRate
+                                                         )))}
+      else{
+        return makeSuccesses(numParticipants - 1, baseRate)
+        }
+      }
+    }
+
+///I had a test for this on my home Desktop
+
+// getInverseHelper
+// input: non-empty list (ex: successes = [1,2])
+//        and non-empty list of individuals in world (ex: [1,2,3,4])
+// removes each success individual from individuals list until no more successes
+var getInverseHelper = function(toFind, individuals){
+  // if toFind.length == 1, remove that element from individuals and then return
+  if(toFind.length == 1){
+    return remove(toFind[0], individuals);
+  }
+  // else remove first element of toFind from individuals and from toFind
+  //   and then recurse on new smaller toFind and new smaller individuals
+  else{
+    return getInverseHelper(remove(toFind[0], toFind),  // toFind w/o first elem
+                            remove(toFind[0], individuals)) // individuals w/o toFind[0]
+  }
+}
+
+
+
+// "main function for getting inverse of list, based on numParticipants in world
+// used for getting failures from list of successes"
+// successes is of notation e.g. [1,2], where numParticipants is total number unbracketed
+var getInverse = function(successes, numParticipants){
+  // "explicitly list out each participant with a number (e.g., [1,2,3,4])"
+  var participants = mapN(function(x) { return x + 1; }, numParticipants);
+  // "check first to see if successes.length == 0, if so, inverse = whole list
+  if(successes.length == 0){
+    return participants
+  }
+  // "else check to see if success.length == numParticipants; if so, inverse = empty
+  else if(successes.length == numParticipants){
+    return [];
+  }else{
+    // "else call helper function to get inverse individuals"
+    return getInverseHelper(successes, participants);
+  }
+}
+// What in the hell is this doing?
+// Looks to be doing the same thing as the helper, except you can give it numParticipants
+// instead of a list
+////TEST
+// var b = getInverse([2],4)
+// b
+
+
+// "state builder: needs to know
+// (1) how many participants (numParticipants),
+// (2) base rate of succes (baseRate)
+//returns: states = {successes: [list of success individuals],
+//                   failures: [list of failure individuals]}"
+var statePrior = function(numParticipants, baseRate){
+  // "always return the collection - can get length alone later on if needed
+  // return make Successes(numPartipants, baseRate);"
+  var successes = makeSuccesses(numParticipants, baseRate);
+  return {
+    successes: successes,
+    failures: getInverse(successes, numParticipants)
+  }
+}
+// I think I understand this function, but I don't understand the syntax. Can you
+// run a recursive function as an argument in a return function? I guess you can
+// this function is a little redudant, as its just the combined output of makeSuccesses and 
+// the failure function. It's good to see a way to compose them though.  Is there a way to 
+// collapse all of these functions into one?
+/////TEST
+// var b = statePrior(4,0.5)
+// viz.hist(repeat(1000, function() {statePrior(4,.5)}))
