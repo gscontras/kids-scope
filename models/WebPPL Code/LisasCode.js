@@ -1,11 +1,11 @@
 // Here is the code for the quantifier scope model
-// TO DO: unit presupposition failure = need to find unit somewhere 
-//    (either successes or failures) -- involves updating meaning function
-//    so that unit not succeeding means all members not in success state
 
 // wrapper function so the global variables can be set up before each run
 var runModel = function(utterances, numParticipants, baseRate,
-                        unitSize, scopes, QUDs,
+                        unitSize, 
+                        exactMeaning,
+                         scopes, scopePriorDist,
+                         QUDs,
                         QUDPrior_makeUnits, QUDPrior_noMakeUnits,
                         makeUnits_baseRate, 
                         makeUnits_baseRate_sameSize,
@@ -185,10 +185,14 @@ var unitPrior = function(unitSize, numParticipants){
 
 /////////// scopePrior: possible scopes /////////
 var scopePrior = function(){ 
-  // uniform over possible scopes
-  return uniformDraw(scopes)
+  // based on scopePriorDist
+   return categorical({vs: scopes, 
+                       ps: scopePriorDist}); 
 }
 ////////////////////////
+
+// sanity check on scope prior
+//print(scopePrior());
 
 
 ///// helper function for unit-based meaning function calculation
@@ -227,25 +231,45 @@ var findFirstInSecondList = function(list1, list2){
 // meaning function: include numParticipants var, 
 // since this impacts the surface scope reading calculation
 // for units: need makeUnits boolean and unit to search for
+// condition on exactMeaning
 var meaning = function(utterance, state, scope, 
                         numParticipants, makeUnits, unit) {
   if(utterance == "two-not"){
     if(makeUnits){ // assess by unit
       // scope doesn't matter -- all that matters is whether 
       // the unit was unsuccessful (= in state.failures)
-      // e.g., unit [1,2] for state failures = [1, 2, 3] = true
-      // TO DO: Update this so unit [1,2] for success state [1,3] = false
-      //        because unit not in failure state
-      return findFirstInSecondList(unit, state["failures"]);
+      if(exactMeaning){
+        // need failures to be unit
+        // debug
+//         print("debug, meaning: checking if unit " + unit)
+//         print(" is equivalent to state[\"failures\"] " + state["failures"]);
+//         print((findFirstInSecondList(unit, state["failures"]) 
+//                && state["failures"].length == unitSize));
+        return (findFirstInSecondList(unit, state["failures"]) 
+              && state["failures"].length == unitSize);
+      }else{
+        // e.g., unit [1,2] for state failures = [1, 2, 3] = true
+        return findFirstInSecondList(unit, state["failures"]);
+      }
     }else{ // no units -- just total count, where scope matters
       // working with state.length to get total count
       if(scope == "surface"){ //there are two who didn't
         // Update so doing verification on failure state
+        if(exactMeaning){
+          // looking for exactly two failures
+          return (state["failures"].length == 2);
+        }else{
         //   Specifically, looking for failures >= 2 individuals
         return (state["failures"].length >= 2); 
+        }
       }else{ // it's not true that two did
-        // verification on successes, < 2 individuals
-        return (state["successes"].length < 2)      
+        // verification on successes
+        if(exactMeaning){
+          return (state["successes"].length != 2);
+        }else{
+          //  < 2 individuals
+          return (state["successes"].length < 2)
+        }
       }
     }
   }else{
@@ -351,7 +375,7 @@ var literalListener = cache(function(utterance,scope,QUD,makeUnits) {
 // sanity check for literal listener
 //viz.auto(literalListener("two-not", "inverse", "this unit?", true));
 
-var alpha_S1 = 1
+var alpha_S1 = 2.5
 
 // Speaker (S)
 var speaker = cache(function(scope,state,QUD,makeUnits,unit) {
@@ -435,6 +459,7 @@ var pragmaticSpeaker = cache(function(state) {
 print("num of participants: " + numParticipants)
 print("in world with successes = " + pragSpeakerState["successes"])
 print(" and failures = " + pragSpeakerState["failures"])
+viz.table(pragmaticSpeaker(pragSpeakerState))
 pragmaticSpeaker(pragSpeakerState)
 
 } // end runModel wrapper function
@@ -442,9 +467,11 @@ pragmaticSpeaker(pragSpeakerState)
 // global variables for runModel
 var utterances = ["null","two-not"];
 var numParticipants = 2; // e.g., total frogs
-var baseRate = 0.5; // success rate
+var baseRate = 0.2; // success rate
 var unitSize = 2; // e.g., for 2-frog units
+var exactMeaning = true;
 var scopes = ["surface", "inverse"];
+var scopePriorDist = [0.9, 0.1];
 var QUDs = ["how many?","all?","none?", "this unit?", "not this unit?"];
 // if making units, favor the QUDs concerned with units
 var QUDPrior_makeUnits = [0.033, 0.033, 0.033, 0.45, 0.45];
@@ -452,18 +479,31 @@ var QUDPrior_makeUnits = [0.033, 0.033, 0.033, 0.45, 0.45];
 var QUDPrior_noMakeUnits = [0.3, 0.3, 0.3, 0.05, 0.05];
 //var makeUnits = true;
 // prior probability of making units in default cases
-var makeUnits_baseRate = 0.5; 
+var makeUnits_baseRate = 0.1; 
 // prior probability of making units if numParticipants == unitSize
 // e.g., two-frog world when utterance is "two frogs..." (two-not)
 var makeUnits_baseRate_sameSize = 0.9;  
   
 
 // now run the model with whatever state we want, given the variables above
-var pragSpeakerState = {
+var pragSpeakerState2frogs = {
   successes: [1],
-  failures: [1]
+  failures: [2]
 }
+
+var pragSpeakerState4frogs = {
+  successes: [1,2],
+  failures: [3,4]
+}
+
+print("baseRate of success: " + baseRate);
+print("makeUnits_baseRate: " + makeUnits_baseRate);
+print("makeUnits_baseRate_sameSize: " + makeUnits_baseRate_sameSize);
+print("scope prior distribution [surface, inverse]: " + scopePriorDist)
+print("exact meaning? " + exactMeaning);
 runModel(utterances, numParticipants, baseRate, unitSize,
-        scopes, QUDs, QUDPrior_makeUnits, QUDPrior_noMakeUnits,
+        exactMeaning,
+        scopes, scopePriorDist,
+        QUDs, QUDPrior_makeUnits, QUDPrior_noMakeUnits,
         makeUnits_baseRate, makeUnits_baseRate_sameSize,
-        pragSpeakerState);
+        pragSpeakerState2frogs);
