@@ -246,7 +246,7 @@ var meaning = function(utterance, state, scope, \
       // scope doesn't matter -- all that matters is whether \
       // the unit was unsuccessful (= in state.failures)\
       if(exactMeaning)\{\
-        // need failures to be unit\
+        // need failures to be only the unit\
         // debug\
 //         print("debug, meaning: checking if unit " + unit)\
 //         print(" is equivalent to state[\\"failures\\"] " + state["failures"]);\
@@ -255,7 +255,7 @@ var meaning = function(utterance, state, scope, \
         return (findFirstInSecondList(unit, state["failures"]) \
               && state["failures"].length == unitSize);\
       \}else\{\
-        // e.g., unit [1,2] for state failures = [1, 2, 3] = true\
+        // e.g., unit [1,2] for state failures = [1, 2, 3] is true\
         return findFirstInSecondList(unit, state["failures"]);\
       \}\
     \}else\{ // no units -- just total count, where scope matters\
@@ -310,7 +310,7 @@ var meaning = function(utterance, state, scope, \
 \
 ///////////// QUDs ////////////////////\
 // "how many?", "all?", "none?", "this unit?", "not this unit?"\
-// TO DO: adjust QUD prior to be based on makeUnits value\
+// QUD prior based on makeUnits value\
 var QUDPrior = function(makeUnits) \{\
   //uniformDraw(QUDs); - old one doing uniform draw\
   // if makeUnits, biased towards unit QUDs ("this unit?", "not this unit?")\
@@ -474,7 +474,7 @@ pragmaticSpeaker(pragSpeakerState)\
 // global variables for runModel\
 var utterances = ["null","two-not"];\
 var numParticipants = 2; // e.g., total frogs\
-var baseRate = 0.2; // success rate\
+var baseRate = 0.9; // success rate\
 var unitSize = 2; // e.g., for 2-frog units\
 var exactMeaning = true;\
 var scopes = ["surface", "inverse"];\
