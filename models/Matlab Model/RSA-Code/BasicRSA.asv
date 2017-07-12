@@ -20,7 +20,7 @@ utterances = {'ambi',
     'notsome'};
 
 %select utterances for this run. Number is place of utterance in list
-utt = [2,7];
+utt = [2,6];
 u = numel(utt);
 utt = uttselect(utt,utterances);
 %speaker optimality parameter
@@ -94,7 +94,7 @@ if scope_prior_sett == 0
     scopes_p = [.5 .5];
 else
     %for the 'twonot' utterances, the second column is 'surface'
-    scopes_p = [.9 .1];
+    scopes_p = [.1 .9];
 end
 
 %type of priors on QUD

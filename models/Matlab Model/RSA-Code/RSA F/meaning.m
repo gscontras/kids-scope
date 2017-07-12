@@ -3,9 +3,9 @@ function [success] = meaning(utt, state, tot, scope)
 %return either a 1 if its true in this world state or a 0 if the utterance
 %is false in this world state.
 
-if nargin < 4
-    scope = 'surface';
-end
+% if nargin < 4
+%     scope = 'surface';
+% end
 %I'm going to need to specify the semantics of each utterance type here
 if strcmpi(utt,'ambi') == 1
     if strcmpi(scope, 'surface') == 1
@@ -41,7 +41,7 @@ elseif strcmpi(utt, 'notall') == 1
     else
         success = 0;
     end
-elseif strcmp(utt, 'nottwoB') == 1
+elseif strcmp(utt, 'twonotNON') == 1
     if strcmpi(scope, 'surface') == 1
         %"This is confusing, since the semantics for 'twonot' and 'nottow'
         %are the same. For 'twonot' the surface is 'nottwo'
@@ -57,7 +57,7 @@ elseif strcmp(utt, 'nottwoB') == 1
             success = 0;
         end
     end
-elseif strcmp(utt, 'nottwo') == 1
+elseif strcmp(utt, 'twonotL') == 1
     if strcmpi(scope, 'surface') == 1
         %"It is not the case that X did two"
         if state == 2

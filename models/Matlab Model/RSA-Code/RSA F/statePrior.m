@@ -1,4 +1,4 @@
-function [statePrior] = statePrior(frogs, probs, iter)
+function [statePrior] = statePrior(tot, baserate, iter)
 %statePrior(frogs, probs,iter) 
 %this function calculates my state prior as it was instatiated in the
 %orginal model (Sav, 2017). It uses the individual probabilities of each
@@ -15,12 +15,13 @@ function [statePrior] = statePrior(frogs, probs, iter)
 
 
 for i = 1:iter
-    world = worldPrior(frogs, probs);
-    x = numel(world);
-    tot(i) = x;
+    world = worldPrior(tot,baserate);
+    x = sum(world);
+    States(i) = x;
 end
-y(1) = sum(tot(:) == 0)/1000;
-y(2) = sum(tot(:) == 1)/1000;
-y(3) = sum(tot(:) == 2)/1000;
+for i = 1:(tot + 1)
+    y(i) = sum(States(:) == (i - 1))/iter;
+end
+y(isnan(y))=0;
 
 statePrior = y;
