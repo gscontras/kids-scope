@@ -1,4 +1,4 @@
-////Most Recent Model (As of 6/1/2017)
+////Most Recent Model (As of 8/1/2017)
 
 // wrapper function so the global variables can be set up before each run
 var runModel = function(utterances, numParticipants, baseRate, 
@@ -91,7 +91,7 @@ var runModel = function(utterances, numParticipants, baseRate,
   }
 
   // sanity check on state prior
-  //print(statePrior(4, 0.5))
+  print(statePrior(4, 0.5))
   //////////// end world state generation
 
   /////////// scopePrior: possible scopes /////////
@@ -168,7 +168,7 @@ var runModel = function(utterances, numParticipants, baseRate,
   // print("Draw one when makeUnits = true");
   // print(QUDPrior(true));
 
-  // "how many?", "all?", "none?", "this unit?", "not this unit?"
+  // "how many?", "all?", "none?", "Two or less?", "exactly two?"
   var QUDFun = function(QUD,state,numParticipants) {
     if(QUD == "all?"){ // boolean
       return state["successes"].length == numParticipants;
@@ -176,8 +176,12 @@ var runModel = function(utterances, numParticipants, baseRate,
       return state["successes"].length == 0;
     }else if(QUD == "how many?"){ // number successes
       return state["successes"].length;
+    }else if(QUD == "two or less?"){
+      return state["successes"].length <= 2;
+    }else if(QUD == "exactly two?"){
+      return state["successes"].length == 2;
     }
-  };
+    };
 
   // QUD sanity check
   //print(QUDFun("this unit?", {"successes": [1,2,4], "failures": [3]}, 4, [1,2]))
@@ -201,8 +205,8 @@ var runModel = function(utterances, numParticipants, baseRate,
   });
 
   // sanity check for literal listener
-  print("Literal Listener:")
-  viz.auto(literalListener("two-not", "surface", "how many?"));
+  //print("Literal Listener:")
+  //viz.auto(literalListener("two-not", "surface", "how many?"));
 
   var alpha_S1 = 2.5
 
@@ -218,8 +222,8 @@ var runModel = function(utterances, numParticipants, baseRate,
   });
 
   // sanity check for speaker S1
-  print("Speaker:")
-  viz.auto(speaker("surface", {"successes":[3,4],"failures":[1,2]}, "how many?"))
+  //print("Speaker:")
+  //viz.auto(speaker("surface", {"successes":[3,4],"failures":[1,2]}, "how many?"))
 
 
   // Pragmatic listener (L1)
@@ -261,13 +265,13 @@ var runModel = function(utterances, numParticipants, baseRate,
   print("num of participants: " + numParticipants)
   print("in world with successes = " + pragSpeakerState["successes"])
   print(" and failures = " + pragSpeakerState["failures"])
-  pragmaticSpeaker(pragSpeakerState)
+  print(pragmaticSpeaker(pragSpeakerState))
 
 } // end runModel wrapper function
 
 //// Global variables for runModel
 var utterances = ["null","two-not"];
-var exactMeaning = false;
+var exactMeaning = true;
 
 //World Manip
 var numParticipants = 4; // e.g., total frogs
@@ -278,9 +282,8 @@ var scopes = ["surface", "inverse"];
 var scopePriorDist = [.5, .5]
 
 //QUD Manip
-var QUDs = ["how many?", "all?","none?"];
-var QUDProbs = [1, 0, 0];
-
+var QUDs = ["how many?", "all?","none?", "two or less?", "exactly two?"];   
+var QUDProbs = [(.1/4),(.1/4),(.1/4),(.1/4),9];
 
 // now run the model with whatever state we want, given the variables above
 var pragSpeaker2State = {
