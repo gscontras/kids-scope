@@ -176,8 +176,8 @@ var runModel = function(utterances, numParticipants, baseRate,
       return state["successes"].length == 0;
     }else if(QUD == "how many?"){ // number successes
       return state["successes"].length;
-    }else if(QUD == "two or less?"){
-      return state["successes"].length <= 2;
+    }else if(QUD == "at least two?"){
+      return state["successes"].length >= 2;
     }else if(QUD == "exactly two?"){
       return state["successes"].length == 2;
     }
@@ -275,15 +275,20 @@ var exactMeaning = true;
 
 //World Manip
 var numParticipants = 4; // e.g., total frogs
-var baseRate = 0.5; // success rate
+var baseRate = 0.9; // success rate
 
 //Scope Manip
 var scopes = ["surface", "inverse"];
 var scopePriorDist = [.5, .5]
 
 //QUD Manip
-var QUDs = ["how many?", "all?","none?", "two or less?", "exactly two?"];   
-var QUDProbs = [(.1/4),(.1/4),(.1/4),(.1/4),9];
+var QUDs = ["how many?", "all?","none?", "at least two?", "exactly two?"];   
+//var QUDProbs = [(.1/4),(.1/4),(.1/4),(.1/4),9];
+var QUDProbs = [1,1,1,1,1];
+
+//QUD Manip
+// var QUDs = ["how many?", "all?","none?"];   
+// var QUDProbs = [.9,.05,.05];
 
 // now run the model with whatever state we want, given the variables above
 var pragSpeaker2State = {
