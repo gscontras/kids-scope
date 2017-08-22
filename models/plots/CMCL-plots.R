@@ -1,94 +1,146 @@
-##setwd("~/Documents/kids-scope/")
+setwd("~/git/kids-scope/models/plots/")
 ##setwd("~/Documents/MATLAB/kids-scope/kids-scope/models/Matlab Model/RSA-Code/Data")
 library(ggplot2)
 library(scales)
-# ## BIG PLOt
-# 
-# all_d = read.csv("big_matrix.csv",header=T)
-# 
-# names(all_d) <- c("state","scope","QUD","p")
-# 
-# all_d$state = factor(all_d$state,levels=c("3","0","1","2"))
-# all_d$state = factor(all_d$state,labels=c("uniform\nstate prior","0 horses","1 horse","2 horses"))
-# 
-# all_d$QUD = factor(all_d$QUD,levels=c("3","0","1","2"))
-# all_d$QUD = factor(all_d$QUD,labels=c("uniform\nQUD prior","did no\nhorses succeed?","how many\nhorses succeeded?","did all\nhorses succeed?"))
-# 
-# p <- ggplot(all_d,aes(x=as.factor(scope),y=p,fill=as.factor(scope))) +
-#   geom_bar(stat="identity")+
-#   ylab("probability of endorsing\nambiguous utterance\n") +
-#   xlab("\nscope prior")+
-#   #scale_fill_manual(values=c("red", "blue"))+
-#   theme(axis.text.x = element_text(size=10,angle=0))+
-#   #ylim(0,0.8)+
-#   theme_bw()+
-#   guides(fill=FALSE)+
-# facet_grid(QUD~state)
-# p
-# #ggsave("big-plot.jpg",width=7,height=7)
 
 
-# little plot
+# figure 1: independent manipulations
 
-#q = read.csv("twonot_qud",header=F)
-q = read.csv("qud_manip9.csv",header=F)
-names(q) <- c("state","scope","QUD","p")
-q$condition = "qud"
-q$QUD = factor(q$QUD,levels=c("3","0","1","2"))
-#change from horses to frogs
-#q$QUD = factor(q$QUD,labels=c("uniform\nQUD prior","did no\nfrogs succeed?","how many\nfrogs succeeded?","did all\nfrogs succeed?"))
-q$QUD = factor(q$QUD,labels=c("uniform\nQUD prior","did no\nhorses succeed?","how many\nhorses succeeded?","did all\nhorses succeed?"))
+d = read.csv("../results/CMCL-figure1.csv",header=T)
+names(d) <- c("n","baserate","QUD","scope","meaning","p","manipulation")
 
-#s = read.csv("twonot_scope",header=F)
-s = read.csv("scope_manip.csv",header=F)
-names(s) <- c("state","scope","QUD","p")
-s$condition = "scope"
-
-#w = read.csv("twonot_world",header=F)
-w = read.csv("world_manip9.csv",header=F)
-w = w[-c(3),]
-names(w) <- c("state","scope","QUD","p")
-w$condition = "world"
-##Frogs
-#w$state = factor(w$state,levels=c("3","0","1","2"))
-#w$state = factor(w$state,labels=c("uniform\nstate prior","0 frogs","1 frog","2 frogs"))
-##Horses
-w$state = factor(w$state,levels=c("4","0","2","3"))
-w$state = factor(w$state,labels=c("uniform\nstate prior","0 horses","2 horses","3 horses"))
-
-d = rbind(s,w,q)
+d$manipulation = factor(d$manipulation,labels=c("baserate","QUD","scope"))
 
 d$x = NA
-d[d$condition=="qud",]$x = as.character(d[d$condition=="qud",]$QUD)
-d[d$condition=="scope",]$x = d[d$condition=="scope",]$scope
-d[d$condition=="world",]$x = d[d$condition=="world",]$world
 
-##Horses
-d$x = factor(d$x,levels=c("uniform\nQUD prior","did no\nhorses succeed?","how many\nhorses succeeded?","did all\nhorses succeed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 horses","2 horses","3 horses"))
-d$x = factor(d$x,labels=c("uniform","none?","how\nmany?","all?","0.1","0.3", "0.5","0.7","0.9","uniform","0","2","3"))
+d[d$manipulation=="QUD",]$x = as.character(d[d$manipulation=="QUD",]$QUD)
+d[d$manipulation=="scope",]$x = d[d$manipulation=="scope",]$scope
+d[d$manipulation=="baserate",]$x = as.character(d[d$manipulation=="baserate",]$baserate)
 
 ##Frogs
-#d$x = factor(d$x,levels=c("uniform\nQUD prior","did no\nfrogs succeed?","how many\nfrogs succeeded?","did all\nfrogs succeed?","0.1","0.3", "0.5","0.7","0.9","uniform\nstate prior","0 frogs","1 frog","2 frogs"))
-#d$x = factor(d$x,labels=c("uniform","none?","how\nmany?","all?","0.1","0.3", "0.5","0.7","0.9","uniform","0","1","2"))
+d$x = factor(d$x,levels=c("none?","many?","all?","0.1","0.5","0.9","b=0.1","b=0.5","b=0.9"))
+d$x = factor(d$x,labels=c("none?","how many?","all?","p(inv)=0.1","p(inv)=0.5","p(inv)=0.9","b=0.1","b=0.5","b=0.9"))
 
-d$condition = factor(d$condition,levels=c("world","qud","scope"))
-d$condition = factor(d$condition,labels=c("world state prior\nmanipulation","qud prior\nmanipulation","scope prior\nmanipulation"))
+d$manipulation = factor(d$manipulation,levels=c("baserate","QUD","scope"))
+d$manipulation = factor(d$manipulation,labels=c("world state prior\nmanipulation","QUD prior\nmanipulation","scope prior\nmanipulation"))
 
-lp <- ggplot(d,aes(x=as.factor(x),y=p,fill=as.factor(x))) +
+p1 <- ggplot(d,aes(x=as.factor(x),y=p,fill=as.factor(x))) +
   geom_bar(stat="identity")+
   ylab("probability of endorsing\nambiguous utterance\n") +
   xlab("\nscope prior")+
   #scale_fill_manual(values=c("red", "blue"))+
   theme(axis.text.x = element_text(size=10,angle=0))+
-  scale_y_continuous(limits=c(.2,.9),oob = rescale_none)+
+  scale_y_continuous(limits=c(0,1),oob = rescale_none)+
+  geom_abline(intercept = 0.2, slope = 0,linetype=2) +
+  geom_abline(intercept = 0.9, slope = 0,linetype="dotted") +
   theme_bw()+
   xlab("")+
   guides(fill=FALSE)+
   theme(text = element_text(size=26))+
-  facet_grid(.~condition,scales = "free_x")
-lp
-#ggsave("twonot_results.jpeg",width=15.75,height=4.5)
-ggsave("horses_BU.jpeg",width=15.75,height=4.5)
+  facet_grid(.~manipulation,scales = "free_x")
+p1
+#ggsave("CMCL-figure1.png",width=15.5,height=4.5)
+
+
+
+# figure 2: 1-of-2 contrast manipulation
+
+d2 = read.csv("../results/CMCL-figure2.csv",header=T)
+names(d2) <- c("n","baserate","QUD","surface_scope","meaning","p","manipulation")
+d2$scope = 1 - d2$surface_scope
+# 
+# d2$manipulation = factor(d2$manipulation,levels=c("p(inv) = 0.1","p(inv) = 0.5","p(inv) = 0.9","p(inv) = 0.1 b = 0.9"))
+# d2$manipulation = factor(d2$manipulation,labels=c("p(inv) = 0.1\nb = 0.1","p(inv) = 0.5\nb = 0.1","p(inv) = 0.9\nb = 0.1","p(inv) = 0.1\nb = 0.9"))
+# 
+# #d2$scope = factor(d2$scope,labels=c("p(inv) = 0.1","p(inv) = 0.5"))
+# 
+# p2 <- ggplot(d2,aes(x=as.factor(QUD),y=p,fill=as.factor(QUD))) +
+#   geom_bar(stat="identity")+
+#   ylab("probability of endorsing\nambiguous utterance\n") +
+#   xlab("\nscope prior")+
+#   #scale_fill_manual(values=c("red", "blue"))+
+#   theme(axis.text.x = element_text(size=10,angle=0))+
+#   scale_y_continuous(limits=c(0,1),oob = rescale_none)+
+#   geom_abline(intercept = 0.2, slope = 0,linetype=2) +
+#   geom_abline(intercept = 0.9, slope = 0,linetype="dotted") +
+#   theme_bw()+
+#   xlab("")+
+#   guides(fill=FALSE)+
+#   theme(text = element_text(size=26))+
+#   facet_grid(.~manipulation,scales = "free_x")
+# p2
+# #ggsave("CMCL-figure2a.png",width=14.5,height=4)
+# 
+# d2b <- d2[(d2$QUD=="uniform" & d2$surface_scope==0.9)|d2$QUD=="all?",]
+# d2b$manipulation = factor(d2b$manipulation,labels=c("b=0.1\np(inv)=0.1\nQUD: uniform","b=0.9\np(inv)=0.1\nQUD: all?"))
+# 
+# p2b <- ggplot(d2b,aes(x=manipulation,y=p,fill=manipulation)) +
+#   geom_bar(stat="identity")+
+#   ylab("probability of endorsing\nambiguous utterance\n") +
+#   #xlab("\nscope prior")+
+#   #scale_fill_manual(values=c("red", "blue"))+
+#   theme(axis.text.x = element_text(size=10,angle=0))+
+#   scale_y_continuous(limits=c(0,1),oob = rescale_none)+
+#   geom_abline(intercept = 0.2, slope = 0,linetype=2) +
+#   geom_abline(intercept = 0.9, slope = 0,linetype="dotted") +
+#   theme_bw()+
+#   xlab("")+
+#   guides(fill=FALSE)+
+#   theme(text = element_text(size=26))#+
+#   #facet_grid(.~manipulation,scales = "free_x")
+# p2b
+# #ggsave("CMCL-figure2b.png",width=6,height=5)
+
+d2c <- d2[d2$QUD=="uniform"|d2$QUD=="all?",]
+d2c$manipulation = factor(d2c$manipulation,labels=c("b=0.1\nQUD: uniform","b=0.9\nQUD: all?"))
+
+p2c <- ggplot(d2c,aes(x=manipulation,y=p,fill=as.factor(scope))) +
+  geom_bar(stat="identity",position = position_dodge())+
+  ylab("probability of endorsing\nambiguous utterance\n") +
+  #xlab("\nscope prior")+
+  scale_fill_manual(values=c("#00BA38", "#00C19F","#00B9E3"))+
+  theme(axis.text.x = element_text(size=10,angle=0))+
+  scale_y_continuous(limits=c(0,1),oob = rescale_none)+
+  geom_abline(intercept = 0.2, slope = 0,linetype=2) +
+  geom_abline(intercept = 0.9, slope = 0,linetype="dotted") +
+  theme_bw()+
+  labs(fill="p(inv)") +
+  xlab("")+
+  theme(text = element_text(size=26)) #+
+  #facet_grid(.~manipulation,scales = "free_x")
+p2c
+#ggsave("CMCL-figure2c.png",width=7.5,height=5)
+
+
+
+
+# figure 3: 2-of-4 context
+
+
+d3 = read.csv("../results/CMCL-figure3.csv",header=T)
+names(d3) <- c("n","baserate","QUD","surface_scope","meaning","p","manipulation")
+d3$scope = 1 - d3$surface_scope
+
+d3$manipulation = factor(d3$manipulation,labels=c("b=0.1\nQUD: uniform\nat least","b=0.1\nQUD: uniform\nexact"))
+
+p3 <- ggplot(d3,aes(x=manipulation,y=p,fill=as.factor(scope))) +
+  geom_bar(stat="identity",position = position_dodge())+
+  ylab("probability of endorsing\nambiguous utterance\n") +
+  #xlab("\nscope prior")+
+  scale_fill_manual(values=c("#00BA38", "#00C19F","#00B9E3"))+
+  theme(axis.text.x = element_text(size=10,angle=0))+
+  scale_y_continuous(limits=c(0,1),oob = rescale_none)+
+  #geom_abline(intercept = 0.2, slope = 0,linetype=2) +
+  #geom_abline(intercept = 0.9, slope = 0,linetype="dotted") +
+  theme_bw()+
+  labs(fill="p(inv)") +
+  xlab("")+
+  theme(text = element_text(size=26)) #+
+#facet_grid(.~manipulation,scales = "free_x")
+p3
+#ggsave("CMCL-figure3.png",width=7.5,height=5)
+
+
 
 ##Super Endorsement Graph
 

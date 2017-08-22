@@ -1,0 +1,13 @@
+World Type,Baserate,QUD Favored,Surface Favored,Two Meaning,Endorsement Probability,Notes
+2 Frogs,0.1,uniform,0.9,NA,0.1975,b=0.1 QUD: uniform
+2 Frogs,0.1,many?,0.9,NA,0.0711,b=0.1 QUD: uniform
+2 Frogs,0.1,none?,0.9,NA,0.0683,b=0.1 QUD: uniform
+2 Frogs,0.1,uniform,0.5,NA,0.3286,b=0.1 QUD: uniform
+2 Frogs,0.1,many?,0.5,NA,0.2611,b=0.1 QUD: uniform
+2 Frogs,0.1,none?,0.5,NA,0.2473,b=0.1 QUD: uniform
+2 Frogs,0.1,uniform,0.1,NA,0.4611,b=0.1 QUD: uniform
+2 Frogs,0.1,many?,0.1,NA,0.4548,b=0.1 QUD: uniform
+2 Frogs,0.1,none?,0.1,NA,0.43,b=0.1 QUD: uniform
+2 Frogs,0.9,all?,0.9,NA,0.9757,b=0.9 QUD: all?
+2 Frogs,0.9,all?,0.5,NA,0.9812,b=0.9 QUD: all?
+2 Frogs,0.9,all?,0.1,NA,0.9876,b=0.9 QUD: all?

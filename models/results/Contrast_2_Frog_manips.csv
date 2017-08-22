@@ -1,0 +1,13 @@
+World Type,Baserate,QUD Favored,Surface Favored,Two Meaning,Endorsement Probability,Notes
+2 Frogs,0.1,many?,0.5,NA,0.261,baserate manip (many? and scope shift)
+2 Frogs,0.9,many?,0.5,NA,0.891,baserate manip (many? and scope shift)
+2 Frogs,0.1,many?,0.9,NA,0.071,baserate manip (many? and scope shift)
+2 Frogs,0.9,many?,0.9,NA,0.809,baserate manip (many? and scope shift)
+2 Frogs,0.1,many?,0.5,NA,0.261,QUD manip (.1 b and scope shift)
+2 Frogs,0.1,all?,0.5,NA,0.479,QUD manip (.1 b and scope shift)
+2 Frogs,0.1,many?,0.9,NA,0.071,QUD manip (.1 b and scope shift)
+2 Frogs,0.1,all?,0.9,NA,0.459,QUD manip (.1 b and scope shift)
+2 Frogs,0.1,many?,0.5,NA,0.261,QUD/baserate manip (scope shift)
+2 Frogs,0.9,all?,0.5,NA,0.981,QUD/baserate manip (scope shift)
+2 Frogs,0.1,many?,0.9,NA,0.071,QUD/baserate manip (scope shift)
+2 Frogs,0.9,all?,0.9,NA,0.976,QUD/baserate manip (scope shift)

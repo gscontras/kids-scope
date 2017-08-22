@@ -1,0 +1,7 @@
+World Type,Baserate,QUD Favored,Surface Favored,Two Meaning,Endorsement Probability,Notes
+4 Frogs,0.1,Uniform,0.1,exact,0.3178,b=0.1 QUD: uniform exact
+4 Frogs,0.1,Uniform,0.5,exact,0.676,b=0.1 QUD: uniform exact
+4 Frogs,0.1,Uniform,0.9,exact,0.919,b=0.1 QUD: uniform exact
+4 Frogs,0.1,Uniform,0.1,at least,0.2567,b=0.1 QUD: uniform at least
+4 Frogs,0.1,Uniform,0.5,at least,0.36,b=0.1 QUD: uniform at least
+4 Frogs,0.1,Uniform,0.9,at least,0.463,b=0.1 QUD: uniform at least
