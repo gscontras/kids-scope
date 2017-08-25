@@ -31,8 +31,8 @@ p1 <- ggplot(d,aes(x=as.factor(x),y=p,fill=as.factor(x))) +
   #scale_fill_manual(values=c("red", "blue"))+
   theme(axis.text.x = element_text(size=10,angle=0))+
   scale_y_continuous(limits=c(0,1),oob = rescale_none)+
-  geom_abline(intercept = 0.2, slope = 0,linetype=2) +
-  geom_abline(intercept = 0.9, slope = 0,linetype="dotted") +
+  geom_abline(intercept = 0.275, slope = 0,linetype=2) +
+  geom_abline(intercept = 0.925, slope = 0,linetype="dotted") +
   theme_bw()+
   xlab("")+
   guides(fill=FALSE)+
@@ -101,8 +101,8 @@ p2c <- ggplot(d2c,aes(x=manipulation,y=p,fill=as.factor(scope))) +
   scale_fill_manual(values=c("#00BA38", "#00C19F","#00B9E3"))+
   theme(axis.text.x = element_text(size=10,angle=0))+
   scale_y_continuous(limits=c(0,1),oob = rescale_none)+
-  geom_abline(intercept = 0.2, slope = 0,linetype=2) +
-  geom_abline(intercept = 0.9, slope = 0,linetype="dotted") +
+  geom_abline(intercept = 0.275, slope = 0,linetype=2) +
+  geom_abline(intercept = 0.925, slope = 0,linetype="dotted") +
   theme_bw()+
   labs(fill="p(inv)") +
   xlab("")+
