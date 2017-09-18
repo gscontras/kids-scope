@@ -1,0 +1,17 @@
+World Type,Baserate,QUD Favored,Surface Favored,Two Meaning,Endorsement Probability,Notes
+4 Frogs,0.5,Uniform,0.5,exact,0.529,scope/two manip
+4 Frogs,0.5,Uniform,0.9,exact,0.737,scope/two manip
+4 Frogs,0.5,Uniform,0.5,at least,0.44,scope/two manip
+4 Frogs,0.5,Uniform,0.9,at least,0.514,scope/two manip
+4 Frogs,0.1,many?,0.5,exact,0.716,.1 many? scope/two manip
+4 Frogs,0.1,many?,0.9,exact,0.983,.1 many? scope/two manip
+4 Frogs,0.1,many?,0.5,at least,0.264,.1 many? scope/two manip
+4 Frogs,0.1,many?,0.9,at least,0.453,.1 many? scope/two manip
+4 Frogs,0.5,many?,0.5,exact,0.547,many? scope/two manip
+4 Frogs,0.5,many?,0.9,exact,0.879,many? scope/two manip
+4 Frogs,0.5,many?,0.5,at least,0.459,many? scope/two manip
+4 Frogs,0.5,many?,0.9,at least,0.65,many? scope/two manip
+4 Frogs,0.1,Uniform,0.5,exact,0.676,.1 scope/two manp
+4 Frogs,0.1,Uniform,0.9,exact,0.919,.1 scope/two manp
+4 Frogs,0.1,Uniform,0.5,at least,0.36,.1 scope/two manp
+4 Frogs,0.1,Uniform,0.9,at least,0.463,.1 scope/two manp

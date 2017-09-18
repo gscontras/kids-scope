@@ -1,0 +1,10 @@
+World Type,Baserate,QUD Favored,Surface Favored,Two Meaning,Endorsement Probability,Notes
+2 Frogs,0.1,Uniform,0.5,NA,0.329,Baserate Manip
+2 Frogs,0.5,Uniform,0.5,NA,0.493,Baserate Manip
+2 Frogs,0.9,Uniform,0.5,NA,0.861,Baserate Manip
+2 Frogs,0.5,Uniform,0.1,NA,0.5716,Scope manip
+2 Frogs,0.5,Uniform,0.5,NA,0.4927,Scope manip
+2 Frogs,0.5,Uniform,0.9,NA,0.3994,Scope manip
+2 Frogs,0.5,all?,0.5,NA,0.6412,QUD manip
+2 Frogs,0.5,many?,0.5,NA,0.4648,QUD manip
+2 Frogs,0.5,none?,0.5,NA,0.3502,QUD manip
