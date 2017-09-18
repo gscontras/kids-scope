@@ -28,7 +28,7 @@
 
     <!--CSS-->
     <link href="../_shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-    <link href="../_shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
+    <link href="../_shared/css/colalab-style.css" rel="stylesheet" type="text/css"/>
     <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
 
     <!-- experiment file -->
@@ -42,14 +42,14 @@
   <div class="slide" id="i0" >
     <img src="../_shared/images/CoLaLabLogo.jpg" alt="University of California, CoLaLab" id="cocologo"></img>
     <p id="cocolab">University of California, CoLaLab</p>
-    <p id="instruct-text">You will hear stories accompanied with a video. A description of the final scene will follow the story and you will be asked to say if the description is right or wrong. The HIT should take ~3.5 minutes. Please pay attention, thanks!</p>
-	<p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the University of California Cogntivie Sciences Department. If you have questions about this research, please contact K.J. Savinelli at <a href="ksavinel@uci.edu">ksavinel@uci.edu</a>, Lisa Pearl, at lpearl@uci.edu, or Gregory Scontras, at gscontras@uci.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
+    <p id="instruct-text">You will hear stories followed by a description of the story and be asked to say if the description is right or wrong. The HIT should take 10-15 minutes. Please pay attention, thanks!</p>
+	<p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the University of California Cogntivie Sciences Department. If you have questions about this research, please contact K.J. Savinelli at <a href="ksavinel@uci.edu">ksavinel@uci.edu</a> or Lisa Pearl, at lpearl@uci.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
     <button id="start_button" type="button">Start Experiment</button>
  </div>
 
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
-    <p>You will here a short story, and then hear a puppet make a comment about the story.  Your goal is to say whether the puppet is right or wrong in his account of the story. You will be able to decide the degree to which you think the puppet is right or wrong.  You will be asked to justify your answer. The first two trials will be practice trials to familiarize you with the task. Several test trials will follow those. The entire HIT should take approximately 6 minutes.</p>
+    <p>You will here a short story, and then hear a fictitious puppet make a comment about the story.  Your goal is to say whether the puppet is right or wrong in his account of the story.  You will be asked why you think the puppet is right or wrong.  The puppet gets a reward for being right or wrong (not sure if adults need/got this instruction; papers aren't clear)</p>
     <button onclick="_s.button()">Continue</button>
   </div>
   
@@ -68,18 +68,11 @@
   </div>
 
   <div class="slide" id="one_slider">
-    <video width="720" height="580">
-		<source src="https://youtu.be/OBMrd_1gr8s" >
+	<button onclick="playPause()">Play</button> 
+	<br><br>
+    <video id="control1" width="720" height="580" >
+		<source src="../_shared/images/Control Story 1.mp4" type="video/mp4">
 		</video>
-    <!--<p>Three horses decide to have some fun jumping over things. One horse suggests jumping
-over a cow, but the other horses say the cow is too big to jump over, and the plan is
-abandoned. Then the first horse jumps over the pig, which is much smaller, and
-challenges the other horses to do the same. The second horse jumps over the pig. The
-third horse considers jumping over the pig but decides that the pig looks scared and
-approaches him. The pig is, in fact, scared, so the third horse just talks with him instead
-of jumping over him.</p>
-	<p>(Animation Here)<p> <!--two slides or one?-->
-    <!--<p class="prompt"></p>-->
 	<p> "Am I right?" </p>
     <table id="slider_table" class="slider_table">
       <tr><td class="left">no</td><td class="right">yes</td></tr>
@@ -91,31 +84,18 @@ of jumping over him.</p>
     <button onclick="_s.button()">Continue</button>
     <div class="err">Please adjust the slider before continuing.</div>
   </div>
+  <script>
+  var myVideo = document.getElementById("control1"); 
+	function playPause() { 
+		if (myVideo.paused) 
+			myVideo.play(); 
+		else 
+			myVideo.pause(); 
+	} 
+	</script> 
 
-  <div class="slide" id="multi_slider">
-    <p>Here are a bunch of sliders.</p>
-    <p>How likely do you think it is that someone would say each of the following?</p>
-    <table id="multi_slider_table" class="slider_table">
-      <tr><td></td><td class="left">very unlikely</td><td class="right">very likely</td></tr>
-    </table>
-    <button onclick="_s.button()">Continue</button>
-    <div class="err">Please adjust all the sliders before continuing.</div>
-  </div>
 
-  <div class="slide" id="vertical_sliders">
-    <p>Here are a bunch of vertical sliders.</p>
-    <p id="vertical_question">{{}}</p>
-    <table id="vertical_slider_table" class="slider_table">
-      <tbody>
-        <tr id="sliders">
-        </tr>
-        <tr id="bin_labels">
-        </tr>
-      </tbody>
-    </table>
-    <button onclick="_s.button()">Continue</button>
-    <div class="err">Please adjust all the sliders before continuing.</div>
-  </div>
+  
 
   <div class="slide"  id="subj_info">
     <div class="long_form">
@@ -162,7 +142,7 @@ of jumping over him.</p>
 	  <p>What did you think the experiment was about? What thoughts do you have about the utterances the puppet made?</p>
       <textarea id="selfreport" rows="3" cols="50"></textarea>
 
-      <p>We would be interested in any comments you have about this experiment. Please type them here:</p>
+      <p>We would be interested in any other comments you have about this experiment. Please type them here:</p>
       <textarea id="comments" rows="3" cols="50"></textarea>
       <br/>
       <button onclick="_s.submit()">Submit</button>
