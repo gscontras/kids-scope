@@ -29,10 +29,10 @@
     <!--CSS-->
     <link href="../_shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     <link href="../_shared/css/colalab-style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
+    <link href="../colalab_exps/css/local-style.css" rel="stylesheet" type="text/css"/>
 
     <!-- experiment file -->
-    <script src="js/colatemplate.js"></script>
+    <script src="../colalab_exps/js/mturkTVJT.js"></script>
     
 </head>
 
@@ -60,24 +60,25 @@
   </div>
 
 
+  <!-- In order to bug test, it helps to add 'controls' to the video element below -->
   <div class="slide" id="one_slider">
-	<!-- <button onclick="playPause()">Play</button>  -->
+	<button id="play" type = "button" onclick = "playPause()">Play</button>
 	<br><br>
-    <video id="expVideo" width="720" height="580" controls> </video>
-	<p class = right> "Am I right?" </p>
-    <table id="slider_table" class="slider_table">
-      <tr><td class="left">no</td><td class="right">yes</td></tr>
-      <tr><td colspan="2"><div id="single_slider" class="slider"></div></td></tr>
+    <video id="expVideo" width="720" height="580"> </video>
+	<p class = "hidden"> "Am I right?" </p>
+    <table id="slider_table" class="slider_table hidden">
+      <tr><td class="left hidden">no</td><td class="right hidden">yes</td></tr>
+      <tr><td colspan="2"><div id="single_slider" class="slider hidden"></div></td></tr>
     </table>
-	  <p>Please justify your answer:</p>
-	  <textarea id="justification" rows="3" cols="50"></textarea>
+	  <p class = "hidden">Please justify your answer:</p>
+	  <textarea id="justification" class = "hidden" rows="3" cols="50"></textarea>
 	  <br>
-    <button onclick="_s.button()">Continue</button>
+    <button onclick="_s.button()" class = "hidden">Continue</button>
     <div class="err">Please adjust the slider before continuing.</div>
   </div>
   
   <!-- This is for the play button -->
- <!--  <script>
+  <script>
   var myVideo = document.getElementById("expVideo"); 
 	function playPause() { 
 		if (myVideo.paused) 
@@ -85,7 +86,7 @@
 		else 
 			myVideo.pause(); 
 	} 
-	</script>  -->
+	</script> 
   
 
   <div class="slide"  id="subj_info">

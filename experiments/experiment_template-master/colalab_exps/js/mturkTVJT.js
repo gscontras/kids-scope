@@ -3,7 +3,7 @@ function make_slides(f) {
 
   slides.i0 = slide({
      name : "i0",
-     start: function() {
+     start : function() {
       exp.startT = Date.now();
      }
   });
@@ -44,16 +44,32 @@ function make_slides(f) {
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
       $(".err").hide();
+	  $(".hidden").hide();
 
       this.stim = stim; //I like to store this information in the slide so I can record it later.
 
 
       $("#expVideo").html(stim.source);
 	  $("#expVideo").load();
+	  document.getElementById("expVideo").onended = function() {right()};
+		function right() {
+			$(".hidden").show()
+		
+		}
       this.init_sliders();
       exp.sliderPost = null;	  //erase current slider value
 	  
     },
+	
+/* 	$("#play").click(function() {
+		  var myVideo = document.getElementById("expVideo"); 
+			function playPause() { 
+				if (myVideo.paused) 
+					myVideo.play(); 
+				else 
+					myVideo.pause(); 
+			} 
+	}); */
 
     button : function() {
       if (exp.sliderPost == null) {
