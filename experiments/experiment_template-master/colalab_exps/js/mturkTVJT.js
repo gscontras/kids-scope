@@ -29,24 +29,74 @@ function make_slides(f) {
     /* trial information for this block
      (the variable 'stim' will change between each of these values,
       and for each of these, present_handle will be run.) */
-    present : [
-		{source: '<source src = "../_shared/images/practice story 1.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/practice story 2.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/TwoNot TwoActors 1.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/Control Story 1.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/Control Story 2.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/TwoNot TwoActors 3.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/Control Story 3.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/TwoNot TwoActors 4.mp4" <type="video/mp4"></source>'},
-    ],
+	  
+	    
+	  /*do an 'if' for exp.condition here*/
+	  //I'm currently randomizing for each type, but I know we discussed doing this differently. This also gives me an idea of which videos I still need.
+/* 	  if exp.condition == "Cond 1" {
+		  //2 Entity */
+			present : [
+				{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TNTwo3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TNTwo4.mp4" <type="video/mp4"></source>'},
+			],
+/* 		} else if exp.condition == "Cond 2" {
+			//2 entity w/ contrast
+			present : [
+				{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 4.mp4" <type="video/mp4"></source>'},
+			],
+		} else if exp.condition == "Cond 3" {
+			//4 entity
+			present : [
+				{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/Control Story 1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/Control Story 2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/Control Story 3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 4.mp4" <type="video/mp4"></source>'},
+			],
+		} else {
+			//4 entity with contrast
+			present : [
+				{source: '<source src = "../_shared/images/practice story 1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/practice story 2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/Control Story 1.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/Control Story 2.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/Control Story 3.mp4" <type="video/mp4"></source>'},
+				{source: '<source src = "../_shared/images/TwoNot TwoActors 4.mp4" <type="video/mp4"></source>'},
+			],
+		} */
+		
 
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
-      $(".err").hide();
-	  $(".hidden").hide();
+ 		$(".practice").hide();
+		$("#justification").val('');
+		$(".err").hide();
+		$(".hidden").hide();
+		$(".jerr").hide();
 
-      this.stim = stim; //I like to store this information in the slide so I can record it later.
+		this.stim = stim; //I like to store this information in the slide so I can record it later.
 
 
       $("#expVideo").html(stim.source);
@@ -58,6 +108,12 @@ function make_slides(f) {
 		}
       this.init_sliders();
       exp.sliderPost = null;	  //erase current slider value
+	  
+	  var chatinput = document.getElementById("justification").value;
+		if (chatinput == "" || chatinput.length == 0 || chatinput == null)
+			{
+				
+			}
 	  
     },
 	
@@ -72,15 +128,21 @@ function make_slides(f) {
 	}); */
 
     button : function() {
-      if (exp.sliderPost == null) {
-        $(".err").show();
-      } else {
-        this.log_responses();
+		if (exp.sliderPost == null) {
+			$(".err").show();
+		} else {
+			var chatinput = document.getElementById("justification").value;
+			if (chatinput == "" || chatinput.length == 0 || chatinput == null) {
+				$(".err").hide();
+				$(".jerr").show();
+			} else {
+				this.log_responses();
 
-        /* use _stream.apply(this); if and only if there is
-        "present" data. (and only *after* responses are logged) */
-        _stream.apply(this);
-      }
+					/* use _stream.apply(this); if and only if there is
+					"present" data. (and only *after* responses are logged) */
+					_stream.apply(this);
+			}
+		}
     },
 
     init_sliders : function() {
@@ -92,7 +154,8 @@ function make_slides(f) {
     log_responses : function() {
       exp.data_trials.push({
         "trial_type" : "one_slider",
-        "response" : exp.sliderPost
+        "response" : exp.sliderPost,
+		"justification" : $("#justification").val(),
       });
     }
   });
@@ -141,7 +204,8 @@ function make_slides(f) {
 function init() {
   exp.trials = [];
   exp.catch_trials = [];
-  exp.condition = _.sample(["Stories randomized here"]); //can randomize between subject conditions here
+  exp.condition = _.sample(["Cond 1"]); //can randomize between subject conditions here
+  //exp.condition = _.sample(["Cond 1, Cond 2, Cond 3, Cond 4"]); //can randomize between subject conditions here
   exp.system = {
       Browser : BrowserDetect.browser,
       OS : BrowserDetect.OS,

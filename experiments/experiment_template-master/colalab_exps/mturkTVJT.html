@@ -62,9 +62,11 @@
 
   <!-- In order to bug test, it helps to add 'controls' to the video element below -->
   <div class="slide" id="one_slider">
-	<button id="play" type = "button" onclick = "playPause()">Play</button>
+	<!-- <button id="play" type = "button" onclick = "playPause()">Play</button> -->
 	<br><br>
-    <video id="expVideo" width="720" height="580"> </video>
+	<p class = "practice"> This is a practice trail. </p>
+	<!-- add 'controls' when debugging -->
+    <video id="expVideo" width="720" height="580" autoplay controls> </video>
 	<p class = "hidden"> "Am I right?" </p>
     <table id="slider_table" class="slider_table hidden">
       <tr><td class="left hidden">no</td><td class="right hidden">yes</td></tr>
@@ -75,9 +77,10 @@
 	  <br>
     <button onclick="_s.button()" class = "hidden">Continue</button>
     <div class="err">Please adjust the slider before continuing.</div>
+	<div class="jerr">Please justify your answer in the textbox before coninuing. </div>
   </div>
   
-  <!-- This is for the play button -->
+  <!-- This is for the play button, although it currently isn't needed -->
   <script>
   var myVideo = document.getElementById("expVideo"); 
 	function playPause() { 
