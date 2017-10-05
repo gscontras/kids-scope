@@ -56,6 +56,10 @@ div.long_form {
 	font-size: 15px;
 }
 
+#expVideo {
+	margin-top: -80px;
+}
+
 fieldset {
 	border: none;
 	border-top: solid 1px #ccc;
