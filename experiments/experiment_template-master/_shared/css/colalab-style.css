@@ -10,7 +10,7 @@ table {
 /*the experiment happens in "slides"*/
 .slide {
 	/*pad the inside of the slide*/
-	padding-top: 10px;
+	padding-top: 20px;
 	padding-left: 20px;
 	padding-right: 20px;
 
@@ -40,7 +40,7 @@ table {
 }
 
 #legal {
-	font-size: 0.8em;
+	font-size: 1em;
 }
 
 /*make the subj_info slide prettier*/
@@ -57,7 +57,11 @@ div.long_form {
 }
 
 #expVideo {
-	margin-top: -80px;
+	margin-top: -55px;
+}
+
+#practiceVideo {
+	margin-top: -66px;
 }
 
 fieldset {

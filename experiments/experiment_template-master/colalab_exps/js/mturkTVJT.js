@@ -15,12 +15,76 @@ function make_slides(f) {
     }
   });
   
-  slides.story = slide({
-    name : "story",
-    button : function() {
-      exp.go(); //use exp.go() if and only if there is no "present" data.
+    slides.one_slider_practice = slide({
+    name : "one_slider_practice",
+
+    /* trial information for this block
+     (the variable 'stim' will change between each of these values,
+      and for each of these, present_handle will be run.) */
+	  
+
+	present : [
+		{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
+		{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
+	],
+
+    //this gets run only at the beginning of the block
+    present_handle : function(stim) {
+		$("#p_justification").val('');
+		$(".p_err").hide();
+		$(".p_hidden").hide();
+		$(".p_jerr").hide();
+
+		this.stim = stim; //I like to store this information in the slide so I can record it later.
+
+
+      $("#practiceVideo").html(stim.source);
+	  $("#practiceVideo").load();
+	  document.getElementById("practiceVideo").onended = function() {right()};
+		function right() {
+			$(".p_hidden").show()
+		
+		}
+      this.init_sliders();
+      exp.sliderPost = null;	  //erase current slider value
+	  
+    },
+	
+	    button : function() {
+		if (exp.sliderPost == null) {
+			$(".p_err").show();
+		} else {
+			var chatinput = document.getElementById("p_justification").value;
+			if (chatinput == "" || chatinput.length == 0 || chatinput == null) {
+				$(".p_err").hide();
+				$(".p_jerr").show();
+			} else {
+				this.log_responses();
+
+					/* use _stream.apply(this); if and only if there is
+					"present" data. (and only *after* responses are logged) */
+					_stream.apply(this);
+			}
+		}
+    },
+
+    init_sliders : function() {
+      utils.make_slider("#prac_single_slider", function(event, ui) {
+        exp.sliderPost = ui.value;
+      });
+    },
+
+    log_responses : function() {
+      exp.data_trials.push({
+        "trial_type" : "one_slider_practice",
+        "response" : exp.sliderPost,
+		"justification" : $("#p_justification").val(),
+		//put condition here as well
+      });
     }
   });
+  
+  
 
 
   slides.one_slider = slide({
@@ -30,67 +94,19 @@ function make_slides(f) {
      (the variable 'stim' will change between each of these values,
       and for each of these, present_handle will be run.) */
 	  
-	    
-	  /*do an 'if' for exp.condition here*/
-	  //I'm currently randomizing for each type, but I know we discussed doing this differently. This also gives me an idea of which videos I still need.
-/* 	  if exp.condition == "Cond 1" {
-		  //2 Entity */
-			present : [
-				{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TNTwo3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TNTwo4.mp4" <type="video/mp4"></source>'},
-			],
-/* 		} else if exp.condition == "Cond 2" {
-			//2 entity w/ contrast
-			present : [
-				{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 4.mp4" <type="video/mp4"></source>'},
-			],
-		} else if exp.condition == "Cond 3" {
-			//4 entity
-			present : [
-				{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/Control Story 1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/Control Story 2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/Control Story 3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 4.mp4" <type="video/mp4"></source>'},
-			],
-		} else {
-			//4 entity with contrast
-			present : [
-				{source: '<source src = "../_shared/images/practice story 1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/practice story 2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/Control Story 1.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/Control Story 2.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/Control Story 3.mp4" <type="video/mp4"></source>'},
-				{source: '<source src = "../_shared/images/TwoNot TwoActors 4.mp4" <type="video/mp4"></source>'},
-			],
-		} */
-		
+
+	present : [
+		{source: '<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>'},
+		{source: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
+		{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
+		{source: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
+		{source: '<source src = "../_shared/images/TNTwo3.mp4" <type="video/mp4"></source>'},
+		{source: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
+		{source: '<source src = "../_shared/images/TNTwo4.mp4" <type="video/mp4"></source>'},
+	],
 
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
- 		$(".practice").hide();
 		$("#justification").val('');
 		$(".err").hide();
 		$(".hidden").hide();
@@ -108,12 +124,6 @@ function make_slides(f) {
 		}
       this.init_sliders();
       exp.sliderPost = null;	  //erase current slider value
-	  
-	  var chatinput = document.getElementById("justification").value;
-		if (chatinput == "" || chatinput.length == 0 || chatinput == null)
-			{
-				
-			}
 	  
     },
 	
@@ -156,6 +166,7 @@ function make_slides(f) {
         "trial_type" : "one_slider",
         "response" : exp.sliderPost,
 		"justification" : $("#justification").val(),
+		"condition" : exp.condition,
       });
     }
   });
@@ -174,7 +185,7 @@ function make_slides(f) {
         age : $("#age").val(),
         gender : $("#gender").val(),
         education : $("#education").val(),
-		selfreport : $("Self-Report").val(),
+		selfreport : $("#selfreport").val(),
         comments : $("#comments").val(),
       };
       exp.go(); //use exp.go() if and only if there is no "present" data.
@@ -215,8 +226,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "instructions", "one_slider", 'subj_info', 'thanks'];
-  //removed "story" and "single_trial"
+  exp.structure=["i0", "instructions", "one_slider_practice", "one_slider", 'subj_info', 'thanks'];
   
   exp.data_trials = [];
   //make corresponding slides:
