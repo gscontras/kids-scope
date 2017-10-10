@@ -94,15 +94,17 @@ function make_slides(f) {
      (the variable 'stim' will change between each of these values,
       and for each of these, present_handle will be run.) */
 	  
+	  //exp_condition = _.sample(["cond1", "cond2", "cond3", "cond4"])
+	  
 
 	present : [
-		{source: '<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/TwoNot TwoActors 2.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/TNTwo3.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/TNTwo4.mp4" <type="video/mp4"></source>'},
+		{cond1: '<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2frogscontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4frogs.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4frogscontrast.mp4" <type="video/mp4"></source>'},
+		{cond1: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
+		{cond1: '<source src = "../_shared/images/TNTwo2.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2butterflycontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4butterflies.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4butterflycontrast.mp4" <type="video/mp4"></source>'},
+		{cond1: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
+		{cond1: '<source src = "../_shared/images/TNTwo3.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2lioncontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4lions.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4lionscontrast.mp4" <type="video/mp4"></source>'},
+		{cond1: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
+		{cond1: '<source src = "../_shared/images/TNTwo4.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2dinoscontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4dinos.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4dinoscontrast.mp4" <type="video/mp4"></source>'},
 	],
 
     //this gets run only at the beginning of the block
@@ -114,8 +116,9 @@ function make_slides(f) {
 
 		this.stim = stim; //I like to store this information in the slide so I can record it later.
 
+	    exp.condition = _.sample(["cond1", "cond2", "cond3", "cond4"]);
 
-      $("#expVideo").html(stim.source);
+      $("#expVideo").html(stim[exp.condition]);
 	  $("#expVideo").load();
 	  document.getElementById("expVideo").onended = function() {right()};
 		function right() {
@@ -215,7 +218,7 @@ function make_slides(f) {
 function init() {
   exp.trials = [];
   exp.catch_trials = [];
-  exp.condition = _.sample(["Cond 1"]); //can randomize between subject conditions here
+  //exp.condition = _.sample(["Cond 1"]); //can randomize between subject conditions here
   //exp.condition = _.sample(["Cond 1, Cond 2, Cond 3, Cond 4"]); //can randomize between subject conditions here
   exp.system = {
       Browser : BrowserDetect.browser,
