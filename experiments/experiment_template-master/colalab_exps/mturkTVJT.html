@@ -44,7 +44,8 @@
 	Study Information Sheet <br /> 
 	Truth Value Judgment Survey </p>
     <img src="../_shared/images/CoLaLabLogo.jpg" alt="University of California, CoLaLab" id="cocologo"></img>
-	<p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the University of California Cogntivie Sciences Department. If you have questions about this research, please contact K.J. Savinelli at <a href="ksavinel@uci.edu">ksavinel@uci.edu</a>, Gregory Scontras at gscontra@uci.edu, or Lisa Pearl, at lpearl@uci.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
+	<div class = "scrollbox">
+		<p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the University of California Cogntivie Sciences Department. If you have questions about this research, please contact K.J. Savinelli at <a href="ksavinel@uci.edu">ksavinel@uci.edu</a>, Gregory Scontras at gscontra@uci.edu, or Lisa Pearl, at lpearl@uci.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
 		<p> We are asking you to take part in a study conducted by researchers at the University of California, Irvine. Participating in this study is optional. </p>
 		<p> If you choose to be in the study, you will complete a survey. The survey will consist of short stories followed by an utterance describing the end state of the story. Your goal is to decide if that utterance is a right or wrong description. This survey will help us learn more about how humans understand language. The survey will take about 10-15 minutes to complete. </p>
 		<p> You will only be able to do the survey one time. You can skip questions that you do not want to answer or stop the survey at any time. The survey is anonymous, and no one will be able to link your answers back to you. Please do not include your name or other information that could be used to identify you in the survey responses. will keep your answers confidential and will not share your personal information with anyone outside the research team. </p>
@@ -53,8 +54,9 @@
 		<p> If you have any comments, concerns, or questions regarding the conduct of this research please contact the researchers listed at the top of this form. </p>
 		<p> If you have questions or concerns about your rights as a research participant, you can contact the UCI Institutional Review Board by phone, (949) 824-6662, by e-mail at IRB@research.uci.edu or at 141 Innovation, Suite 250, Irvine, CA 92697. <br /> <br />
 
-		<b> What is an IRB? </b> An Institutional Review Board (IRB) is a committee made up of scientists and nonscientists. The IRB’s role is to protect the rights and welfare of human subjects involved in research. The IRB also assures that the research complies with applicable regulations, laws, and institutional policies. </p>
+		<b> What is an IRB? </b> An Institutional Review Board (IRB) is a committee made up of scientists and nonscientists. The IRB's role is to protect the rights and welfare of human subjects involved in research. The IRB also assures that the research complies with applicable regulations, laws, and institutional policies. </p>
 		<p> If you want to participate in this study, click the 'Start Experiment' button to start the survey. </p>
+	</div>
 <!--     <p id="instruct-text">You will hear stories followed by a description of the story and be asked to say if the description is right or wrong. The HIT should take 10-15 minutes. Please pay attention, thanks!</p>
 	<p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the University of California Cogntivie Sciences Department. If you have questions about this research, please contact K.J. Savinelli at <a href="ksavinel@uci.edu">ksavinel@uci.edu</a>, Gregory Scontras at gscontra@uci.edu, or Lisa Pearl, at lpearl@uci.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p> -->
     <button id="start_button" type="button">Start Experiment</button>
@@ -63,7 +65,13 @@
 
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
-    <p>You will here a short story, and then hear a puppet make a comment about the story.  Your goal is to say whether the puppet is right or wrong in his account of the story.  You will be asked why you think the puppet is right or wrong. There will be two practice trials before the experiment begins. The experiment will have seven trials. </p>
+    <p>You will hear a short story, and then hear a puppet make a comment about the story.  Your goal is to decide whether the puppet is right or wrong in his account of the story, and explain your decision. There will be two practice trials before the experiment begins. Please make sure your volume is turned up, because there will be an audio component </p>
+    <button onclick="_s.button()">Continue</button>
+  </div>
+  
+  <div class="slide" id="pretrial">
+    <h3>End of Practice</h3>
+    <p>The practice trials are now over. There will be 7 more trials to this experiment. </p>
     <button onclick="_s.button()">Continue</button>
   </div>
   
@@ -73,7 +81,7 @@
 	<!-- add 'controls' when debugging -->
 	<b> This is a practice trial </b>
     <video id="practiceVideo" width="650" height="500" autoplay controls> </video>
-	<p class = "p_hidden"> "Am I right?" </p>
+	<p class = "p_hidden"> "Is the puppet right?" </p>
     <table id="practice_slider" class="slider_table p_hidden">
       <tr><td class="left p_hidden">definitely not</td><td class="right p_hidden">definitely</td></tr>
       <tr><td colspan="2"><div id="prac_single_slider" class="slider p_hidden"></div></td></tr>
@@ -82,8 +90,8 @@
 	  <textarea id="p_justification" class = "p_hidden" rows="3" cols="50"></textarea>
 	  <br>
     <button onclick="_s.button()" class = "p_hidden">Continue</button>
-    <div class="p_err">Please adjust the slider before continuing.</div>
-	<div class="p_jerr">Please justify your answer in the textbox before coninuing. </div>
+    <div class="p_err" style = "color:red">Please adjust the slider before continuing. <br><br></div>
+	<div class="p_jerr" style = "color:red">Please justify your answer in the text box before continung.<br><br></div>
   </div>
 
   <!-- In order to bug test, it helps to add 'controls' to the video element below -->
@@ -91,7 +99,7 @@
 	<!-- <button id="play" type = "button" onclick = "playPause()">Play</button> -->
 	<!-- add 'controls' when debugging -->
     <video id="expVideo" width="650" height="500" autoplay controls> </video>
-	<p class = "hidden"> "Am I right?" </p>
+	<p class = "hidden"> "Is the puppet right?" </p>
     <table id="slider_table" class="slider_table hidden">
       <tr><td class="left hidden">definitely not</td><td class="right hidden">definitely</td></tr>
       <tr><td colspan="2"><div id="single_slider" class="slider hidden"></div></td></tr>
@@ -100,8 +108,8 @@
 	  <textarea id="justification" class = "hidden" rows="3" cols="50"></textarea>
 	  <br>
     <button onclick="_s.button()" class = "hidden">Continue</button>
-    <div class="err">Please adjust the slider before continuing.</div>
-	<div class="jerr">Please justify your answer in the textbox before coninuing. </div>
+    <div class="err" style = "color:red">Please adjust the slider before continuing. <br><br></div>
+	<div class="jerr" style = "color:red">Please justify your answer in the text box before continuing. <br><br></div>
   </div>
   
   <!-- This is for the play button, although it currently isn't needed -->
@@ -158,7 +166,7 @@
         <label><option value="2">Better than average HIT</option></label>
       </select>
 	  
-	  <p>What did you think the experiment was about? What thoughts do you have about the utterances the puppet made?</p>
+	  <p>What did you think the experiment was about? </p>
       <textarea id="selfreport" rows="3" cols="50"></textarea>
 
       <p>We would be interested in any other comments you have about this experiment. Please type them here:</p>

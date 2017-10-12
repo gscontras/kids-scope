@@ -15,6 +15,13 @@ function make_slides(f) {
     }
   });
   
+  slides.pretrial = slide({
+    name : "pretrial",
+    button : function() {
+      exp.go(); //use exp.go() if and only if there is no "present" data.
+    }
+  });
+  
     slides.one_slider_practice = slide({
     name : "one_slider_practice",
 
@@ -229,7 +236,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "instructions", "one_slider_practice", "one_slider", 'subj_info', 'thanks'];
+  exp.structure=["i0", "instructions", "one_slider_practice", "pretrial", "one_slider", 'subj_info', 'thanks'];
   
   exp.data_trials = [];
   //make corresponding slides:

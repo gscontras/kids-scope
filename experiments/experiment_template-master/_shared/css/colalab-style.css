@@ -43,6 +43,13 @@ table {
 	font-size: 1em;
 }
 
+.scrollbox {
+    width: 800px;
+    height: 245px;
+    overflow: scroll;
+	align: center;
+}
+
 /*make the subj_info slide prettier*/
 
 .subj_info_title {
@@ -63,6 +70,8 @@ div.long_form {
 #practiceVideo {
 	margin-top: -66px;
 }
+
+.
 
 fieldset {
 	border: none;
