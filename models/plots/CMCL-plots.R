@@ -19,7 +19,7 @@ d[d$manipulation=="baserate",]$x = as.character(d[d$manipulation=="baserate",]$b
 
 ##Frogs
 d$x = factor(d$x,levels=c("none?","many?","all?","0.1","0.5","0.9","b=0.1","b=0.5","b=0.9"))
-d$x = factor(d$x,labels=c("none?","how many?","all?","p(inv)=0.1","p(inv)=0.5","p(inv)=0.9","b=0.1","b=0.5","b=0.9"))
+d$x = factor(d$x,labels=c("none?","what\nhappened?","all?","p(inv)=0.1","p(inv)=0.5","p(inv)=0.9","b=0.1","b=0.5","b=0.9"))
 
 d$manipulation = factor(d$manipulation,levels=c("baserate","QUD","scope"))
 d$manipulation = factor(d$manipulation,labels=c("world state prior\nmanipulation","QUD prior\nmanipulation","scope prior\nmanipulation"))
