@@ -120,6 +120,7 @@ function make_slides(f) {
 		$(".err").hide();
 		$(".hidden").hide();
 		$(".jerr").hide();
+		$(".text_response").val('');
 
 		this.stim = stim; //I like to store this information in the slide so I can record it later.
 
@@ -233,7 +234,7 @@ function init() {
       screenH: screen.height,
       screenUH: exp.height,
       screenW: screen.width,
-      screenUW: exp.width
+      screenUW: exp.width,
     };
   //blocks of the experiment:
   exp.structure=["i0", "instructions", "one_slider_practice", "pretrial", "one_slider", 'subj_info', 'thanks'];
