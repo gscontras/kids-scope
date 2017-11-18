@@ -21,16 +21,13 @@ Give this config file a unique label as its name: `[LABEL].config`.
     "conditions":"cond"
     }
 
-
 Then run the following commands in the terminal:
 
-    
-python submiterator.py posthit [LABEL]
+    python submiterator.py posthit [LABEL]
 
 And then when you want to get the results:
 
-    
-python submiterator.py getresults [LABEL]
+    python submiterator.py getresults [LABEL]
 
 This will create a `[LABEL].results` file.
 It will also create a `[LABEL]_anonymized.results` file which will have not have worker ids.

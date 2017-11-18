@@ -18,6 +18,7 @@ table {
 	margin: auto auto;
 	margin-top: 0px;
 
+
 	/*all elements in a slide will be centered by default*/
     text-align: center;
 
@@ -48,6 +49,7 @@ table {
     height: 245px;
     overflow: scroll;
 	align: center;
+	border: 3px solid black;
 }
 
 /*make the subj_info slide prettier*/
