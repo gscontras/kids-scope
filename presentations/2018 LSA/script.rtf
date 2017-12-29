@@ -2,63 +2,75 @@
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\margl1440\margr1440\vieww10800\viewh25980\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 When we think about what our sentences mean, we often worry about their truth conditions, or what it would take for the sentence to be true. What does the world look like that our sentence describes? Now, to arrive at those truth conditions, and thereby arrive at the meaning of a sentence, we rely on our truth value judgments: could a sentence truthfully describe a given scenario.\
+\f0\fs24 \cf0 Imagine you\'92re in a world where you have three different horses. \
 \
-Well, today I\'92d like to offer you a cautionary tale for obtaining these truth value judgments. So let me walk you through what it takes to get such judgments.\
-\
-Imagine you\'92re in a world where you have three different horses. \
-\
-And I see that horse number 1 jumps over a fence.\
+Horse number 1 jumps over a fence.\
 \
 Horse number 2 also jumps over the fence.\
 \
-But horse number 3 decides that he\'92s not going to jump over the fence.\
+But horse number 3 decides that she\'92s not going to jump over the fence.\
 \
-So after this little scenario, the world looks like this: where 1 and 2 have jumped, 3 doesn\'92t. And now I tell you that Mary here comes in and describes the scenario as follows: every horse didn\'92t jump over the fence. Would you endorse that sentence as true or false? Did Mary speak correctly or not?\
+In the resulting world state, two out of three horse have jumped. \
 \
-Well what\'92s interesting is that adults and kids give very different patterns of responses. Adults readily endorse this utterance as a discretion of this two out of three scenario, but kids do not. \
+Now Mary here comes in and describes the scenario as follows: every horse didn\'92t jump over the fence. Did Mary speak correctly or not?\
 \
-Now what\'92s interesting about these judgments is that they inform our interpretation of what\'92s known as scope ambiguity. So this sentence is ambiguous.\
+This is a truth-value judgment. Given the central role they play in the study of meaning, today I\'92d like to offer you a cautionary tale about understanding them.\
 \
-It has what\'92s known as a surface interpretation, whereby we say that none of the horses jumped.\
+These two-out-of-three scenarios are interesting because adults and kids give very different patterns of responses. Adults readily endorse the utterance, but most kids do not. But what\'92s going on?\
 \
-It also has what\'92s known as an inverse interpretation where we say that not all of the horses jumped.\
+This sentence is ambiguous, with different truth conditions depending on the logical scope of \'93every\'94 and negation.\
 \
-Now what\'92s interesting about this ambiguity is that you\'92ll notice that only the inverse interpretation is true in this two out of three scenario: It\'92s not the case that none of the horses jumped, but it is the case that not all of them did. So maybe we would conclude that adults are able to access this inverse interpretation of the sentence grammatically in a way that kids are not. Kids are only getting the surface interpretation. Well that\'92s not the end of the story\'85\
+Under what\'92s known as the \'93surface\'94 interpretation, we say that every horse did not jump, or 
+\b none
+\b0  of the horses did.\
 \
-because in fact we can make kids a lot more adult like in their behavior, meaning we can get them to endorse this utterance more.\
+Under what\'92s known as the \'93inverse\'94 interpretation, we say it\'92s not the case that every horse jumped, or 
+\b not all
+\b0  of the horses did.\
 \
-Here\'92s one way to get them to endorse the utterance more using what\'92s known as an explicit contrast clause. So now I tell you every horse jumped over the log, but every horse didn\'92t jump over the fence. Now kids are going to endorse that sentence 60% of the time. Why might they do that?\
+In this two-out-of-three scenario, only the inverse interpretation is true: It\'92s not the case that none of the horses jumped, but it is the case that not all of them did. So should we conclude that kids are stuck on the surface interpretation, and only adults are able to grammatically access the inverse? Well, that\'92s not the end of the story\'85\
 \
-Well, this explicit contrast clause here plausibly affects our world knowledge, or out expectations about how likely horses are to succeed at jumping. So if I tell you every horse jumped over the log, I might prime you to believe that horses are very good at jumping. \
+because in fact we can make kids a lot more adult-like in their behavior, with increasing rates of utterance endorsement.\
 \
-This explicit contrast also might affect conversation topic. So if it\'92s relevant that every horse jumped over the log, you might then want to know whether or not all the horses jumped over the fence. So I might shift the topic of conversation form whether or not none of the horses did to whether all of the horses did.\
+One way to increase endorsement uses what\'92s known as an explicit contrast clause. Now I tell you early on that every horse jumped over the log, but that every horse didn\'92t jump over the fence. And kids\'92 endorsement jumps from around 10% to 60%. But why?\
 \
-Interestingly, I can get the same sort of result if I explicitly change the conversation topic with goals. So if I make it relevant whether the man found all of the horses, and then I tell you the man didn\'92t find some horses, here the kid is going to endorse the utterance 90% of the time.\
+This explicit contrast clause affects our world knowledge: we\'92ve learned that horses are pretty good at jumping. So you might have strong expectations that all of the horses will jump over the fence.\
 \
-So, why is it that we can make kids endorse the utterance more? How are we making them more adult like? It could be that we\'92re affecting their world knowledge, or their expectations about the conversational topic, or it could be that we\'92re affecting some grammatical factor that determines the logical scope of things like every and negation. Now, given the remarkable interaction of all of these factors as we\'92re understanding language, it\'92s incredibly difficult to tease apart the independent contributions of these factors. So how are we going to do it? Well..\
+This explicit contrast also affects conversational goals, or the topic. Hearing that every horse jumped over the log, you might then want to know 
+\b not
+\b0  whether 
+\b any
+\b0  of the horses jumped over the fence, but whether 
+\b all
+\b0  of them did.\
 \
-WE\'92re going to do it by developing a computational cognitive model of this disambiguation process.\
+But which of these changes actually causes children to endorse the utterance more? Is it the pragmatic factors of world knowledge and conversational goals, or is the root cause the grammatical access to inverse scope? To tease apart the independent contribution of each factor as they interact during the complicated process of language understanding, we\'92ll need a pretty beefy tool:\
 \
-It\'92s couched within the rational speech act modeling framework, which views language understanding as recursive social reasoning between speakers and listeners.\
+A computer with which to develop a cognitive computational model of the disambiguation process. Such a model allows us to explicitly manipulate each factor to measure its effect.\
 \
-So, during communication, a speaker and a listener coordinate of the utterance and interoperation that maximizes the probability of correctly addressing the topic of conversation. They do this with the speaker observing what the state of the world is, choosing an utterance to communicate that state of the world to a listener. The listener hears that utterance and then infers the state of the world by updating the listener\'92s beliefs. Now the good news is..\
+Our model is conceived within the Rational Speech Act modeling framework, which views language understanding as recursive social reasoning between speakers and listeners. Now the good news is this model is just a whole bunch of math..\
 \
-..this is all just math, and here\'92s a look at that. But for our purposes we\'92re really just interested in the probability of endorsing an ambiguous every-not utterance in one of these two out of three scenarios like you saw. Okay? \
+but that\'92s also the bad news. For our purposes, we\'92re really just interested in the probability of endorsing an ambiguous every-not utterance in a two-out-of-three scenario, and the affect that our pragmatic and grammatical factors has on this endorsement probability.\
 \
-So I\'92m going to plot for you these model predictions. On the y-axis you have the probability of endorsing the that every-not utterance. However values mean you\'92re more kid like. Higher values mean you\'92re more adult like. Here we\'92re manipulating the prior probability of a none vs. a not all interpretation, and you\'92ll notice that as I increase that prior probability I am increasing the probability of endorsing that utterance in this two out of three world state.\
+Here\'92s a look at model predictions. On the y-axis you have the probability of endorsing the every-not utterance. Higher values mean you\'92re more adult-like; lower values mean more child-like. I\'92m starting by manipulating the grammatical factor: how likely I am to access a surface 
+\b none
+\b0  vs. an inverse 
+\b not all
+\b0  interpretation. As I increase the prior probability of inverse not all, I increase the probability of endorsing the utterance.\
 \
-Next I\'92m plotting for you the results of the manipulation on the world expectations. So, as well move from expectations that tell us that horses are very bad vs. very good at jumping over fences, you\'92ll notice that the endorsement rate jumps up nearly to 90%. \
+Next is the world knowledge manipulation. As we move from lazy-horse expectations to the expectation that all horses are likely to succeed, the endorsement rate jumps up nearly to 90%. \
 \
-And finally I\'92m showing you here the manipulation of the topic prior. So, changing from whether to not any horse jumped over the fence to whether or not all the horses jumped over the fence, we see a sharp increase endorsement rates. Now what\'92s interesting is..\
+And here\'92s the manipulation of the topic of conversation. Changing the topic from whether any horses succeeded to whether all of them did leads to a sharp increase in endorsement. Taken together, we see that the pragmatic factors have a much more pronounced effect that the grammatical one.\
 \
-..when we have these factors interact, so if I\'92m in a situation where it\'92s relevant whether or not all the horses jumped over the fence and I believe that horses are very good jumpers, it doesn\'92t matter what happens to the prior on the grammatical scope access. These pragmatic factors overwhelm it.\
+We see this more clearly by letting the factors interact. Here I\'92ve set the parameters so that it\'92s relevant whether 
+\b all
+\b0  the horses jumped and I believe that horses are very good jumpers. What you\'92ll notice is that it doesn\'92t matter what happens to the prior on the grammatical scope access. The pragmatic factors completely overwhelm it.\
 \
-This happens because endorsing the utterance requires no disambiguation at all. If it matters whether or not all the horses jumped over the fence or I believe that horses are really really likely to succeed, under either intepretation \'97 none or not all \'97 that utterance is informative: it tells me no it\'92s not the case that all the horses jumped over the fence, which means my prior beliefs that all horses succeed do not hold. \
+This happens because endorsing the utterance requires no disambiguation at all. Either interpretation, none or not all, fully answers the question of whether all horses succeeded, and informs me that my prior expectations of total horse success do not hold. Our truth-value judgments tell us next to nothing about the specific interpretation.\
 \
-So what that offers us is a cautionary tale for understanding truth value judgments, which means we have to take into account the pragmatic that go into the task.\
+So now you have the cautionary tale: truth-value judgments are worthless unless you understand the pragmatics that goes into giving them. And we can accomplish that with a little bit of math.\
 \
 Thank you very much!}
