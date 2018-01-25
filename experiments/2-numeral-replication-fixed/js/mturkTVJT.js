@@ -115,7 +115,7 @@ function make_slides(f) {
 	// ],
 
   present : [
-    {twowith: {video: '/<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>', sentence: "\"hello!\"", item: "dog"}}
+    {twowithout: {video: '/<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>', sentence: "\"Two frogs didn't jump over the rock.\"", item: "frog"}, twowith: {video: '/<source src = "../_shared/images/2frogscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Two frogs jumped over the fence, but two frogs didn't jump over the rock\"", item: "frog"}}
   ],
 
     //this gets run only at the beginning of the block
@@ -129,7 +129,8 @@ function make_slides(f) {
 		this.stim = stim; //I like to store this information in the slide so I can record it later.
 
       exp.context = _.sample(["with","without"]);
-      exp.number = _.sample(["two","four"]);
+      //exp.number = _.sample(["two","four"]);
+	  exp.number = _.sample(["two"]);
 
       exp.condition = exp.number + exp.context
 
