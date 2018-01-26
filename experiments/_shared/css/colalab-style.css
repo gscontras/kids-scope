@@ -40,6 +40,22 @@ table {
 	font-weight: bold;
 }
 
+#practiceSentence {
+	position: relative;
+}
+
+#testSentence {
+	position: relative;
+}
+
+#puppet {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+
 #legal {
 	font-size: 1em;
 }

@@ -31,8 +31,8 @@ function make_slides(f) {
 	  
 
 	present : [
-		{source: '<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>'},
-		{source: '<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>'},
+		{practice: {video: '/<source src = "../_shared/images/PS1.mp4" <type="video/mp4"></source>', sentence: "\"The smurf bought two cars.\""}},
+		{practice: {video: '/<source src = "../_shared/images/PS2.mp4" <type="video/mp4"></source>', sentence: "\"All dogs jumped on the table.\""}},
 	],
 
     //this gets run only at the beginning of the block
@@ -41,11 +41,12 @@ function make_slides(f) {
 		$(".p_err").hide();
 		$(".p_hidden").hide();
 		$(".p_jerr").hide();
+		$(".text_response").val('');
 
 		this.stim = stim; //I like to store this information in the slide so I can record it later.
-
-
-      $("#practiceVideo").html(stim.source);
+		
+		$("#practiceSentence").html(stim["practice"]["sentence"]);
+		$("#practiceVideo").html(stim["practice"]["video"]);
 	  $("#practiceVideo").load();
 	  document.getElementById("practiceVideo").onended = function() {right()};
 		function right() {
@@ -100,22 +101,16 @@ function make_slides(f) {
     /* trial information for this block
      (the variable 'stim' will change between each of these values,
       and for each of these, present_handle will be run.) */
-	  
-	  //exp_condition = _.sample(["cond1", "cond2", "cond3", "cond4"])
-	  
-
-	// present : [
-	// 	{cond1: '<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2frogscontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4frogs.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4frogscontrast.mp4" <type="video/mp4"></source>'},
-	// 	{cond1: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>'},
-	// 	{cond1: '<source src = "../_shared/images/TNTwo2.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2butterflycontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4butterflies.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4butterflycontrast.mp4" <type="video/mp4"></source>'},
-	// 	{cond1: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>'},
-	// 	{cond1: '<source src = "../_shared/images/TNTwo3.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2lionscontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4lions.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4lionscontrast.mp4" <type="video/mp4"></source>'},
-	// 	{cond1: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>'},
-	// 	{cond1: '<source src = "../_shared/images/TNTwo4.mp4" <type="video/mp4"></source>', cond2: '<source src = "../_shared/images/2dinoscontrast.mp4" <type="video/mp4"></source>', cond3: '<source src = "../_shared/images/4dinos.mp4" <type="video/mp4"></source>', cond4: '<source src = "../_shared/images/4dinoscontrast.mp4" <type="video/mp4"></source>'},
-	// ],
 
   present : [
-    {twowithout: {video: '/<source src = "../_shared/images/TNTwo1.mp4" <type="video/mp4"></source>', sentence: "\"Two frogs didn't jump over the rock.\"", item: "frog"}, twowith: {video: '/<source src = "../_shared/images/2frogscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Two frogs jumped over the fence, but two frogs didn't jump over the rock\"", item: "frog"}}
+    {twowithout: {video: '/<source src = "../_shared/images/2frogs.mp4" <type="video/mp4"></source>', sentence: "\"Two frogs didn't jump over the rock.\"", item: "frog"}, twowith: {video: '/<source src = "../_shared/images/2frogscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Two frogs jumped over the fence, but two frogs didn't jump over the rock.\"", item: "frog"}, fourwithout: {video: '/<source src = "../_shared/images/4frogs.mp4" <type="video/mp4"></source>', sentence: "\"Two frogs didn't jump over the rock.\"", item: "frog"}, fourwith: {video: '/<source src = "../_shared/images/4frogscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Four frogs jumped over the fence, but two frogs didn't jump over the rock.\"", item: "frog"}},
+	{twowithout: {video: '/<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', sentence: "\"Three hippos drank milk.\"", item: "control1"}, twowith: {video: '/<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', sentence: "\"Three hippos drank milk.\"", item: "control1"}, fourwithout: {video: '/<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', sentence: "\"Three hippos drank milk.\"", item: "control1"}, fourwith: {video: '/<source src = "../_shared/images/CS1.mp4" <type="video/mp4"></source>', sentence: "\"Three hippos drank milk.\"", item: "control1"}},
+	{twowithout: {video: '/<source src = "../_shared/images/2butterflies.mp4" <type="video/mp4"></source>', sentence: "\"Two butterflies didn't go to the city.\"", item: "butterflies"}, twowith: {video: '/<source src = "../_shared/images/2butterfliescontrast.mp4" <type="video/mp4"></source>', sentence: "\"Two butterflies went to the forest, but two butterflies didn't go to the city.\"", item: "butterflies"}, fourwithout: {video: '/<source src = "../_shared/images/4butterflies.mp4" <type="video/mp4"></source>', sentence: "\"Two butterflies didn't go to the city.\"", item: "butterflies"}, fourwith: {video: '/<source src = "../_shared/images/4butterfliescontrast.mp4" <type="video/mp4"></source>', sentence: "\"Four butterflies went to the forest, but two butterflies didn't go to the city.\"", item: "butterflies"}},
+	{twowithout: {video: '/<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', sentence: "\"Only one dog rolled his ball.\"", item: "control2"}, twowith: {video: '/<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', sentence: "\"Only one dog rolled his ball.\"", item: "control2"}, fourwithout: {video: '/<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', sentence: "\"Only one dog rolled his ball.\"", item: "control2"}, fourwith: {video: '/<source src = "../_shared/images/CS2.mp4" <type="video/mp4"></source>', sentence: "\"Only one dog rolled his ball.\"", item: "control2"}},
+	{twowithout: {video: '/<source src = "../_shared/images/2lions.mp4" <type="video/mp4"></source>', sentence: "\"Two lions didn't buy a cookie.\"", item: "lions"}, twowith: {video: '/<source src = "../_shared/images/2lionscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Two lions bought an egg, but two lions didn't buy a cookie.\"", item: "lions"}, fourwithout: {video: '/<source src = "../_shared/images/4lions.mp4" <type="video/mp4"></source>', sentence: "\"Two lions didn't buy a cookie\"", item: "lions"}, fourwith: {video: '/<source src = "../_shared/images/4lionscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Four lions bought an egg, but two lions didn't buy a cookie.\"", item: "lions"}},
+	{twowithout: {video: '/<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', sentence: "\"Four lizards climbed on the book.\"", item: "control3"}, twowith: {video: '/<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', sentence: "\"Four lizards climbed on the book.\"", item: "control3"}, fourwithout: {video: '/<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', sentence: "\"Four lizards climbed on the book.\"", item: "control3"}, fourwith: {video: '/<source src = "../_shared/images/CS3.mp4" <type="video/mp4"></source>', sentence: "\"Four lizards climbed on the book.\"", item: "control3"}},
+	{twowithout: {video: '/<source src = "../_shared/images/2dinosaurs.mp4" <type="video/mp4"></source>', sentence: "\"Two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}, twowith: {video: '/<source src = "../_shared/images/2dinosaurscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Two dinosaurs ate fish, but two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}, fourwithout: {video: '/<source src = "../_shared/images/4dinosaurs.mp4" <type="video/mp4"></source>', sentence: "\"Two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}, fourwith: {video: '/<source src = "../_shared/images/4dinosaurscontrast.mp4" <type="video/mp4"></source>', sentence: "\"Four dinosaurs ate fish, but two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}},
+	
   ],
 
     //this gets run only at the beginning of the block
@@ -129,8 +124,8 @@ function make_slides(f) {
 		this.stim = stim; //I like to store this information in the slide so I can record it later.
 
       exp.context = _.sample(["with","without"]);
-      //exp.number = _.sample(["two","four"]);
-	  exp.number = _.sample(["two"]);
+      exp.number = _.sample(["two","four"]);
+	  //exp.number = _.sample(["two"]);
 
       exp.condition = exp.number + exp.context
 

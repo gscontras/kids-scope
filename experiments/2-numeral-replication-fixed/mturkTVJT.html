@@ -65,7 +65,7 @@
 
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
-    <p>You will hear a short story, and then hear a puppet make a comment about the story.  Your goal is to decide whether the puppet is right or wrong in his account of the story, and explain your decision. There will be two practice trials before the experiment begins. Please make sure your volume is turned up, because there will be an audio component </p>
+    <p>You will hear a short story, and then a puppet will make a comment about the story. The puppet's comment will be in bold below the puppet.  Your goal is to decide whether the puppet is right or wrong in his account of the story, and explain your decision. There will be two practice trials before the experiment begins. Please make sure your volume is turned up, because there will be an audio component </p>
     <button onclick="_s.button()">Continue</button>
   </div>
   
@@ -81,6 +81,9 @@
 	<!-- add 'controls' when debugging -->
 	<b> This is a practice trial </b>
     <video id="practiceVideo" width="650" height="500" autoplay controls> </video>
+	<p class="p_hidden">The puppet said:</p>
+	<p><img src = "../_shared/images/puppet.jpg" class = "p_hidden" id = "puppet"></p>
+	<p id="practiceSentence" class="p_hidden" style="font-weight: bold;"></p>
 	<p class = "p_hidden"> Is the puppet right?</p>
     <table id="practice_slider" class="slider_table p_hidden">
       <tr><td class="left p_hidden">definitely not</td><td class="right p_hidden">definitely</td></tr>
@@ -102,7 +105,8 @@
 	<!-- add 'controls' when debugging -->
     <video id="expVideo" width="650" height="500" autoplay controls> </video>
     <p class="hidden">The puppet said:</p>
-    <p id="testSentence" class="hidden" style="font-weight: bold;">~~~</p>
+	<p><img src = "../_shared/images/puppet.jpg" class = "hidden" id = "puppet"></p>
+    <p id="testSentence" class="hidden" style="font-weight: bold;"></p>
 	<p class = "hidden">Is the puppet right?</p>
     <table id="slider_table" class="slider_table hidden">
       <tr><td class="left hidden">definitely not</td><td class="right hidden">definitely</td></tr>
