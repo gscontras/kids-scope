@@ -81,20 +81,22 @@
 	<!-- add 'controls' when debugging -->
 	<b> This is a practice trial </b>
     <video id="practiceVideo" width="650" height="500" autoplay controls> </video>
-	<p class="p_hidden">The puppet said:</p>
-	<p><img src = "../_shared/images/puppet.jpg" class = "p_hidden" id = "puppet"></p>
-	<p id="practiceSentence" class="p_hidden" style="font-weight: bold;"></p>
-	<p class = "p_hidden"> Is the puppet right?</p>
-    <table id="practice_slider" class="slider_table p_hidden">
-      <tr><td class="left p_hidden">definitely not</td><td class="right p_hidden">definitely</td></tr>
-      <tr><td colspan="2"><div id="prac_single_slider" class="slider p_hidden"></div></td></tr>
+  <div id="moveup">
+	<p class="p_hidden text">The puppet said:</p>
+	<!-- <p><img src = "../_shared/images/puppet.jpg" class = "p_hidden" id = "puppet"></p> -->
+	<p id="practiceSentence" class="p_hidden text" style="font-weight: bold;"></p>
+    <p class = "p_hidden text"> Is the puppet right?</p>
+    <table id="practice_slider" class="slider_table p_hidden text">
+      <tr><td class="left p_hidden text">definitely not</td><td class="right p_hidden text">definitely</td></tr>
+      <tr><td colspan="2"><div id="prac_single_slider" class="slider p_hidden text"></div></td></tr>
     </table>
-	  <p class = "p_hidden">Please justify your answer:</p>
-	  <textarea id="p_justification" class = "p_hidden" rows="3" cols="50"></textarea>
+	  <p class = "p_hidden text">Please justify your answer:</p>
+	  <textarea id="p_justification" class = "p_hidden text" rows="3" cols="50"></textarea>
 	  <br>
-    <button onclick="_s.button()" class = "p_hidden">Continue</button>
-    <div class="p_err" style = "color:red">Please adjust the slider before continuing. <br><br></div>
-	<div class="p_jerr" style = "color:red">Please justify your answer in the text box before continung.<br><br></div>
+    <button onclick="_s.button()" class = "p_hidden text">Continue</button>
+    <div class="p_err text" style = "color:red">Please adjust the slider before continuing. <br><br></div>
+	<div class="p_jerr text" style = "color:red">Please justify your answer in the text box before continung.<br><br></div>
+</div>
 	<br>
 	<br>
   </div>
@@ -104,8 +106,9 @@
 	<!-- <button id="play" type = "button" onclick = "playPause()">Play</button> -->
 	<!-- add 'controls' when debugging -->
     <video id="expVideo" width="650" height="500" autoplay controls> </video>
+  <div id="moveup">
     <p class="hidden">The puppet said:</p>
-	<p><img src = "../_shared/images/puppet.jpg" class = "hidden" id = "puppet"></p>
+	<!-- <p><img src = "../_shared/images/puppet.jpg" class = "hidden" id = "puppet"></p> -->
     <p id="testSentence" class="hidden" style="font-weight: bold;"></p>
 	<p class = "hidden">Is the puppet right?</p>
     <table id="slider_table" class="slider_table hidden">
@@ -118,6 +121,7 @@
     <button onclick="_s.button()" class = "hidden">Continue</button>
     <div class="err" style = "color:red">Please adjust the slider before continuing. <br><br></div>
 	<div class="jerr" style = "color:red">Please justify your answer in the text box before continuing. <br><br></div>
+</div>
 	<br>
 	<br>
   </div>

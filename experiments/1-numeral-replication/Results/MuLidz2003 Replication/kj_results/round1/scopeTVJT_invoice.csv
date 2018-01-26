@@ -8,6 +8,6 @@ Fri Nov 24 13:10:09 PST 2017,A1DKVUTOBPQH11,1.25
 Fri Nov 24 13:11:10 PST 2017,A12723JDRPT207,1.25
 Fri Nov 24 13:13:47 PST 2017,ADCXF6QY5T046,1.25
 Fri Nov 24 13:32:42 PST 2017,A3PQUGIQQBPR98,1.25
-,total paid to workers:,=SUM(c2:c10)
-,40% paid to Amazon:,=.4*c11
+,total paid to workers:,11.25
+,40% paid to Amazon:,4.5
 ,total:,=SUM(c11:c12

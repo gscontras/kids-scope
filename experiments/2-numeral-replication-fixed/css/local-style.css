@@ -3,3 +3,25 @@
 	width: 400;
 	margin: 10px;
 }
+
+#moveup {
+	position: relative;
+	bottom: 80px;
+}
+
+/*#practiceSentence {
+	position: relative;
+}
+
+#testSentence {
+	position: relative;
+}
+
+#puppet {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}*/
+
