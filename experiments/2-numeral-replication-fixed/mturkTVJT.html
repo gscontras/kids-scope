@@ -68,7 +68,7 @@
 
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
-    <p>You will hear a short story, and then a puppet will make a comment about the story. The puppet's comment will be in bold below the puppet.  Your goal is to decide whether the puppet is right or wrong in his account of the story, and explain your decision. There will be two practice trials before the experiment begins. Please make sure your volume is turned up, because there will be an audio component </p>
+    <p>You will hear a short story, and then a puppet will make a comment about the story. <b>The puppet's comment will be in bold below the puppet </b>.  Your goal is to decide whether the puppet is right or wrong in his account of the story, and explain your decision. There will be two practice trials before the experiment begins. You will have to click the video to start it. Please make sure your volume is turned up, because there will be an audio component </p>
     <button onclick="_s.button()">Continue</button>
   </div>
   
@@ -82,8 +82,8 @@
   <div class="slide" id="one_slider_practice">
 	<!-- <button id="play" type = "button" onclick = "playPause()">Play</button> -->
 	<!-- add 'controls' when debugging -->
-	<b> This is a practice trial </b>
-    <video id="practiceVideo" width="650" height="500" autoplay> </video>
+	<b> This is a practice trial. Click the video to begin. </b>
+    <video id="practiceVideo" width="650" height="500" onclick="this.play();"> </video>
   <div id="moveup">
 	<p class="p_hidden text">The puppet said:</p>
 	<!-- <p><img src = "../_shared/images/puppet.jpg" class = "p_hidden" id = "puppet"></p> -->
