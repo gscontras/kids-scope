@@ -1,0 +1,82 @@
+workerid,trial_type,justification,number,item,slide_number,context,response
+0,one_slider_practice,He bought the yellow and the silver cars,NA,NA,NA,NA,0.99
+0,one_slider_practice,No the third dog said he wasn&quotechart going to jump on the table because he was too small,NA,NA,NA,NA,0
+0,one_slider,The two small frogs said the rock was too high to jump over. ,four,frog,6,with,1
+0,one_slider,They were both thirsty and both decided to drink the milk ,two,control1,7,with,1
+0,one_slider,Two decided to just stay at home. ,four,butterflies,8,without,1
+0,one_slider,One didn&quotechart roll the ball because he was afraid it would roll off the table. ,four,control2,9,with,1
+0,one_slider,One lion bought a cookie ,two,lions,10,without,0
+0,one_slider,only two lizards jumped up on the book. ,four,control3,11,with,0
+0,one_slider,One dinosaur wanted a bug ,two,dinosaurs,12,with,0
+1,one_slider_practice,He bought two cars.,NA,NA,NA,NA,0.93
+1,one_slider_practice,The third dog did not because he was too small.,NA,NA,NA,NA,0
+1,one_slider,The two small frogs didn&quotechart jump.,four,frog,6,with,1
+1,one_slider,Only two hippos were shown drinking milk.,four,control1,7,with,0
+1,one_slider,2 butterflies stayed in the forest,four,butterflies,8,with,1
+1,one_slider,"one dog did, one dog did not",four,control2,9,with,1
+1,one_slider,one of the lions did buy a cookie but two lions did not,two,lions,10,with,0.75
+1,one_slider,only 2 climbed on the book,four,control3,11,without,0
+1,one_slider,one of them did so its misleading,two,dinosaurs,12,without,0.79
+2,one_slider_practice,He bought the yellow car and the silver car,NA,NA,NA,NA,1
+2,one_slider_practice,The third dog did not jump on the table,NA,NA,NA,NA,0
+2,one_slider,Two frogs jumped and two didn&quotechart,four,frog,6,without,1
+2,one_slider,There were two hippos,two,control1,7,with,0
+2,one_slider,Two butterflies stayed in the forest,four,butterflies,8,with,1
+2,one_slider,One dog rolled its ball and the other didn&quotechart.,four,control2,9,with,1
+2,one_slider,Two lions bought nothing,four,lions,10,without,1
+2,one_slider,Only two jumped on the book,four,control3,11,with,0
+2,one_slider,"All of the dinosaurs ate fish, but only two ate bugs",four,dinosaurs,12,with,1
+3,one_slider_practice,The smurf bought 2 cars for 2 pennies each.,NA,NA,NA,NA,1
+3,one_slider_practice,One dog did not jump because he was too small.,NA,NA,NA,NA,0
+3,one_slider,One frog did not jump over the rock.,two,frog,6,with,1
+3,one_slider,Only 2 hippos drank the milk.,four,control1,7,without,0
+3,one_slider,Only 2 butterflies went to the city because they didn&quotechart like the forest.,four,butterflies,8,with,1
+3,one_slider,One dog didn&quotechart roll his ball because he didn&quotechart want it to roll off the table.,four,control2,9,with,1
+3,one_slider,2 lions didn&quotechart buy cookies.,four,lions,10,with,1
+3,one_slider,Two lizards thought the book was too high and didn&quotechart jump on it.,two,control3,11,without,0
+3,one_slider,Only one dinosaur ate a bug.,two,dinosaurs,12,with,0.99
+4,one_slider_practice,"He bought 2 cars, for 2 pennies each.",NA,NA,NA,NA,1
+4,one_slider_practice,"The third dog did not jump, he said he was too small.",NA,NA,NA,NA,0
+4,one_slider,The two smaller frogs thought the rock was too big to jump over.,four,frog,6,without,1
+4,one_slider,There were only two hippos.,four,control1,7,with,0
+4,one_slider,"They did both go to the forest, but one left and headed to the city, so only one was in the city.",two,butterflies,8,with,0.96
+4,one_slider,"The second dog was afraid the his ball would roll off the table, so did not.",two,control2,9,without,1
+4,one_slider,"All four lions bought eggs, and only two bought cookies.",four,lions,10,with,1
+4,one_slider,Two of the lizards thought the book was too high and did not jump on the book.,two,control3,11,without,0
+4,one_slider,"Two of the dinosaurs were full after eating the fish, and did not eat the bugs.",four,dinosaurs,12,with,1
+5,one_slider_practice,they said so,NA,NA,NA,NA,0.95
+5,one_slider_practice,third dog did not jump on table,NA,NA,NA,NA,0.04
+5,one_slider,the rock was too big for one of them,two,frog,6,with,0.08
+5,one_slider,there were only 2,two,control1,7,without,0.04
+5,one_slider,one butterfly did,two,butterflies,8,without,0.1
+5,one_slider,one dog rolled the other did not want to,two,control2,9,with,0.97
+5,one_slider,thats what the animation showed,four,lions,10,with,0.94
+5,one_slider,2 lizards could not jump because the book was too high,four,control3,11,with,0.04
+5,one_slider,only 1 dinosaur ate a bug,two,dinosaurs,12,with,0.9
+6,one_slider_practice,convertible and a yellow one,NA,NA,NA,NA,0.98
+6,one_slider_practice,only 2 jumped on the table 3 was too small,NA,NA,NA,NA,0.01
+6,one_slider,second was too small to jump rock,two,frog,6,with,0.99
+6,one_slider,only two hippos,four,control1,7,with,0.02
+6,one_slider,two stayed home,four,butterflies,8,without,0.97
+6,one_slider,one didnt want his ball to roll off,four,control2,9,without,0.99
+6,one_slider,two lions are cookieless,four,lions,10,with,0.98
+6,one_slider,only 2 climbed the book,two,control3,11,without,0.01
+6,one_slider,two did not like bugs,four,dinosaurs,12,without,0.99
+7,one_slider_practice,Because the only have one penny left.,NA,NA,NA,NA,0.82
+7,one_slider_practice,The last dog didn&quotechart because he was to small.,NA,NA,NA,NA,0.05
+7,one_slider,Only one frog jumped over the rock.,two,frog,6,with,0.96
+7,one_slider,They both decided to drink milk.,two,control1,7,without,0.65
+7,one_slider,Two butterflies decided to go to the city.,four,butterflies,8,with,0.85
+7,one_slider,The 2nd dog didn&quotechart roll it&quotechars ball.,four,control2,9,without,0.93
+7,one_slider,Two lions decided not to buy a cookie.,four,lions,10,with,0.94
+7,one_slider,Two lizard decided not to jump on the book.,two,control3,11,with,0.09
+7,one_slider,The other dinosaur decided not to eat the bug.,two,dinosaurs,12,with,1
+8,one_slider_practice,he bought two cars,NA,NA,NA,NA,0.98
+8,one_slider_practice,the last dog was too small to jump on the table,NA,NA,NA,NA,0
+8,one_slider,one frog did not jump over it,two,frog,6,without,0.87
+8,one_slider,Only two drank mlik,four,control1,7,without,0
+8,one_slider,two left the forest and two stayed,four,butterflies,8,with,0.95
+8,one_slider,One dog did not roll his ball,two,control2,9,without,0.98
+8,one_slider,"only one lions bought a cookie, not two",two,lions,10,without,0.87
+8,one_slider,Only two climbed on the book,two,control3,11,with,0
+8,one_slider,One dinosaur did eat a bug,two,dinosaurs,12,without,0
