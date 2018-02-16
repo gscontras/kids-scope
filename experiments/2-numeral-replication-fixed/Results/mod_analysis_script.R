@@ -52,6 +52,7 @@ length(unique(d$workerid))
 ## determine number of observations from each condition (less from cond2)
 relevant_data = subset(d, item %in% c('frog','butterflies','lions','dinosaurs'))
 table(relevant_data$context, relevant_data$number)
+relevant_data$item = factor(relevant_data$item)
 
 ## Make histograms for each condition, and get data on control trials for removal
 twowith_data = subset(relevant_data, number == "two" & context == "with")
@@ -93,21 +94,101 @@ agg_resp[2,1] = mean(twowith_data$response)
 agg_resp[3,1] = mean(fourwithout_data$response)
 agg_resp[4,1] = mean(fourwith_data$response)
 
-##for running the ANOVA
+##doing the LMM
+library(nlme)
+library(lme4)
+par(mfrow = c(1,4))
+hist(twowith_data$response, col = "grey", main = "TwoWith", xlab = NULL, breaks=20)
+hist(twowithout_data$response, col = "grey", main = "TwoWithout", xlab = NULL, breaks=20)
+hist(fourwith_data$response, col = "grey", main = "FourWith", xlab = NULL, breaks=20)
+hist(fourwithout_data$response, col = "grey", main = "FourWithout", xlab = NULL, breaks=20)
+
+LM = lm(relevant_data$response ~ relevant_data$number + relevant_data$context)
+summary(LM)
+
+par(mfrow = c(2,1))
+plot(LM)
+
+##for running the ANOVA - works
 new_thing = aggregate(relevant_data$response,
-                      by = list(relevant_data$workerid, relevant_data$condition),
+                      by = list(relevant_data$workerid, relevant_data$number, relevant_data$context),
                       FUN = 'mean')
 
-colnames(new_thing) = c("WorkerID","Condition","AverageResponse")
+colnames(new_thing) = c("WorkerID","number", "context","response")
+
 new_thing = new_thing[order(new_thing$WorkerID),]
 head(new_thing)
 
 new_thing.aov = with(new_thing, 
-                     aov(AverageResponse ~ Condition + Error(WorkerID/Condition)))
+                     aov(new_thing$response ~ new_thing$number * new_thing$context + Error(new_thing$WorkerID/(new_thing$number * new_thing$context))))
 
 summary(new_thing.aov)
 
+PostHocTest(new_thing.aov, which = NULL, method = c("scheffe"), conf.level = 0.95, ordered = FALSE, ...)
+
+
+##Getting a graph with error bars - not sure if this is correct
+sum = summarySE(relevant_data,
+                measurevar = "response",
+                groupvars = c("number","context"))
+
+#weird plot
+ggplot(sum, aes(x=number,
+                y=response,
+                color=context)) +
+  geom_errorbar(aes(ymin=response-se,
+                    ymax=response+se),
+                width=.2, size=0.7) +
+  geom_point(shape=15, size=4) +
+  theme_bw() +
+  theme(
+    axis.title.y = element_text(vjust = 1.8),
+    axis.title.x = element_text(vjust= -0.5),
+    axis.title = element_text(face = "bold")) +
+  scale_color_manual(values = c("black", "red"))
+
+##Hopefully normal plot
+ggplot(sum, aes(x=number,
+                y=response,
+                fill=context,
+                ymax=response+se,
+                ymin=response-se)) +
+  geom_bar(stat="identity", position = "dodge", width=0.7)+
+  geom_bar(stat="identity", position = "dodge",
+           colour="black",width=0.7,
+           show.legend=FALSE) +
+  scale_y_continuous(breaks = seq(0,1,.25),
+                     limits = c(0,1),
+                     expand = c(0,0)) +
+  scale_fill_manual(name = "Count type" , 
+                    values = c('grey80', 'grey30'), 
+                    labels = c("with", 
+                               "without"))  +
+  geom_errorbar(position=position_dodge(width=0.7), 
+                width=0.0, size=0.5, color="black")  +
+  labs(x = "number",
+       y = "response")  +
+  ## ggtitle("Main title") + 
+  theme_bw()  +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey50"),
+        plot.title = element_text(size = rel(1.5), 
+                                  face = "bold", vjust = 1.5),
+        axis.title = element_text(face = "bold"),
+        legend.position = "top",
+        legend.title = element_blank(),
+        legend.key.size = unit(0.4, "cm"),
+        legend.key = element_rect(fill = "black"),
+        axis.title.y = element_text(vjust= 1.8),
+        axis.title.x = element_text(vjust= -0.5)
+  )
+
+
+  
+
 ##If the website I got this from is correct, we have super significance!
+
+
 
 
 
@@ -122,17 +203,7 @@ length(unique(ids$Actual.ID))
 n_occur <- data.frame(table(ids$Actual.ID))
 
 
-####Condition types
-#cond1 = two
-#cond2 = two contrast
-#cond3 = four
-#cond4 = four contrast
-
-
-## calculate average subjectivity by class
-## agg_class = aggregate(response~class,data=d,mean)
-
-## write to CSV files
-#write.csv(agg_adj,"../results/adjective-subjectivity.csv")
-#write.csv(agg_class,"../results/class-subjectivity.csv")
+## write to CSV files NAME THEM
+#write.csv(agg_adj,"../results/.csv")
+#write.csv(agg_class,"../results/.csv")
 
