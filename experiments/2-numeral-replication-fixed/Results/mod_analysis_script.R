@@ -1,5 +1,6 @@
 library(ggplot2)
 library(lme4)
+library(lmerTest)
 library(hydroGOF)
 library(tidyr)
 library(dplyr)
@@ -66,14 +67,6 @@ fourwithout_data = subset(relevant_data, number == "four" & context == "without"
 #   geom_histogram(color="black", binwidth = .033333) +
 #   facet_grid(. ~ trial_num)
 
-# ##looking at justifications for cond4 (2 did, 2 didn't (4 entities))
-# cond4_resp_justification = cbind(cond4_data$response, cond4_data$justification)
-# cond4_resp_just = data_frame(cond4_data$response, cond4_data$justification)
-# View(cond4_resp_just)
-
-# cont1 = subset(d, trial_num %in% c('4'))
-# cont2 = subset(d, trial_num %in% c('6'))
-# cont3 = subset(d, trial_num %in% c('8'))
 
 
 ##Histograms of the 4 conditions
@@ -103,7 +96,21 @@ hist(twowithout_data$response, col = "grey", main = "TwoWithout", xlab = NULL, b
 hist(fourwith_data$response, col = "grey", main = "FourWith", xlab = NULL, breaks=20)
 hist(fourwithout_data$response, col = "grey", main = "FourWithout", xlab = NULL, breaks=20)
 
-LM = lm(relevant_data$response ~ relevant_data$number + relevant_data$context)
+##This works (greg showed me the syntax)
+newLM = lmer(relevant_data$response ~ relevant_data$number * 
+     relevant_data$context + (1+number+context|workerid)+(1+number+context|item),data=relevant_data)
+summary(newLM)
+subsetLM = lmer(response ~ 
+               context + (1|workerid) + (1|item),data=relevant_data[relevant_data$number=="four",])
+summary(subsetLM)
+anova(newLM)
+
+glht(newLM)
+
+#predicting repsonse by number and context, randomly fixing workerid and item.
+
+#, test = adjusted(type = "bonferroni"))
+
 summary(LM)
 
 par(mfrow = c(2,1))
@@ -124,7 +131,10 @@ new_thing.aov = with(new_thing,
 
 summary(new_thing.aov)
 
-PostHocTest(new_thing.aov, which = NULL, method = c("scheffe"), conf.level = 0.95, ordered = FALSE, ...)
+TukeyHSD(new_thing.aov, "relevant_data$number")
+posthoc = TukeyHSD(x=new_thing.aov, 'relevant_data$number', conf.level=0.95)
+
+summary(glht(lme_velocity, linfct=mcp(Material = "Tukey")), test = adjusted(type = "bonferroni"))
 
 
 ##Getting a graph with error bars - not sure if this is correct
@@ -147,7 +157,9 @@ ggplot(sum, aes(x=number,
     axis.title = element_text(face = "bold")) +
   scale_color_manual(values = c("black", "red"))
 
-##Hopefully normal plot
+##Normal bar plot
+##bootstrap 95% confidence intervals
+#bootstrap confidence intervals
 ggplot(sum, aes(x=number,
                 y=response,
                 fill=context,
@@ -185,8 +197,6 @@ ggplot(sum, aes(x=number,
 
 
   
-
-##If the website I got this from is correct, we have super significance!
 
 
 
