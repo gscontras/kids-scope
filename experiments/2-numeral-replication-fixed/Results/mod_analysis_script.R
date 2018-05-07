@@ -4,6 +4,7 @@ library(lmerTest)
 library(hydroGOF)
 library(tidyr)
 library(dplyr)
+library(Rmisc)
 
 #setwd("~/Desktop/adjs!/kids-adjectives/experiments/1-kids-subjectivity/Submiterator-master")
 #setwd("~/git/kids-adjectives/experiments/1-kids-subjectivity/Submiterator-master/")

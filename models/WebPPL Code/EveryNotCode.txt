@@ -1,4 +1,4 @@
-////Most Recent Model (As of 8/1/2017)
+////Most Recent Model (As of 5/4/2017)
 
 // wrapper function so the global variables can be set up before each run
 var runModel = function(utterances, numParticipants, baseRate, 
