@@ -4,7 +4,44 @@ library(ggplot2)
 library(scales)
 
 
-# figure 1: independent manipulations
+# figure 1: horses and every not
+
+d = read.csv("../results/adv-everynot-fig1.csv",header=T)
+names(d) <- c("n","baserate","QUD","scope","p","manipulation")
+
+d$manipulation = factor(d$manipulation,labels=c("baserate","QUD","scope"))
+
+d$x = NA
+
+d[d$manipulation=="QUD",]$x = as.character(d[d$manipulation=="QUD",]$QUD)
+d[d$manipulation=="scope",]$x = d[d$manipulation=="scope",]$scope
+d[d$manipulation=="baserate",]$x = as.character(d[d$manipulation=="baserate",]$baserate)
+
+##Frogs
+d$x = factor(d$x,levels=c("none?","many?","all?","0.1","0.5","0.9","b=0.1","b=0.5","b=0.9"))
+d$x = factor(d$x,labels=c("none?","how many?","all?","p(inv)=0.1","p(inv)=0.5","p(inv)=0.9","b=0.1","b=0.5","b=0.9"))
+
+d$manipulation = factor(d$manipulation,levels=c("baserate","QUD","scope"))
+d$manipulation = factor(d$manipulation,labels=c("world state prior\nmanipulation","QUD prior\nmanipulation","scope prior\nmanipulation"))
+
+p1 <- ggplot(d,aes(x=as.factor(x),y=p,fill=as.factor(x))) +
+  geom_bar(stat="identity")+
+  ylab("probability of endorsing\nambiguous utterance\n") +
+  xlab("\nscope prior")+
+  #scale_fill_manual(values=c("red", "blue"))+
+  theme(axis.text.x = element_text(size=10,angle=0))+
+  scale_y_continuous(limits=c(0,1),oob = rescale_none)+
+  # geom_abline(intercept = 0.275, slope = 0,linetype=2) +
+  # geom_abline(intercept = 0.925, slope = 0,linetype="dotted") +
+  theme_bw()+
+  xlab("")+
+  guides(fill=FALSE)+
+  theme(text = element_text(size=26))+
+  facet_grid(.~manipulation,scales = "free_x")
+p1
+ggsave("adv_everynot.png",width=15.5,height=4.5)
+
+##figure 2: 2 actor scenarios basic graph
 
 d = read.csv("../results/adv-everynot-fig1.csv",header=T)
 names(d) <- c("n","baserate","QUD","scope","p","manipulation")
@@ -39,7 +76,7 @@ p1 <- ggplot(d,aes(x=as.factor(x),y=p,fill=as.factor(x))) +
   theme(text = element_text(size=26))+
   facet_grid(.~manipulation,scales = "free_x")
 p1
-ggsave("adv_everynot.png",width=15.5,height=4.5)
+ggsave("adv_twonot.png",width=15.5,height=4.5)
 
 
 

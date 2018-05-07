@@ -1,1 +1,10 @@
-﻿
+World Type,Baserate,QUD Favored,Inverse favored,Endorsement Probability,Notes
+3 Horses,b=0.1,uniform,0.5,0.333,Baserate Manip
+3 Horses,b=0.5,uniform,0.5,0.493,Baserate Manip
+3 Horses,b=0.9,uniform,0.5,0.827,Baserate Manip
+3 Horses,0.5,uniform,0.9,0.534,Scope manip
+3 Horses,0.5,uniform,0.5,0.493,Scope manip
+3 Horses,0.5,uniform,0.1,0.437,Scope manip
+3 Horses,0.5,all?,0.5,0.561,QUD manip
+3 Horses,0.5,many?,0.5,0.473,QUD manip
+3 Horses,0.5,none?,0.5,0.429,QUD manip
