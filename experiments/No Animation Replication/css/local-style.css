@@ -1,0 +1,31 @@
+.slider {
+  /* default is width 400 and margin 10 */
+	width: 400;
+	margin: 10px;
+}
+
+#moveup {
+	position: relative;
+	bottom: 80px;
+}
+
+#puppet {
+	width: 150;
+}
+
+/*#practiceSentence {
+	position: relative;
+}
+
+#testSentence {
+	position: relative;
+}
+
+#puppet {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}*/
+
