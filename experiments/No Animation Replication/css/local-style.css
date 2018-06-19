@@ -11,6 +11,8 @@
 
 #puppet {
 	width: 150;
+	position: relative;
+	top: -20px;
 }
 
 /*#practiceSentence {
