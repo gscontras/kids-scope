@@ -37,7 +37,7 @@ function make_slides(f) {
 
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
-		$("#p_justification").val('');
+		//$("#p_justification").val('');
 		$(".p_err").hide();
 		$(".p_hidden").hide();
 		$(".p_jerr").hide();
@@ -60,18 +60,12 @@ function make_slides(f) {
 	    button : function() {
 		if (exp.sliderPost == null) {
 			$(".p_err").show();
-		} else {
-			var chatinput = document.getElementById("p_justification").value;
-			if (chatinput == "" || chatinput.length == 0 || chatinput == null) {
-				$(".p_err").hide();
-				$(".p_jerr").show();
 			} else {
 				this.log_responses();
 
 					/* use _stream.apply(this); if and only if there is
 					"present" data. (and only *after* responses are logged) */
 					_stream.apply(this);
-			}
 		}
     },
 
@@ -85,7 +79,7 @@ function make_slides(f) {
       exp.data_trials.push({
         "trial_type" : "one_slider_practice",
         "response" : exp.sliderPost,
-		"justification" : $("#p_justification").val(),
+		//"justification" : $("#p_justification").val(),
 		//put condition here as well
       });
     }
@@ -151,18 +145,12 @@ function make_slides(f) {
     button : function() {
 		if (exp.sliderPost == null) {
 			$(".err").show();
-		} else {
-			var chatinput = document.getElementById("justification").value;
-			if (chatinput == "" || chatinput.length == 0 || chatinput == null) {
-				$(".err").hide();
-				$(".jerr").show();
 			} else {
 				this.log_responses();
 
 					/* use _stream.apply(this); if and only if there is
 					"present" data. (and only *after* responses are logged) */
 					_stream.apply(this);
-			}
 		}
     },
 

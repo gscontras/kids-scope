@@ -15,19 +15,13 @@
 	top: -20px;
 }
 
-/*#practiceSentence {
-	position: relative;
+#practiceStory {
+	border: 3px solid black;
 }
 
-#testSentence {
-	position: relative;
+#expStory {
+	border: 3px solid black;
 }
 
-#puppet {
-	width: 100px;
-	height: 100px;
-	position: relative;
-	left: 0px;
-	top: 0px;
-}*/
+
 
