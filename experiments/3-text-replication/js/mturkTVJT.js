@@ -164,7 +164,7 @@ function make_slides(f) {
       exp.data_trials.push({
         "trial_type" : "one_slider",
         "response" : exp.sliderPost,
-		"justification" : $("#justification").val(),
+		//"justification" : $("#justification").val(),
 		"number" : exp.number,
     "context" : exp.context,
     "item" : exp.item,
@@ -203,7 +203,7 @@ function make_slides(f) {
           "catch_trials" : exp.catch_trials,
           "system" : exp.system,
           "condition" : exp.condition,
-		  "justification" : exp.justify,
+		  //"justification" : exp.justify,
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT)/60000
       };
