@@ -1,0 +1,10 @@
+workerid,language,enjoyment,gender,age,comments,assess,selfreport,education
+0,english,0,Male,31,none,Yes,not sur,2
+1,english,2,Male,31,good,Yes,judgement,3
+2,english,1,Male,25,,NA,idk,4
+3,English,2,Female,34,,Yes,interpreting sentences,3
+4,English,2,Male,44,Thanks,Yes,how we see language,2
+5,english,2,Male,27,,Yes,to see reading comp,2
+6,english,2,Female,45,,Yes,Language interpretation,3
+7,english,2,Female,23,,Yes,To see how people comprehend what they read,2
+8,English,2,Male,22,,Yes,How well people can come to a logical conclusion.,2

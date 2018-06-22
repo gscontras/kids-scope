@@ -10,13 +10,13 @@ library(Rmisc)
 #setwd("~/git/kids-adjectives/experiments/1-kids-subjectivity/Submiterator-master/")
 
 
-num_round_dirs = 4
+num_round_dirs = 5
 df = do.call(rbind, lapply(1:num_round_dirs, function(i) {
   return (read.csv(paste(
-    'round', i, '/scopeTVJT-fixed.csv', sep='')) %>% #'round1/kids-subjectivity.csv')) %>% #for just 1
+    'round', i, '/scopeTVJT-text-only-replication.csv', sep='')) %>% #'round1/kids-subjectivity.csv')) %>% #for just 1
       mutate(workerid = (workerid + (i-1)*9)))}))
 
-d = subset(df, select=c("workerid","number","item","slide_number","context","response", "justification", "language"))
+d = subset(df, select=c("workerid","number","item","slide_number","context","response", "language"))
 unique(d$language)
 
 length(unique(d$workerid)) 
@@ -204,14 +204,14 @@ ggplot(sum, aes(x=number,
 
 
 
-## average score on control trials (most people correctly rejected)
-agg_controls = aggregate(response~condition,mean,
-                     data=subset(d, trial_num %in% c('4','6','8') ))
-
-###Checking for duplicate Ids - there are none
-ids = read.csv('WorkerIDs.csv')
-length(unique(ids$Actual.ID))
-n_occur <- data.frame(table(ids$Actual.ID))
+# ## average score on control trials (most people correctly rejected)
+# agg_controls = aggregate(response~condition,mean,
+#                      data=subset(d, trial_num %in% c('4','6','8') ))
+# 
+# ###Checking for duplicate Ids - there are none
+# ids = read.csv('WorkerIDs.csv')
+# length(unique(ids$Actual.ID))
+# n_occur <- data.frame(table(ids$Actual.ID))
 
 
 ## write to CSV files NAME THEM
