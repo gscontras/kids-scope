@@ -16,18 +16,18 @@ df = do.call(rbind, lapply(1:num_round_dirs, function(i) {
     'round', i, '/scopeTVJT-text-only-replication.csv', sep='')) %>% #'round1/kids-subjectivity.csv')) %>% #for just 1
       mutate(workerid = (workerid + (i-1)*9)))}))
 
-d = subset(df, select=c("workerid","number","item","slide_number","context","response", "language"))
+dt = subset(df, select=c("workerid","number","item","slide_number","context","response", "language"))
 unique(d$language)
 
-length(unique(d$workerid)) 
-head(d)
+length(unique(dt$workerid)) 
+head(dt)
 
 ## remove non-English speakers 
-d = d[d$language!="Russian"&d$language!="",]
-length(unique(d$workerid)) 
+dt = dt[dt$language!="Russian"&dt$language!="",]
+length(unique(dt$workerid)) 
 
 ##Principled removal of participants
-controltrials = subset(d, item %in% c('control1','control2','control3'))
+controltrials = subset(dt, item %in% c('control1','control2','control3'))
 contr1trial = subset(controltrials, item %in% c('control1'))
 contr2trial = subset(controltrials, item %in% c('control2'))
 contr3trial = subset(controltrials, item %in% c('control3'))
@@ -44,15 +44,15 @@ contsd3 = sd(contr3trial$response)*2
 
 ## remove participants who failed control trials
 to_omit1 = subset(contr1trial, contr1trial$response > (contMean1 + contsd1))
-d = subset(d, !workerid %in% c(unique(to_omit1$workerid)))
+dt = subset(dt, !workerid %in% c(unique(to_omit1$workerid)))
 to_omit2 = subset(contr2trial, contr2trial$response < (contMean2 - contsd2))
-d = subset(d, !workerid %in% c(unique(to_omit2$workerid)))
+dt = subset(dt, !workerid %in% c(unique(to_omit2$workerid)))
 to_omit3 = subset(contr3trial, contr3trial$response > (contMean3 + contsd3))
-d = subset(d, !workerid %in% c(unique(to_omit3$workerid)))
-length(unique(d$workerid))
+dt = subset(dt, !workerid %in% c(unique(to_omit3$workerid)))
+length(unique(dt$workerid))
 
 ## determine number of observations from each condition (less from cond2)
-relevant_data = subset(d, item %in% c('frog','butterflies','lions','dinosaurs'))
+relevant_data = subset(dt, item %in% c('frog','butterflies','lions','dinosaurs'))
 table(relevant_data$context, relevant_data$number)
 relevant_data$item = factor(relevant_data$item)
 
@@ -61,6 +61,11 @@ twowith_data = subset(relevant_data, number == "two" & context == "with")
 twowithout_data = subset(relevant_data, number == "two" & context == "without")
 fourwith_data = subset(relevant_data, number == "four" & context == "with")
 fourwithout_data = subset(relevant_data, number == "four" & context == "without")
+
+##Checking if animal counts were different
+twowithout_animals = aggregate(response~item, mean, data=twowithout_data)
+twowith_animals = aggregate(response~item, mean, data=twowith_data)
+
 
 # ##checking to see if animal type matters for cond4 (it maybe does!)
 # cond4_animals = aggregate(response~trial_num,mean, data=cond4_data)
@@ -82,11 +87,11 @@ qplot(fourwithout_data$response, geom="histogram")
 
 
 ## calculate average response by condition
-agg_resp = matrix(0,4,1);
-agg_resp[1,1] = mean(twowithout_data$response)
-agg_resp[2,1] = mean(twowith_data$response)
-agg_resp[3,1] = mean(fourwithout_data$response)
-agg_resp[4,1] = mean(fourwith_data$response)
+agg_respt = matrix(0,4,1);
+agg_respt[1,1] = mean(twowithout_data$response)
+agg_respt[2,1] = mean(twowith_data$response)
+agg_respt[3,1] = mean(fourwithout_data$response)
+agg_respt[4,1] = mean(fourwith_data$response)
 
 ##doing the LMM
 library(nlme)
