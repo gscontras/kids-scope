@@ -52,19 +52,33 @@ dt = subset(dt, !workerid %in% c(unique(to_omit3$workerid)))
 length(unique(dt$workerid))
 
 ## determine number of observations from each condition (less from cond2)
-relevant_data = subset(dt, item %in% c('frog','butterflies','lions','dinosaurs'))
-table(relevant_data$context, relevant_data$number)
-relevant_data$item = factor(relevant_data$item)
+relevant_datat = subset(dt, item %in% c('frog','butterflies','lions','dinosaurs'))
+table(relevant_datat$context, relevant_datat$number)
+relevant_datat$item = factor(relevant_data$item)
 
 ## Make histograms for each condition, and get data on control trials for removal
-twowith_data = subset(relevant_data, number == "two" & context == "with")
-twowithout_data = subset(relevant_data, number == "two" & context == "without")
-fourwith_data = subset(relevant_data, number == "four" & context == "with")
-fourwithout_data = subset(relevant_data, number == "four" & context == "without")
+twowith_data = subset(relevant_datat, number == "two" & context == "with")
+twowithout_data = subset(relevant_datat, number == "two" & context == "without")
+fourwith_data = subset(relevant_datat, number == "four" & context == "with")
+fourwithout_data = subset(relevant_datat, number == "four" & context == "without")
 
 ##Checking if animal counts were different
-twowithout_animals = aggregate(response~item, mean, data=twowithout_data)
-twowith_animals = aggregate(response~item, mean, data=twowith_data)
+twowithout_animalsT = aggregate(response~item, mean, data=twowithout_data)
+twowith_animalsT = aggregate(response~item, mean, data=twowith_data)
+fourwith_animalsT = aggregate(response~item, mean, data=fourwith_data)
+fourwithout_animalsT = aggregate(response~item, mean, data=fourwithout_data)
+
+table(relevant_datat$item, relevant_datat$context, relevant_datat$number)
+
+###Checking animal differences by item by condition
+###rows: butterflies, dinosaurs, frogs, lions
+###columns: twowithout, twowith, fourwithout, fourwith
+animalsT = matrix(0,4,4);
+animalsT[,1] = twowithout_animalsT$response
+animalsT[,2] = twowith_animalsT$response
+animalsT[,3] = fourwithout_animalsT$response
+animalsT[,4] = fourwith_animalsT$response
+
 
 
 # ##checking to see if animal type matters for cond4 (it maybe does!)
@@ -103,11 +117,11 @@ hist(fourwith_data$response, col = "grey", main = "FourWith", xlab = NULL, break
 hist(fourwithout_data$response, col = "grey", main = "FourWithout", xlab = NULL, breaks=20)
 
 ##This works (greg showed me the syntax)
-newLM = lmer(relevant_data$response ~ relevant_data$number * 
-     relevant_data$context + (1+number+context|workerid)+(1+number+context|item),data=relevant_data)
+newLM = lmer(relevant_datat$response ~ relevant_datat$number * 
+     relevant_datat$context + (1+number+context|workerid)+(1+number+context|item),data=relevant_datat)
 summary(newLM)
 subsetLM = lmer(response ~ 
-               context + (1|workerid) + (1|item),data=relevant_data[relevant_data$number=="four",])
+               context + (1|workerid) + (1|item),data=relevant_datat[relevant_datat$number=="four",])
 summary(subsetLM)
 anova(newLM)
 

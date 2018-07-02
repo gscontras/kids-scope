@@ -62,6 +62,23 @@ twowithout_data = subset(relevant_data, number == "two" & context == "without")
 fourwith_data = subset(relevant_data, number == "four" & context == "with")
 fourwithout_data = subset(relevant_data, number == "four" & context == "without")
 
+##Checking if animal counts were different
+twowithout_animals = aggregate(response~item, mean, data=twowithout_data)
+twowith_animals = aggregate(response~item, mean, data=twowith_data)
+fourwith_animals = aggregate(response~item, mean, data=fourwith_data)
+fourwithout_animals = aggregate(response~item, mean, data=fourwithout_data)
+
+###Checking animal differences by item by condition
+###rows: butterflies, dinosaurs, frogs, lions
+###columns: twowithout, twowith, fourwithout, fourwith
+animals = matrix(0,4,4);
+animals[,1] = twowithout_animals$response
+animals[,2] = twowith_animals$response
+animals[,3] = fourwithout_animals$response
+animals[,4] = fourwith_animals$response
+
+table(relevant_data$item, relevant_data$context, relevant_data$number)
+
 # ##checking to see if animal type matters for cond4 (it maybe does!)
 # cond4_animals = aggregate(response~trial_num,mean, data=cond4_data)
 # ggplot(cond4_data, aes(cond4_data$response)) + 
