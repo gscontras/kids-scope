@@ -1,0 +1,221 @@
+<html>
+
+<head>
+    <title>Sentences of English</title>
+
+    <!--JS-->
+
+    <!-- external general utilities -->
+    <script src="../_shared/js/jquery-1.11.1.min.js "></script>
+    <script src="../_shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../_shared/js/underscore-min.js"></script>
+    <!-- if you want to draw stuff: -->
+    <!-- <script src="../_shared/js/raphael-min.js"></script> -->
+
+    <!-- cocolab experiment logic -->
+    <script src="../_shared/js/exp-V2.js"></script>
+    <script src="../_shared/js/stream-V2.js"></script>
+
+    <!-- cocolab general utilities -->
+    <script src="../_shared/js/mmturkey.js "></script>
+    <script src="../_shared/js/browserCheck.js"></script>
+    <script src="../_shared/js/utils.js"></script>
+    <!-- if you want to draw cute creatures (depends on raphael): -->
+    <!-- <script src="../_shared/js/ecosystem.js"></script> -->
+
+    <!-- experiment specific helper functions -->
+    <!-- <script src="js/local-utils.js"></script> -->
+
+    <!--CSS-->
+    <link href="../_shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../_shared/css/colalab-style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
+
+    <!-- experiment file -->
+    <script src="js/mturkTVJT.js"></script>
+
+    <!-- check unique turkers -->
+    <script src="../_shared/js/uniqueturker.js"></script>
+    
+</head>
+
+<body onload="init();">
+  <noscript>This task requires JavaScript.</noscript>
+
+  <div class="slide" id="i0" >
+	<p id = "cocolab"> University of California, Irvine <br /> 
+	Study Information Sheet <br /> 
+	Truth Value Judgment Survey </p>
+    <img src="../_shared/images/CoLaLabLogo.jpg" alt="University of California, CoLaLab" id="cocologo"></img>
+	<div class = "scrollbox">
+		<p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the University of California Cogntivie Sciences Department. If you have questions about this research, please contact K.J. Savinelli at <a href="ksavinel@uci.edu">ksavinel@uci.edu</a>, Gregory Scontras at gscontra@uci.edu, or Lisa Pearl, at lpearl@uci.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
+		<p> We are asking you to take part in a study conducted by researchers at the University of California, Irvine. Participating in this study is optional. </p>
+		<p> If you choose to be in the study, you will complete a survey. The survey will consist of short stories followed by an utterance describing the end state of the story. Your goal is to decide if that utterance is a right or wrong description. This survey will help us learn more about how humans understand language. The survey will take about 10-15 minutes to complete. </p>
+		<p> You will only be able to do the survey one time. You can skip questions that you do not want to answer or stop the survey at any time. The survey is anonymous, and no one will be able to link your answers back to you. Please do not include your name or other information that could be used to identify you in the survey responses. We will keep your answers confidential and will not share your personal information with anyone outside the research team. </p>
+		<p> The data you provide may be collected and used by Amazon as per its privacy agreement. This survey contains a number of checks to make sure that participants are finishing the tasks honestly and completely. As long as you read the instructions and complete the tasks, your HIT will be approved. If you fail these checks, your HIT will be rejected. This research is for residents of the United States over the age of 18; if you are not a resident of the United States and/or under the age of 18, please do not complete this survey. </p>
+		<p> You will receive $1.25 for your participation in this study. </p>
+		<p> If you have any comments, concerns, or questions regarding the conduct of this research please contact the researchers listed at the top of this form. </p>
+		<p> If you have questions or concerns about your rights as a research participant, you can contact the UCI Institutional Review Board by phone, (949) 824-6662, by e-mail at IRB@research.uci.edu or at 141 Innovation, Suite 250, Irvine, CA 92697. <br /> <br />
+
+		<b> What is an IRB? </b> An Institutional Review Board (IRB) is a committee made up of scientists and nonscientists. The IRB's role is to protect the rights and welfare of human subjects involved in research. The IRB also assures that the research complies with applicable regulations, laws, and institutional policies. </p>
+		<p> If you want to participate in this study, click the 'Start Experiment' button to start the survey. </p>
+	</div>
+<!--     <p id="instruct-text">You will hear stories followed by a description of the story and be asked to say if the description is right or wrong. The HIT should take 10-15 minutes. Please pay attention, thanks!</p>
+	<p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the University of California Cogntivie Sciences Department. If you have questions about this research, please contact K.J. Savinelli at <a href="ksavinel@uci.edu">ksavinel@uci.edu</a>, Gregory Scontras at gscontra@uci.edu, or Lisa Pearl, at lpearl@uci.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p> -->
+    <button id="start_button" type="button">Start Experiment</button>
+	<p> <br /> </p>
+ </div>
+
+  <div class="slide" id="instructions">
+    <h3>Instructions</h3>
+    <p>You will be given a paragraph long story to read. After you read the story, click "next" and a puppet will comment on the story. <b>The puppet's comment will be in bold below the puppet </b>.  Your goal is to decide whether the puppet is right or wrong in his account of the story. There will be two practice trials before the experiment begins. </p>
+    <button onclick="_s.button()">Continue</button>
+  </div>
+  
+  <div class="slide" id="pretrial">
+    <h3>End of Practice</h3>
+    <p>The practice trials are now over. There will be 7 more trials to this experiment. </p>
+    <button onclick="_s.button()">Continue</button>
+  </div>
+  
+
+  <div class="slide" id="one_slider_practice">
+	<!-- <button id="play" type = "button" onclick = "playPause()">Play</button> -->
+	<!-- add 'controls' when debugging -->
+	<b> This is a practice trial. </b>
+    <p id="practiceStory"> </p>
+    <button onclick="p_showButton()" class = "p_showButton">Next</button>
+    <script> 
+      function p_showButton() {
+          $(".p_hidden").show();
+          $(".p_showButton").hide();
+      }
+    </script>
+  <p><img src = "../_shared/images/puppet.jpg" class = "p_hidden" id = "puppet"></p> 
+	<p class="p_hidden text">The puppet said:</p>
+	<!-- <p><img src = "../_shared/images/puppet.jpg" class = "p_hidden" id = "puppet"></p> -->
+	<p id="practiceSentence" class="p_hidden text" style="font-weight: bold;"></p>
+    <p class = "p_hidden text"> Is the puppet right?</p>
+    <table id="practice_slider" class="slider_table p_hidden text">
+      <tr><td class="left p_hidden text">definitely not</td><td class="right p_hidden text">definitely</td></tr>
+      <tr><td colspan="2"><div id="prac_single_slider" class="slider p_hidden text"></div></td></tr>
+    </table>
+	  <!-- <p class = "p_hidden text">Please justify your answer:</p>
+	  <textarea id="p_justification" class = "p_hidden text" rows="3" cols="50"></textarea>
+	  <br> -->
+    <button onclick="_s.button()" class = "p_hidden text">Continue</button>
+    <div class="p_err text" style = "color:red">Please adjust the slider before continuing. <br><br></div>
+	<!--<div class="p_jerr text" style = "color:red">Please justify your answer in the text box before continung.<br><br></div> -->
+</div>
+	<br>
+	<br>
+  </div>
+
+  <!-- In order to bug test, it helps to add 'controls' to the video element below -->
+  <div class="slide" id="one_slider">
+	<!-- <button id="play" type = "button" onclick = "playPause()">Play</button> -->
+	<!-- add 'controls' when debugging -->
+    <p id="expStory"> </p>
+    <button onclick="showButton()" class = "showButton">Next</button>
+    <script>
+    function showButton() {
+      $(".hidden").show();
+      $(".showButton").hide();
+    }
+    </script>
+	<p><img src = "../_shared/images/puppet.jpg" class = "hidden" id = "puppet"></p> 
+    <p id="testSentence" class="hidden" style="font-weight: bold;"></p>
+	<p class = "hidden">Is the puppet right?</p>
+    <table id="slider_table" class="slider_table hidden">
+      <tr><td class="left hidden">definitely not</td><td class="right hidden">definitely</td></tr>
+      <tr><td colspan="2"><div id="single_slider" class="slider hidden"></div></td></tr>
+    </table>
+	  <!-- <p class = "hidden">Please justify your answer:</p>
+	  <textarea id="justification" class = "hidden" rows="3" cols="50"></textarea>
+	  <br> -->
+    <button onclick="_s.button()" class = "hidden">Continue</button>
+    <div class="err" style = "color:red">Please adjust the slider before continuing. <br><br></div>
+	<!-- <div class="jerr" style = "color:red">Please justify your answer in the text box before continuing. <br><br></div> -->
+</div>
+	<br>
+	<br>
+  </div>
+  
+  <!-- This is for the play button, although it currently isn't needed -->
+  <script>
+  var myVideo = document.getElementById("expVideo"); 
+	function playPause() { 
+		if (myVideo.paused) 
+			myVideo.play(); 
+		else 
+			myVideo.pause(); 
+	} 
+	</script> 
+  
+
+  <div class="slide"  id="subj_info">
+    <div class="long_form">
+      <div class="subj_info_title">Additional information</div>
+      <p class="info">Answering these questions is optional, but will help us understand your answers.</p>
+      <p>Did you read the instructions and do you think you did the HIT correctly?</p>
+      <label><input type="radio"  name="assess" value="No"/>No</label>
+      <label><input type="radio"  name="assess" value="Yes"/>Yes</label>
+      <label><input type="radio"  name="assess" value="Confused"/>I was confused</label>
+
+      <p>Gender:
+        <select id="gender">
+          <label><option value=""/></label>
+          <label><option value="Male"/>Male</label>
+          <label><option value="Female"/>Female</label>
+          <label><option value="Other"/>Other</label>
+        </select>
+      </p>
+
+      <p>Age: <input type="text" id="age"/></p>
+
+      <p>Level Of Education:
+        <select id="education">
+          <label><option value="-1"/></label>
+          <label><option value="0"/>Some High School</label>
+          <label><option value="1"/>Graduated High School</label>
+          <label><option value="2"/>Some College</label>
+          <label><option value="3"/>Graduated College</label>
+          <label><option value="4"/>Hold a higher degree</label>
+        </select>
+      </p>
+
+      <p>Native Language: <input type="text" id="language"/></p>
+      <label>(the language(s) spoken at home when you were a child)</label>
+
+      <p>Did you enjoy the hit?</p>
+      <select id="enjoyment">
+        <label><option value="-1"></option></label>
+        <label><option value="0">Worse than the Average HIT</option></label>
+        <label><option value="1" >An Average HIT</option></label>
+        <label><option value="2">Better than average HIT</option></label>
+      </select>
+	  
+	  <p>What did you think the experiment was about? </p>
+      <textarea id="selfreport" rows="3" cols="50"></textarea>
+
+      <p>We would be interested in any other comments you have about this experiment. Please type them here:</p>
+      <textarea id="comments" rows="3" cols="50"></textarea>
+      <br/>
+      <button onclick="_s.submit()">Submit</button>
+    </div>
+  </div>
+
+  <div id="thanks" class="slide js" >
+    <p  class="big">Thanks for your time!</p>
+  </div>
+
+  <div class="progress">
+    <span>Progress:</span>
+    <div class="bar-wrapper">
+      <div class="bar" width="0%">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
