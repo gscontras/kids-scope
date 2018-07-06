@@ -1,10 +1,2 @@
-workerid,trial_type,number,item,slide_number,context,response
-0,one_slider_practice,NA,NA,NA,NA,0.49
-0,one_slider_practice,NA,NA,NA,NA,0.4
-0,one_slider,two,frog,6,without,0.12
-0,one_slider,four,control1,7,without,0.55
-0,one_slider,four,butterflies,8,with,0.06
-0,one_slider,four,control2,9,without,0.74
-0,one_slider,four,lions,10,with,0.95
-0,one_slider,four,control3,11,with,0.4
-0,one_slider,four,dinosaurs,12,without,0.26
+workerid
+0
