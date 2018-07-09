@@ -37,7 +37,7 @@ function make_slides(f) {
 
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
-		//$("#p_justification").val('');
+		$("#p_justification").val('');
 		$(".p_err").hide();
 		$(".p_hidden").hide();
 		$(".p_jerr").hide();
@@ -58,14 +58,20 @@ function make_slides(f) {
     },
 	
 	    button : function() {
-		if (exp.sliderPost == null) {
-			$(".p_err").show();
-			} else {
-				this.log_responses();
+    if (exp.sliderPost == null) {
+      $(".p_err").show();
+    } else {
+      var chatinput = document.getElementById("p_justification").value;
+      if (chatinput == "" || chatinput.length == 0 || chatinput == null) {
+        $(".p_err").hide();
+        $(".p_jerr").show();
+      } else {
+        this.log_responses();
 
-					/* use _stream.apply(this); if and only if there is
-					"present" data. (and only *after* responses are logged) */
-					_stream.apply(this);
+          /* use _stream.apply(this); if and only if there is
+          "present" data. (and only *after* responses are logged) */
+          _stream.apply(this);
+        }
 		}
     },
 
@@ -79,7 +85,7 @@ function make_slides(f) {
       exp.data_trials.push({
         "trial_type" : "one_slider_practice",
         "response" : exp.sliderPost,
-		//"justification" : $("#p_justification").val(),
+		"justification" : $("#p_justification").val(),
 		//put condition here as well
       });
     }
@@ -100,7 +106,7 @@ function make_slides(f) {
 	{twowithout: {story: "This story features two hippos and two cartons of milk. Two hippos were very thirsty and were looking for water to drink. The only thing they could find to drink was milk. They both decided to drink the milk.", sentence: "\"Three hippos drank milk.\"", item: "control1"}, twowith: {story: "This story features two hippos and two cartons of milk. Two hippos were very thirsty and were looking for water to drink. The only thing they could find to drink was milk. They both decided to drink the milk.", sentence: "\"Three hippos drank milk.\"", item: "control1"}, fourwithout: {story: "This story features two hippos and two cartons of milk. Two hippos were very thirsty and were looking for water to drink. The only thing they could find to drink was milk. They both decided to drink the milk.", sentence: "\"Three hippos drank milk.\"", item: "control1"}, fourwith: {story: "This story features two hippos and two cartons of milk. Two hippos were very thirsty and were looking for water to drink. The only thing they could find to drink was milk. They both decided to drink the milk.", sentence: "\"Three hippos drank milk.\"", item: "control1"}},
 	{twowithout: {story: "This story features two butterflies, a forest, and a city. The two butterflies were deciding where to go. First, they thought about the forest. One butterfly did not like the forest, but the other one did. They decided not to go to the forest. The first butterfly decided to go to the city. The other butterfly decided to go home instead.", sentence: "\"Two butterflies didn't go to the city.\"", item: "butterflies"}, twowith: {story: "This story features two butterflies, a forest, and a city. The two butterflies were deciding where to go. First, they thought about the forest, and decided to go. One butterfly did not like the forest, but the other one did. The butterfly who didn't like the forest decided to leave the forest and go to the city.", sentence: "\"Two butterflies went to the forest, but two butterflies didn't go to the city.\"", item: "butterflies"}, fourwithout: {story: "This story features four butterflies, a forest, and a city. The four butterflies were deciding where to go. First, they thought about the forest. Two butterflies did not like the forest, but the other two did. They decided not to go to the forest. The first two butterflies decided to go to the city. The other two butterflies decided to stay at home.", sentence: "\"Two butterflies didn't go to the city.\"", item: "butterflies"}, fourwith: {story: "This story features four butterflies, a forest, and a city. The four butterflies were deciding where to go. First, they thought about the forest, and decided to go. two of the butterfly did not like the forest, but the other two did. The butterflies who didn't like the forest decided to leave the forest and go to the city.", sentence: "\"Four butterflies went to the forest, but two butterflies didn't go to the city.\"", item: "butterflies"}},
 	{twowithout: {story: "This story features two dogs and two balls. Two dogs were playing, and each had a ball. The first dog decided to roll its ball across the table. The second dog decided not to roll its ball, because it was afraid its ball might roll off the table.", sentence: "\"Only one dog rolled his ball.\"", item: "control2"}, twowith: {story: "This story features two dogs and two balls. Two dogs were playing, and each had a ball. The first dog decided to roll its ball across the table. The second dog decided not to roll its ball, because it was afraid its ball might roll off the table.", sentence: "\"Only one dog rolled his ball.\"", item: "control2"}, fourwithout: {story: "This story features two dogs and two balls. Two dogs were playing, and each had a ball. The first dog decided to roll its ball across the table. The second dog decided not to roll its ball, because it was afraid its ball might roll off the table.", sentence: "\"Only one dog rolled his ball.\"", item: "control2"}, fourwith: {story: "This story features two dogs and two balls. Two dogs were playing, and each had a ball. The first dog decided to roll its ball across the table. The second dog decided not to roll its ball, because it was afraid its ball might roll off the table.", sentence: "\"Only one dog rolled his ball.\"", item: "control2"}},
-	{twowithout: {story: "This story features two lions, eggs, cookies, and a store. The two lions went into the store. They asked the owner what he had that they could eat. The store owner showed them eggs and cookies. The first lion bought a cookie. The other lion bought neither an egg nor a cookie, because he didn't like them.", sentence: "\"Two lions didn't buy a cookie.\"", item: "lions"}, twowith: {story: "This story features two lions, eggs, cookies, and store. The two lions went into the store looking for something to eat. They saw eggs and cookies. The two lions each bought an egg, and one of the lions also bought a cookie.", sentence: "\"Two lions bought an egg, but two lions didn't buy a cookie.\"", item: "lions"}, fourwithout: {story: "This story features four lions, eggs, cookies, and a store. The four lions went into the store. They asked store owner what food he was selling. The store owner showed them eggs and cookies. The first two lions each bought a cookie. The other two lions bought neither an egg nor a cookie, because they didn't like them.", sentence: "\"Two lions didn't buy a cookie\"", item: "lions"}, fourwith: {story: "This story features four lions, eggs, cookies, and a store. The four lions went into the store looking for something to eat. They saw eggs and cookies. All four lions bought eggs, and two of the lions bought cookies.", sentence: "\"Four lions bought an cookie, but two lions didn't buy a egg.\"", item: "lions"}},
+	{twowithout: {story: "This story features two lions, eggs, cookies, and a store. The two lions went into the store. They asked the owner what he had that they could eat. The store owner showed them eggs and cookies. The first lion bought a cookie. The other lion bought neither an egg nor a cookie, because he didn't like them.", sentence: "\"Two lions didn't buy a cookie.\"", item: "lions"}, twowith: {story: "This story features two lions, eggs, cookies, and store. The two lions went into the store looking for something to eat. They saw eggs and cookies. The two lions each bought an egg, and one of the lions also bought a cookie.", sentence: "\"Two lions bought an egg, but two lions didn't buy a cookie.\"", item: "lions"}, fourwithout: {story: "This story features four lions, eggs, cookies, and a store. The four lions went into the store. They asked store owner what food he was selling. The store owner showed them eggs and cookies. The first two lions each bought a cookie. The other two lions bought neither an egg nor a cookie, because they didn't like them.", sentence: "\"Two lions didn't buy a cookie\"", item: "lions"}, fourwith: {story: "This story features four lions, eggs, cookies, and a store. The four lions went into the store looking for something to eat. They saw eggs and cookies. All four lions bought eggs, and two of the lions bought cookies.", sentence: "\"Four lions bought an egg, but two lions didn't buy a cookie.\"", item: "lions"}},
 	{twowithout: {story: "This story features four lizards and a book. The lizards were sunning themselves when one of the lizards thought they would get more sun on top of the book. Two of the lizards jumped on the book. The other two lizards decided the book was too high and decided not to jump.", sentence: "\"Four lizards climbed on the book.\"", item: "control3"}, twowith: {story: "This story features four lizards and a book. The lizards were sunning themselves when one of the lizards thought they would get more sun on top of the book. Two of the lizards jumped on the book. The other two lizards decided the book was too high and decided not to jump.", sentence: "\"Four lizards climbed on the book.\"", item: "control3"}, fourwithout: {story: "This story features four lizards and a book. The lizards were sunning themselves when one of the lizards thought they would get more sun on top of the book. Two of the lizards jumped on the book. The other two lizards decided the book was too high and decided not to jump.", sentence: "\"Four lizards climbed on the book.\"", item: "control3"}, fourwith: {story: "This story features four lizards and a book. The lizards were sunning themselves when one of the lizards thought they would get more sun on top of the book. Two of the lizards jumped on the book. The other two lizards decided the book was too high and decided not to jump.", sentence: "\"Four lizards climbed on the book.\"", item: "control3"}},
 	{twowithout: {story: "This story features two dinosaurs, bugs, and fish. The two dinosaurs were hungry and looking for food. The dinosaurs saw some fish in the river but decided they were too hard to catch. One dinosaur decided to eat a bug instead because bugs are easy to catch. The other dinosaur ate neither a fish nor a bug because he didn't like bugs.", sentence: "\"Two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}, twowith: {story: "This story features two dinosaurs, bugs, and fish. The two dinosaurs were hungry and looking for food. Each dinosaur ate a fish because fish are easy to catch. The dinosaurs then saw the some bugs. One dinosaur was still hungry, so he decided to also eat a bug. The other dinosaur was too full after eating the fish to eat anything else.", sentence: "\"Two dinosaurs ate fish, but two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}, fourwithout: {story: "This story features four dinosaurs, bugs, and fish. The four dinosaurs were hungry and looking for food. The dinosaurs saw some fish in the river but decided they were too hard to catch. Two dinosaurs decided to eat a bug instead because bugs are easy to catch. The other two dinosaurs ate neither a fish nor a bug because they didn't like bugs.", sentence: "\"Two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}, fourwith: {story: "This story features four dinosaurs, bugs, and fish. The four dinosaurs were hungry and looking for food. Each dinosaur ate a fish because fish are easy to catch. The dinosaurs then saw some bugs. Two dinosaurs were still hungry, so they decided to also eat bugs. The other two dinosaurs were too full after eating the fish to eat anything else.", sentence: "\"Four dinosaurs ate fish, but two dinosaurs didn't eat bugs.\"", item: "dinosaurs"}},
 	
@@ -143,14 +149,20 @@ function make_slides(f) {
 	}); */
 
     button : function() {
-		if (exp.sliderPost == null) {
-			$(".err").show();
-			} else {
-				this.log_responses();
+    if (exp.sliderPost == null) {
+      $(".err").show();
+    } else {
+      var chatinput = document.getElementById("justification").value;
+      if (chatinput == "" || chatinput.length == 0 || chatinput == null) {
+        $(".err").hide();
+        $(".jerr").show();
+      } else {
+        this.log_responses();
 
-					/* use _stream.apply(this); if and only if there is
-					"present" data. (and only *after* responses are logged) */
-					_stream.apply(this);
+          /* use _stream.apply(this); if and only if there is
+          "present" data. (and only *after* responses are logged) */
+          _stream.apply(this);
+        }
 		}
     },
 
@@ -164,7 +176,7 @@ function make_slides(f) {
       exp.data_trials.push({
         "trial_type" : "one_slider",
         "response" : exp.sliderPost,
-		//"justification" : $("#justification").val(),
+		"justification" : $("#justification").val(),
 		"number" : exp.number,
     "context" : exp.context,
     "item" : exp.item,
@@ -188,7 +200,7 @@ function make_slides(f) {
         age : $("#age").val(),
         gender : $("#gender").val(),
         education : $("#education").val(),
-		selfreport : $("#selfreport").val(),
+		    selfreport : $("#selfreport").val(),
         comments : $("#comments").val(),
       };
       exp.go(); //use exp.go() if and only if there is no "present" data.
@@ -203,7 +215,7 @@ function make_slides(f) {
           "catch_trials" : exp.catch_trials,
           "system" : exp.system,
           "condition" : exp.condition,
-		  //"justification" : exp.justify,
+		      "justification" : exp.justify,
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT)/60000
       };

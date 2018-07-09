@@ -1,5 +1,4 @@
 ## How to use submiterator mturk tools
-## Notes on this expleriment: The lions in the fourwith condition were not done correctly
 
 To post the HIT, first setup the config file.
 Give this config file a unique label as its name: `[LABEL].config`.
