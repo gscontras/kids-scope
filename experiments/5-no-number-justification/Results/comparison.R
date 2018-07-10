@@ -7,7 +7,7 @@ library(dplyr)
 library(Rmisc)
 
 #setwd("~/Desktop/adjs!/kids-adjectives/experiments/1-kids-subjectivity/Submiterator-master")
-#setwd("~/git/kids-scope/experiments/4-no-number-replication/Results/")
+#setwd("~/git/kids-scope/experiments/5-no-number-justification/Results/")
 
 source("helpers.r")
 
@@ -25,8 +25,13 @@ dn = read.csv("no-numbers_data.csv", header=T)
 dn$modality = "no-numbers"
 dn$u_worker = paste("n", dn$workerid)
 
+dnj = read.csv("no-numbers-just_data.csv", header = T)
+dnj$modality = "no-numbers-just"
+dnj$u_worker = paste("nj", dnj$workerid)
 
-d = rbind(dv,dt,dn)
+dtn = rbind(dt,dnj)
+dt = rbind(dv,dt,dnj)
+d = rbind(dv,dt,dn,dnj)
 
 d_s = bootsSummary(data=d, measurevar="response", groupvars=c("item","context","modality","number"))
 #d_s = bootsSummary(data=dn, measurevar="response", groupvars = c("item", "context", "modality", "number"))
@@ -38,11 +43,11 @@ big_plot <- ggplot(d_s, aes(x=context,y=response,fill=number,color=modality)) +
   #xlab("\nadjective class") +
   ylim(0,1) +
   facet_wrap("item") +
-  scale_color_manual(values=c("blue","red","green")) +
-  scale_fill_manual(values=c("lightblue","pink","purple")) +
+  scale_color_manual(values=c("blue","red","green","yellow")) +
+  scale_fill_manual(values=c("lightblue","pink")) +
   theme_bw()
 big_plot
-ggsave("big_plot.png")
+ggsave("big_plot_four.png")
 
 
 c_s = bootsSummary(data=d, measurevar="response", groupvars=c("context","modality","number"))
@@ -54,8 +59,8 @@ collapsed_plot <- ggplot(c_s, aes(x=context,y=response,fill=number,color=modalit
   #xlab("\nadjective class") +
   ylim(0,1) +
   #facet_wrap("item") +
-  scale_color_manual(values=c("blue","red")) +
+  scale_color_manual(values=c("blue","red","green","yellow")) +
   scale_fill_manual(values=c("lightblue","pink")) +
   theme_bw()
 collapsed_plot
-ggsave("collapsed_plot.png")
+ggsave("collapsed_plot_four.png")

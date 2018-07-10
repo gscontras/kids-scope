@@ -7,17 +7,17 @@ library(dplyr)
 library(Rmisc)
 
 #setwd("~/Desktop/adjs!/kids-adjectives/experiments/1-kids-subjectivity/Submiterator-master")
-#setwd("~/git/kids-scope/experiments/4-no-number-replication/Results/")
+#setwd("~/git/kids-scope/experiments/5-no-number-justification/Results/")
 
 
 num_round_dirs = 5
 df = do.call(rbind, lapply(1:num_round_dirs, function(i) {
   return (read.csv(paste(
-    'round', i, '/scopeTVJT-no-number.csv', sep='')) %>%  #for just 1
+    'round', i, '/scopeTVJT-no-number-just.csv', sep='')) %>%  #for just 1
       mutate(workerid = (workerid + (i-1)*9)))}))
 
 dn = subset(df, select=c("workerid","number","item","slide_number","context","response", "language"))
-unique(d$language)
+unique(dn$language)
 
 length(unique(dn$workerid)) 
 head(dn)
@@ -55,7 +55,7 @@ length(unique(dn$workerid))
 ## determine number of observations from each condition (less from cond2)
 relevant_datan = subset(dn, item %in% c('frog','butterflies','lions','dinosaurs'))
 table(relevant_datan$context, relevant_datan$number)
-relevant_datan$item = factor(relevant_data$item)
+relevant_datan$item = factor(relevant_datan$item)
 
 ## Make histograms for each condition, and get data on control trials for removal
 twowith_data = subset(relevant_datan, number == "two" & context == "with")
@@ -108,6 +108,9 @@ agg_respN[2,1] = mean(twowith_data$response)
 agg_respN[3,1] = mean(fourwithout_data$response)
 agg_respN[4,1] = mean(fourwith_data$response)
 
+## Make the data a csv file
+write.csv(relevant_datan, "no-numbers-just_data.csv")
+
 ##doing the LMM
 library(nlme)
 library(lme4)
@@ -122,7 +125,7 @@ newLM = lmer(relevant_datan$response ~ relevant_datan$number *
      relevant_datan$context + (1+number+context|workerid)+(1+number+context|item),data=relevant_datan)
 summary(newLM)
 subsetLM = lmer(response ~ 
-               context + (1|workerid) + (1|item),data=relevant_datan[relevant_datan$number=="four",])
+               context + (1|workerid) + (1|item),data=relevant_datan[relevant_datan$number=="two",])
 summary(subsetLM)
 anova(newLM)
 

@@ -1,0 +1,82 @@
+workerid,trial_type,justification,number,item,slide_number,context,response
+0,one_slider_practice,I says he bought both,NA,NA,NA,NA,1
+0,one_slider_practice,The third dog did not jump,NA,NA,NA,NA,0
+0,one_slider,two thought it was too big,four,frog,6,without,1
+0,one_slider,there were only 2 hippos,four,control1,7,with,0
+0,one_slider,Only one went to the city,two,butterflies,8,with,1
+0,one_slider,the second one was too afraid,four,control2,9,without,1
+0,one_slider,it explicitly states this,four,lions,10,with,1
+0,one_slider,two thought it was too high,four,control3,11,with,0
+0,one_slider,one ate bugs because they are easy to catch,two,dinosaurs,12,without,0
+1,one_slider_practice,The smurf purchased two cars and stopped once he had no more money,NA,NA,NA,NA,0.95
+1,one_slider_practice,The third dog said he wasn&quotechart going to jump because he&quotechars too small,NA,NA,NA,NA,0.05
+1,one_slider,Only one frog jumped over the rock,two,frog,6,without,0.93
+1,one_slider,There were only two in the story,two,control1,7,with,0.06
+1,one_slider,There were two butterflies in the story and not four,two,butterflies,8,with,0.02
+1,one_slider,Only one dog rolled his ball the other was afraid it&quotechard roll off the table,four,control2,9,with,0.93
+1,one_slider,Only one lion bought a cookie,two,lions,10,without,0.95
+1,one_slider,Only two lizards climbed onto the book,four,control3,11,without,0.06
+1,one_slider,Only one dinosaur ate a bug,two,dinosaurs,12,without,0.95
+2,one_slider_practice,He bought a silver and yellow car.,NA,NA,NA,NA,1
+2,one_slider_practice,The third dog couldn&quotechart fit.,NA,NA,NA,NA,0
+2,one_slider,Only 2 frogs decided the rock was low enough to jump over.,four,frog,6,without,1
+2,one_slider,There were only 2 hippos.,four,control1,7,without,0
+2,one_slider,"One went into the city, one went home.",two,butterflies,8,without,0
+2,one_slider,One dog was worried his ball would fall off the table so he didn&quotechart roll it.,two,control2,9,with,1
+2,one_slider,The other two didn&quotechart like eggs or cookies.,four,lions,10,without,1
+2,one_slider,"Only two lizards jumped on the book, none climbed.",two,control3,11,without,0
+2,one_slider,"One was hungry after eating the fish and ate a bug, one was full after eating the fish.",two,dinosaurs,12,with,1
+3,one_slider_practice,he bought two cars ,NA,NA,NA,NA,0.93
+3,one_slider_practice,the small dog said he was too small to jump,NA,NA,NA,NA,0.05
+3,one_slider,two frogs thought the rock was too big to jump over,four,frog,6,with,0.84
+3,one_slider,there were only two hippos,four,control1,7,with,0.08
+3,one_slider,"two decided to go home not to the city, there  were four",four,butterflies,8,without,0.83
+3,one_slider,the other thought it would roll off the table and didn&quotechart want that to happen,two,control2,9,with,0.8
+3,one_slider,one bought a cookie the other did not ,two,lions,10,with,0.88
+3,one_slider,two of the lizards thought the book was too high and did not jump,four,control3,11,without,0.18
+3,one_slider,two were too full to eat bugs after the fish,four,dinosaurs,12,with,0.92
+4,one_slider_practice,It states in the story that he bought one silver car and one yellow car. He only had one penny left after both purchases so he didn&quotechart spend any more money.,NA,NA,NA,NA,0.99
+4,one_slider_practice,The third dog didn&quotechart want to jump on the table because he said he was too small.,NA,NA,NA,NA,0
+4,one_slider,"Both frogs jumped over the fence. One of the frogs decided to jump over the rock, but the second frog thought the rock was too big to jump over.",two,frog,6,with,0.06
+4,one_slider,"The story states that there were only two hippos, not three.",four,control1,7,with,0.01
+4,one_slider,"Both butterflies decided to go to the forest initially. However, one of the butterflies didn&quotechart like the forest so he opted to go to the city. The other butterfly continued to the forest.",two,butterflies,8,with,0.01
+4,one_slider,"Yes, only one dog decided to roll his ball. The other dog didn&quotechart because he was afraid the ball would roll off of the table.",four,control2,9,with,0.99
+4,one_slider,One lion bought a cookie and the other didn&quotechart buy a cookie or eggs because he didn&quotechart like them.,two,lions,10,without,0
+4,one_slider,"There were four lizards, however only two of them decided to jump on top of the book. The other two lizards didn&quotechart jump on top of the book because they thought it was too high.",two,control3,11,without,0
+4,one_slider,"All four dinosaurs are fish because they were easy to catch. However, after eating the fish two of the dinosaurs were still hungry so they ate bugs. The other two dinosaurs didn&quotechart eat the bugs.",four,dinosaurs,12,with,0.99
+5,one_slider_practice,He bought a silver convertible and a yellow car.,NA,NA,NA,NA,1
+5,one_slider_practice,Only two of the three dogs jumped on the table. The third dog was to small.,NA,NA,NA,NA,0
+5,one_slider,One of the frogs did jump over the rock the other frog thought the rock was too big to jump over.,two,frog,6,without,0
+5,one_slider,The story only featured two hippos.,two,control1,7,without,0
+5,one_slider,Only one of the butterflies went to the city the other went home instead.,two,butterflies,8,without,1
+5,one_slider,Only one dog rolled his ball across the table the other dog was afraid to because it might roll off the table.,two,control2,9,with,1
+5,one_slider,"The story says that ""and two of the lions bought cookies"" but all four bought the eggs.",four,lions,10,with,1
+5,one_slider,The story says that two lizards jumped on the book the other two decided the book was too high.,four,control3,11,without,0
+5,one_slider,The story said that two dinosaurs ate bugs but the other two dinosaurs ate neither fish nor a bug because they dont like bugs.,four,dinosaurs,12,without,1
+6,one_slider_practice,"The smurf bought a silver car and then a yellow car, both costing two pennies. ",NA,NA,NA,NA,0.99
+6,one_slider_practice,After the first two dogs jumped on the table the third dog stated he would not jump on the table because he was too small. ,NA,NA,NA,NA,0.01
+6,one_slider,After both frogs jumped over the fence one frog decided not to jump over the rock thinking the rock was too big to jump over. ,two,frog,6,with,1
+6,one_slider,Teo hippos were thirsty and decided to drink milk. ,four,control1,7,with,0.02
+6,one_slider,After the four butterflies went to the forest two of them decided they didn&quotechart like the forest and left to go to the city. ,four,butterflies,8,with,0.98
+6,one_slider,Only one dog rolled the ball because the second dog decided not to roll the ball because it was afraid the ball might roll off the table. ,two,control2,9,with,0.99
+6,one_slider,"The four lions did buy eggs but the puppet stated egg (not plural), it is not clear if the lions only bought one egg. ",four,lions,10,with,0.62
+6,one_slider,Two lizards did not go onto the book because they felt it was too high to jump on. ,two,control3,11,without,0
+6,one_slider,Two dinosaurs did not eat bugs because they do not like bugs. ,four,dinosaurs,12,without,0.98
+7,one_slider_practice,he bought two cars 2 penny&quotechars each he ha 1 penny left,NA,NA,NA,NA,0.96
+7,one_slider_practice,the little dog did not jump up on table because h was two little.,NA,NA,NA,NA,0.03
+7,one_slider,i fro thought the rock was too big so he did not jump over the rock,two,frog,6,with,0.96
+7,one_slider,there was only two hippos in the story,two,control1,7,without,0.04
+7,one_slider,two butterflies went into the city and the other two stayed home,four,butterflies,8,without,0.99
+7,one_slider,the other dog was afraid its ball might roll off the table,two,control2,9,without,0.97
+7,one_slider,two lions did not like cookies,four,lions,10,without,0.97
+7,one_slider,two lizards jumped up on top of book but to others decided book was too high and decided not to jump,two,control3,11,without,0.05
+7,one_slider,two dinosaurs did not like ugs and did not eat them,four,dinosaurs,12,without,0.97
+8,one_slider_practice,The smurh purchased a silver convertible and a yellow car,NA,NA,NA,NA,0.99
+8,one_slider_practice,One of the dog did not jump because he was to small,NA,NA,NA,NA,0
+8,one_slider,Because two of the four frogs thought that the rock was too big,four,frog,6,without,1
+8,one_slider,Only two hippos drank milk,two,control1,7,with,0
+8,one_slider,Because two of the butterflies decided to stay on the forest,four,butterflies,8,with,1
+8,one_slider,Because one of the dog was afraid that the ball might roll off the table,two,control2,9,with,1
+8,one_slider,Because two lions didn&quotechart like cookies,four,lions,10,without,1
+8,one_slider,"Because only two of the four lizard climbed on the book, the others decided not to jump",four,control3,11,with,0
+8,one_slider,"because one if the dinosaurs was still hungry, so he decided to also eat a bug",two,dinosaurs,12,with,0

@@ -1,0 +1,10 @@
+workerid,language,enjoyment,gender,age,comments,assess,selfreport,education
+0,english,2,Male,27,no,Yes,not sure,2
+1,english,1,Male,29,no,Yes,dunno,3
+2,english,2,Male,29,it was interesting and pretty simple to do.,Yes,how we view sentences.,2
+3,,-1,,,,NA,,-1
+4,english,1,Female,33,,Yes,reading comprehension,3
+5,English,1,Male,23,,Yes,Meaning of sentences,2
+6,English,1,Female,34,Thanks,Yes,Unsure,3
+7,English,2,Male,22,,Yes,The purpose of this survey was to test people&quotechars reading comprehension.,1
+8,English,1,Male,27,I don&quotechart have anything constructive to add other than that everything was easy to understand,Yes,It seemed like it was seeing how I might interpret ambiguous language,2
