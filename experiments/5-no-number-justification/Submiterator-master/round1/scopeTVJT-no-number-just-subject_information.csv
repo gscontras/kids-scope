@@ -1,2 +1,10 @@
-workerid
-0
+workerid,language,enjoyment,gender,age,comments,assess,selfreport,education
+0,English,1,Male,29,,Yes,English sentences,2
+1,English,1,Male,35,"No further relevant comment, at this tim",Yes,I suppose it tested respondent&quotechars interpretation of semantic content,2
+2,english,1,Male,42,Thank you!,Yes,not sure,3
+3,English,2,Male,36,,Yes,How we interpret language.,2
+4,english,1,Female,36,,Yes,How people interpret language.,2
+5,English,1,Female,35,,Yes,Interpretation of sentence meanings.,1
+6,english,2,Male,28,good,Yes,Language processing,3
+7,english,1,Female,38,,Yes,Reading comprehension,2
+8,English,1,Male,24,None,Yes,English proficiency?,1
