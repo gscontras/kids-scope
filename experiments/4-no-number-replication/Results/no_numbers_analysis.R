@@ -17,7 +17,7 @@ df = do.call(rbind, lapply(1:num_round_dirs, function(i) {
       mutate(workerid = (workerid + (i-1)*9)))}))
 
 dn = subset(df, select=c("workerid","number","item","slide_number","context","response", "language"))
-unique(d$language)
+unique(dn$language)
 
 length(unique(dn$workerid)) 
 head(dn)
@@ -26,6 +26,19 @@ head(dn)
 table(dn$language) #check which languages are present
 dn = dn[dn$language!="Chinese"&dn$language!="",]
 length(unique(dn$workerid)) 
+
+d <- dn
+
+################################
+
+t = d[d$item!="control1"&d$item!="control2"&d$item!="control3",]
+
+agg = aggregate(response~context*number,data=t,FUN=mean)
+agg
+
+###############################
+
+
 
 ##Principled removal of participants
 controltrials = subset(dn, item %in% c('control1','control2','control3'))
@@ -107,6 +120,21 @@ agg_respN[1,1] = mean(twowithout_data$response)
 agg_respN[2,1] = mean(twowith_data$response)
 agg_respN[3,1] = mean(fourwithout_data$response)
 agg_respN[4,1] = mean(fourwith_data$response)
+agg_respN 
+
+
+
+
+##############################
+
+dfull = rbind(twowithout_data,twowith_data,fourwithout_data,fourwith_data)
+
+dfull_agg = aggregate(response~context*number,data=dfull,FUN=mean)
+dfull_agg
+
+##############################
+
+
 
 ##doing the LMM
 library(nlme)
