@@ -1,0 +1,13 @@
+manipulation,baserate,qud,inverse,endorsement
+baserate,0.1,uniform,0.5,0.287631447
+baserate,0.5,uniform,0.5,0.505753425
+baserate,0.9,uniform,0.5,0.796436864
+qud,0.5,none?,0.5,0.382581151
+qud,0.5,how-many?,0.5,0.482567455
+qud,0.5,all?,0.5,0.626226882
+scope,0.5,uniform,0.1,0.424471497
+scope,0.5,uniform,0.5,0.505753425
+scope,0.5,uniform,0.9,0.569497338
+pragmatic,0.9,all?,0.1,0.909978206
+pragmatic,0.9,all?,0.5,0.908011102
+pragmatic,0.9,all?,0.9,0.906774032
