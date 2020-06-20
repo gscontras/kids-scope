@@ -2,6 +2,13 @@ setwd("~/git/kids-scope/writing/journal/plots/")
 library(ggplot2)
 library(scales)
 
+
+
+#################################################
+########  every-not plots #######################
+#################################################
+
+
 d_all = read.csv("every-not-results.csv",header=T)
 
 d = d_all[d_all$manipulation!="pragmatic",]
@@ -45,8 +52,66 @@ everyNot_pragmatic
 
 
 
+#################################################
+########  two-not plots #########################
+#################################################
 
 
+d_all = read.csv("two-not-results.csv",header=T)
+
+d = d_all[d_all$manipulation=="pragmatic",]
+
+d$x = d$baserate
+d$x = factor(d$x,levels=c("0.1","0.9"))
+d$x = factor(d$x,labels=c("baserate=0.1\nQUD: uniform","baserate=0.9\nQUD: all?"))
+
+twoNot = ggplot(d,aes(x=as.factor(x),y=endorsement,fill=as.factor(inverse))) +
+  geom_bar(stat="identity",position = position_dodge()) +
+  ylab("probability of endorsing\nambiguous utterance\n") +
+  #guides(fill=FALSE)+
+  theme_bw()+
+  xlab("")+
+  ylim(0,1)+
+  geom_abline(intercept = 0.275, slope = 0,linetype=2, alpha=0.75) +
+  geom_abline(intercept = 0.925, slope = 0,linetype=2, alpha=0.75) +
+  guides(fill=guide_legend(title="p(inverse)"))
+twoNot
+#ggsave("two-not-pragmatic.png",width=5,height=2.3)
+
+
+d4 = d_all[d_all$manipulation=="24pragmatic",]
+
+d4$x = d4$semantics
+d4$x = factor(d4$x,levels=c("at-least","exact"))
+d4$x = factor(d4$x,labels=c("baserate=0.1\nQUD: uniform\nat-least","baserate=0.1\nQUD: uniform\nexact"))
+
+twoNotfour = ggplot(d4,aes(x=as.factor(x),y=endorsement,fill=as.factor(inverse))) +
+  geom_bar(stat="identity",position = position_dodge()) +
+  ylab("probability of endorsing\nambiguous utterance\n") +
+  #guides(fill=FALSE)+
+  theme_bw()+
+  xlab("")+
+  ylim(0,1)+
+  #geom_abline(intercept = 0.275, slope = 0,linetype=2, alpha=0.75) +
+  #geom_abline(intercept = 0.925, slope = 0,linetype=2, alpha=0.75) +
+  guides(fill=guide_legend(title="p(inverse)"))
+twoNotfour
+#ggsave("two-not-four.png",width=5,height=2.3)
+
+
+
+
+p = d_all[d_all$manipulation=="pragmatic",]
+
+everyNot_pragmatic = ggplot(p,aes(x=as.factor(inverse),y=endorsement,fill=as.factor(inverse))) +
+  geom_bar(stat="identity") +
+  ylab("probability of endorsing\nambiguous utterance\n") +
+  xlab("\ninverse scope prior\nmanipulation")+
+  guides(fill=FALSE)+
+  theme_bw()+
+  ylim(0,1)
+everyNot_pragmatic
+#ggsave("every-not-pragmatic-plot.png",width=3,height=2.3)
 
 
 
